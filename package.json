@@ -1,0 +1,16 @@
+{
+  "name": "img-src",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lifechurch/img-src.git",
+  "author": "Michael Martin <martinmsm@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently 'yarn server' 'yarn client'",
+    "server": "export FLASK_APP=server.py && cd server && flask run",
+    "client": "cd client && yarn start"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  }
+}
