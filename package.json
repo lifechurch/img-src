@@ -1,16 +1,25 @@
 {
-  "name": "img-src",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/lifechurch/img-src.git",
-  "author": "Michael Martin <martinmsm@gmail.com>",
-  "license": "MIT",
+  "name": "img-src-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4"
+  },
   "scripts": {
-    "start": "concurrently 'yarn server' 'yarn client'",
-    "server": "export FLASK_APP=server.py && cd server && flask run",
-    "client": "cd client && yarn start"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1"
-  }
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0"
+  },  
+  "proxy": "http://localhost:5000"
 }
