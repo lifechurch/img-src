@@ -15,6 +15,9 @@ Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use
  - Once you're in the Open Digerati workspace, look for the `#yv-image-source` channel
  - Once you're in the `#yv-image-source` channel, mention me (`@Michael Martin`) so I can add you to our `YouVersion Volunteers` team in Github.
 
+## Yarn OR NPM
+For this project, we're using `yarn` as our package manager. You can get instructions to install it [here](https://yarnpkg.com/lang/en/docs/install/).
+
 ## Pick Your First Issue 🤩
 We're using Github Projects and Issues to manage this project. Everything that needs to be done is organized into bite-sized issues that can usually be completed in a few hours. No contribution is too small, so even if you only have a couple of hours available there's something for you.
 
@@ -30,6 +33,12 @@ We're using Github Projects and Issues to manage this project. Everything that n
 - Write your code. Do your best to make each commit fully functional. In other words, don't commit code to your branch that you know is not working.
 - Don't include closing keywords (`Closes #2` or `Fixes #1`) on the individual commits.
 - When your feature is complete and ready for review submit a Pull Request. In the body of the request, include a line stating which issue the PR addresses. Like this, `Fixes #1`. This is vital to our project workflow. Otherwise, it's cumbersome to determine which issues have been resolved.
+
+## Running it Locally
+```Bash
+cd /path/to/cloned/repo
+yarn start
+```
 
 ## Writing the Code 🤓
 Now that you have your first issue, it's time to write some code. But, before you dive in let's talk about a few things. I promise we're not mean or rude. We want to lower the bar for contribution as low as possible. But, we do have a few expectations for this project.
@@ -55,3 +64,26 @@ For naming your components, here's a few general guidelines:
 - Small UI components used in multiple places should be located in `/src/components/{component-name}/index.js`
 - Page-level components that are tied to routes should be located in `/src/containers/{container-name}/index.js`
 - UI components that are only used once, but don't represent a full page should be stored under the container in which they're rendered: `/src/containers/{container-name}/components/{component-name}/index.js`
+
+### Smoke Tests 🧐
+Every React component you submit should be accompanied by a *smoke test*. A *smoke test* is a simple test to ensure a component renders without crashing. Here's an example:
+
+```JavaScript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+});
+```
+
+Name your tests the same way you name your component, but with a `.test.js` extension. The component and its test should be in the same folder, with the same base filename.
+
+Feel free to include more advanced logic in addition to the simple smoke test. ***Remember, if you encounter issues with a component while developing it, that's probably a test case that needs to be automated.***
+
+You can run all the tests in the project like this:
+```Bash
+yarn test
+```
