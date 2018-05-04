@@ -17,7 +17,7 @@ Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use
   - [ESLint](#eslint)
   - [CSS](#css)
   - [PropTypes](#proptypes)
-  - [Componet Naming and Folder Structure](#component-naming-and-folder-structure)
+  - [Component Naming and Folder Structure](#component-naming-and-folder-structure)
   - [Localization](#localization)
     - [Dates and Times](#dates-and-times)
     - [Strings](#strings)
