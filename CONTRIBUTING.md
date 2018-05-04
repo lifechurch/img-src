@@ -33,6 +33,7 @@ Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use
   - Enter and then verify your email
   - Once you're in the Open Digerati workspace, look for the `#yv-image-source` channel
   - Once you're in the `#yv-image-source` channel, mention me (`@Michael Martin`) so I can add you to our `YouVersion Volunteers` team in Github.
+- Check out the full UI designs for this project in the `/ui-design` folder of this repo.
 
 ## Package Manager
 
