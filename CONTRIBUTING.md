@@ -5,7 +5,12 @@
 ## Thank You! 😎
 Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use your limited free time to help us engage the world with God's Word. We don't take our mission lightly, and we fully believe we're stronger when the Church works together to accomplish it.
 
-## Getting Started 🤔
+## Sections
+[Getting Started](#getting-started)
+[Package Manager](#package-manager)
+[Pick Your First Issue](#pick-your-first-issue)
+
+## Getting Started
 - Make sure you have a [Github account](https://github.com/signup/free).
 - Make sure you have a [YouVersion account](https://www.bible.com/sign-up).
 - Join our Open Digerati Slack Channel:
@@ -15,10 +20,10 @@ Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use
  - Once you're in the Open Digerati workspace, look for the `#yv-image-source` channel
  - Once you're in the `#yv-image-source` channel, mention me (`@Michael Martin`) so I can add you to our `YouVersion Volunteers` team in Github.
 
-## Yarn OR NPM
+## Package Manager
 For this project, we're using `yarn` as our package manager. You can get instructions to install it [here](https://yarnpkg.com/lang/en/docs/install/).
 
-## Pick Your First Issue 🤩
+## Pick Your First Issue
 We're using Github Projects and Issues to manage this project. Everything that needs to be done is organized into bite-sized issues that can usually be completed in a few hours. No contribution is too small, so even if you only have a couple of hours available there's something for you.
 
 - Open the [Image Source Project Board](https://github.com/lifechurch/img-src/projects/1)
@@ -64,6 +69,74 @@ For naming your components, here's a few general guidelines:
 - Small UI components used in multiple places should be located in `/src/components/{component-name}/index.js`
 - Page-level components that are tied to routes should be located in `/src/containers/{container-name}/index.js`
 - UI components that are only used once, but don't represent a full page should be stored under the container in which they're rendered: `/src/containers/{container-name}/components/{component-name}/index.js`
+
+### Localization
+We're building this app for the international community, so we want to eventually make it available in over 40 languages. Right from the start, we've built localization support in using `react-intl`. What does that mean for you? When you display a date, time or string in the UI, never output the value directly. Here are the basic rules:
+
+#### Dates & Times
+For dates and times, use `FormattedDate`, `FormattedTime` or `FormattedRelative` [See docs](https://github.com/yahoo/react-intl/wiki/Components#date-formatting-components)
+
+```
+import { FormattedTime, FormattedDate, FormattedRelative } from 'react-intl'
+
+...
+
+<FormattedDate value={new Date(1459832991883)}/>
+// returns <span>4/5/2016</span>
+
+
+<FormattedDate
+  value={new Date(1459832991883)}
+  year='numeric'
+  month='long'
+  day='2-digit'
+/>
+// returns <span>April 05, 2016</span>
+
+
+<FormattedTime value={new Date(1459832991883)}/>
+// returns <span>1:09 AM</span>
+
+<FormattedRelative value={Date.now()}/>
+// returns <span>now</span>
+// 10 seconds later it returns <span>10 seconds ago</span>
+// 60 seconds later it returns <span>1 minute ago</span>
+```
+
+#### Strings
+For strings, first add the string to `/locales/en.json` with a descriptive key. That file might look something like this:
+
+```
+{
+  "splashPage": "Splash Page",
+  "userRegistration": "User Registration",
+  "userVerseAssignment": "User Verse Assignment",
+  "userProfile": "User Profile: {user}",
+  "admin": "Admin"
+}
+```
+
+After you add it to the locale file, you can display it using the `FormattedMessage` component. The `id` property of `FormattedMessage` should match the key you added to the JSON file. Like this:
+
+```
+import { FormattedMessage } from 'react-intl'
+
+...
+
+<FormattedMessage id="splashPage" />
+// returns <span>Splash Page</span>
+```
+
+For strings with placeholders, like the `userProfile` example above:
+
+```
+<FormattedMessage id="userProfile" values={{ user: 'Michael ' }} />
+// returns <span>User Profile: Michael</span>
+```
+
+If you submit a Pull Request with hardcoded strings, dates or times that aren't rendered using `react-intl` components, we'll point you to the process outlined above.
+
+
 
 ### Smoke Tests 🧐
 Every React component you submit should be accompanied by a *smoke test*. A *smoke test* is a simple test to ensure a component renders without crashing. Here's an example:
