@@ -19,7 +19,7 @@ Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use
   - [Localization](#localization)
     - [Dates and Times](#dates-and-times)
     - [Strings](#strings)
-- [Smoke Tests](#smoke-test)
+- [Smoke Tests](#smoke-tests)
 
 ## Getting Started
 - Make sure you have a [Github account](https://github.com/signup/free).

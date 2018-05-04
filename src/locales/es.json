@@ -1,0 +1,7 @@
+{
+  "splashPage": "Página de Bienvenida",
+  "userRegistration": "Registro de Usuario",
+  "userVerseAssignment": "Asignación del Verso de Usuario",
+  "userProfile": "Perfil del Usuario: {user}",
+  "admin": "Administración"
+}

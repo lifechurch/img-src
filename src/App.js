@@ -1,76 +1,69 @@
-import React, { Component } from 'react'
-import './dropdown.css'
+import React from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import Helmet from 'react-helmet'
+import SecureRoute from './components/secure-route'
+import SidebarNavMenu from './components/sidebar-nav-menu'
+import Admin from './containers/admin'
+import SplashPage from './containers/splash-page'
+import UserRegistration from './containers/user-registration'
+import UserVerseAssignment from './containers/user-verse-assignment'
+import UserProfile from './containers/user-profile'
+import SidebarNav from './layouts/sidebar-nav'
 
-class App extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			tasks: []
-		}
+function App() {
+	return (
+		<Router>
+			<div className="h-100">
 
-		this.fetchData = this.fetchData.bind(this)
-	}
+				<Helmet
+					title="Image Source: A YouVersion Design Community"
+					description="A web application for YouVersion design community to submit verse image art for use in the Bible App."
+				/>
 
-	componentDidMount() {
-		this.fetchData()
-	}
-
-	async fetchData() {
-		const response = await fetch('/todo/api/v1.0/tasks')
-		const { tasks } = await response.json()
-		this.setState({ tasks })
-	}
-
-	render() {
-		const { tasks } = this.state
-		const listItems = tasks.map((task) => {
-			return (<li key={task.id}>{task.description}</li>)
-		})
-
-		return (
-			<div className="App">
-				<h1>Output from Flask server:</h1>
-				<ul>
-					{listItems}
-				</ul>
-				<ul className="main-navigation">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Front End Design</a>
-						<ul>
-							<li><a href="#">HTML</a></li>
-							<li><a href="#">CSS</a>
-								<ul>
-									<li><a href="#">Resets</a></li>
-									<li><a href="#">Grids</a></li>
-									<li><a href="#">Frameworks</a></li>
-								</ul>
-							</li>
-							<li><a href="#">JavaScript</a>
-								<ul>
-									<li><a href="#">Ajax</a></li>
-									<li><a href="#">jQuery</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<li><a href="#">WordPress Development</a>
-						<ul>
-							<li><a href="#">Themes</a></li>
-							<li><a href="#">Plugins</a></li>
-							<li><a href="#">Custom Post Types</a>
-								<ul>
-									<li><a href="#">Portfolios</a></li>
-									<li><a href="#">Testimonials</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Options</a></li>
-						</ul>
-					</li>
-					<li><a href="#">About Us</a></li>
-				</ul>
+				{/*
+          This is temporary navigation while we build out the full application
+          This will be removed once we have real navigation developed
+        */}
+				<nav className="flex pa3 bg-near-black">
+					<Link to="/" className="mr3 link dim moon-gray">Splash Page</Link>
+					<Link to="/user-registration" className="mr3 link dim moon-gray">Sign Up</Link>
+					<Link to="/user-verse-assignment" className="mr3 link dim moon-gray">Verse Assignment</Link>
+					<Link to="/user-profile/Michael" className="mr3 link dim moon-gray">User Profile: Michael</Link>
+					<Link to="/user-profile/Tommy" className="mr3 link dim moon-gray">User Profile: Tommy</Link>
+					<Link to="/admin" className="mr3 link dim moon-gray">Admin</Link>
+				</nav>
+				<Route exact path="/" component={SplashPage} />
+				<Route path="/user-registration" component={UserRegistration} />
+				<Route
+					path="/user-verse-assignment" render={() => {
+						return (
+							<SidebarNav menu={<SidebarNavMenu />}>
+								<Route path="/user-verse-assignment" component={UserVerseAssignment} />
+							</SidebarNav>
+						)
+					}}
+				/>
+				<Route
+					path="/user-profile/:userId" render={() => {
+						return (
+							<SidebarNav menu={<SidebarNavMenu />}>
+								<Route path="/user-profile/:userId" component={UserProfile} />
+							</SidebarNav>
+						)
+					}}
+				/>
+				<SecureRoute
+					path="/admin" component={() => {
+						return (
+							<SidebarNav menu={<SidebarNavMenu />}>
+								<Route path="/admin" component={Admin} />
+							</SidebarNav>
+						)
+					}}
+				/>
 			</div>
-		)
-	}
+		</Router>
+	)
 }
 
 export default App
