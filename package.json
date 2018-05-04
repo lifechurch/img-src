@@ -1,7 +1,6 @@
 {
   "name": "img-src-client",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
