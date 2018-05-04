@@ -86,6 +86,7 @@ Be sure to define [PropTypes](https://github.com/facebook/prop-types) for every 
 ### Component Naming and Folder Structure
 
 For naming your components, here's a few general guidelines:
+
 - Don't include the word `component` in the file name or the class name
 - Name your files using hyphens (i.e. `./components/round-button.js`) instead of `camelCase`
 - Name your classes using camelCase (i.e. `class RoundButton extends Component`)
@@ -101,7 +102,7 @@ We're building this app for the international community, so we want to eventuall
 
 For dates and times, use `FormattedDate`, `FormattedTime` or `FormattedRelative` [See docs](https://github.com/yahoo/react-intl/wiki/Components#date-formatting-components)
 
-```
+```JavaScript
 import { FormattedTime, FormattedDate, FormattedRelative } from 'react-intl'
 
 ...
@@ -132,7 +133,7 @@ import { FormattedTime, FormattedDate, FormattedRelative } from 'react-intl'
 
 For strings, first add the string to `/locales/en.json` with a descriptive key. That file might look something like this:
 
-```
+```JavaScript
 {
   "splashPage": "Splash Page",
   "userRegistration": "User Registration",
@@ -144,7 +145,7 @@ For strings, first add the string to `/locales/en.json` with a descriptive key. 
 
 After you add it to the locale file, you can display it using the `FormattedMessage` component. The `id` property of `FormattedMessage` should match the key you added to the JSON file. Like this:
 
-```
+```JavaScript
 import { FormattedMessage } from 'react-intl'
 
 ...
@@ -155,14 +156,12 @@ import { FormattedMessage } from 'react-intl'
 
 For strings with placeholders, like the `userProfile` example above:
 
-```
+```JavaScript
 <FormattedMessage id="userProfile" values={{ user: 'Michael ' }} />
 // returns <span>User Profile: Michael</span>
 ```
 
 If you submit a Pull Request with hardcoded strings, dates or times that aren't rendered using `react-intl` components, we'll point you to the process outlined above.
-
-
 
 ### Smoke Tests
 
@@ -184,6 +183,7 @@ Name your tests the same way you name your component, but with a `.test.js` exte
 Feel free to include more advanced logic in addition to the simple smoke test. ***Remember, if you encounter issues with a component while developing it, that's probably a test case that needs to be automated.***
 
 You can run all the tests in the project like this:
+
 ```Bash
 yarn test
 ```
