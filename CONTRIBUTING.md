@@ -6,9 +6,20 @@
 Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use your limited free time to help us engage the world with God's Word. We don't take our mission lightly, and we fully believe we're stronger when the Church works together to accomplish it.
 
 ## Sections
-[Getting Started](#getting-started)
-[Package Manager](#package-manager)
-[Pick Your First Issue](#pick-your-first-issue)
+- [Getting Started](#getting-started)
+- [Package Manager](#package-manager)
+- [Pick Your First Issue](#pick-your-first-issue)
+- [Git Guidelines](#git-guidelines)
+- [Running it Locally](#running-it-locally)
+- [Writing Code](#writing-code)
+  - [ESLint](#eslint)
+  - [CSS](#css)
+  - [PropTypes](#proptypes)
+  - [Componet Naming and Folder Structure](#component-naming-and-folder-structure)
+  - [Localization](#localization)
+    - [Dates and Times](#dates-and-times)
+    - [Strings](#strings)
+- [Smoke Tests](#smoke-test)
 
 ## Getting Started
 - Make sure you have a [Github account](https://github.com/signup/free).
@@ -32,7 +43,7 @@ We're using Github Projects and Issues to manage this project. Everything that n
 - Go back to the [Image Source Project Board](https://github.com/lifechurch/img-src/projects/1) and drag your Issue into the `In progress` column.
 - There will be many volunteers contributing to this project, so please don't assign as issue to yourself until you're ready to start working. And, if you've assigned an issue to yourself that you cannot work on, un-assign the issue and drag the card back to the `To do` column for someone else to pick up.
 
-## Git
+## Git Guidelines
 - Clone this repo
 - Create a branch with the following naming convention: `{your-initials}/issue-{issue-id}`. For example, I might create a branch called `mm/issue-1`.
 - Write your code. Do your best to make each commit fully functional. In other words, don't commit code to your branch that you know is not working.
@@ -45,15 +56,15 @@ cd /path/to/cloned/repo
 yarn start
 ```
 
-## Writing the Code 🤓
+## Writing Code
 Now that you have your first issue, it's time to write some code. But, before you dive in let's talk about a few things. I promise we're not mean or rude. We want to lower the bar for contribution as low as possible. But, we do have a few expectations for this project.
 
-### ESLint - Don't break the rules
+### ESLint
 We use [ESLint](https://eslint.org/) to perform a static analysis of our code and identify problematic patterns and style issues that don't line up with the way we do things. Most IDEs and text editors support `ESlint`. We recommend [Atom](https://atom.io/), [Sublime](https://www.sublimetext.com/) or even [VSCode](https://code.visualstudio.com/). They each have plugins that automatically validate your code against our linting rules every time you save a file. Plus, we use [Code Climate](https://codeclimate.com/) to check all of your code when you submit a Pull Request.
 
 If your code violates any of our linter rules, we probably won't merge your Pull Request until you fix them. Don't worry! 😰 We'll work with you to fix the issues so your hard work doesn't go to waste.
 
-### CSS - Tachyons Only
+### CSS
 For this project, we're using the [Tachyons](http://tachyons.io/docs/) CSS framework. Using the framework keeps our CSS [D.R.Y](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). Tachyons defines numerous classes for margin, padding, typography, grid layouts and more. Be sure to checkout [tachyons.io](http://tachyons.io/docs/) for documentation on what's available.
 
 Since Tachyons is so comprehensive, we rarely need to create or modify CSS classes. That also means that we rarely need new CSS, LESS or SASS files. So, as you're building your components do your best to use Tachyons classes exclusively. If you define new CSS classes or add new CSS files, we probably won't merge your Pull Request without proper justification. But, admittedly, there will likely be a FEW exceptions to this -- but only go outside of Tachyons as a last resort.
@@ -61,7 +72,7 @@ Since Tachyons is so comprehensive, we rarely need to create or modify CSS class
 ### PropTypes
 Be sure to define [PropTypes](https://github.com/facebook/prop-types) for every property on the React components you build. This is part of the linter rules, but it's worth mentioning again. These PropTypes define the component contract that other developers will need when trying to use your component
 
-### Component Naming / Folder Structure
+### Component Naming and Folder Structure
 For naming your components, here's a few general guidelines:
 - Don't include the word `component` in the file name or the class name
 - Name your files using hyphens (i.e. `./components/round-button.js`) instead of `camelCase`
@@ -73,7 +84,7 @@ For naming your components, here's a few general guidelines:
 ### Localization
 We're building this app for the international community, so we want to eventually make it available in over 40 languages. Right from the start, we've built localization support in using `react-intl`. What does that mean for you? When you display a date, time or string in the UI, never output the value directly. Here are the basic rules:
 
-#### Dates & Times
+#### Dates and Times
 For dates and times, use `FormattedDate`, `FormattedTime` or `FormattedRelative` [See docs](https://github.com/yahoo/react-intl/wiki/Components#date-formatting-components)
 
 ```
@@ -138,7 +149,7 @@ If you submit a Pull Request with hardcoded strings, dates or times that aren't 
 
 
 
-### Smoke Tests 🧐
+### Smoke Tests
 Every React component you submit should be accompanied by a *smoke test*. A *smoke test* is a simple test to ensure a component renders without crashing. Here's an example:
 
 ```JavaScript
