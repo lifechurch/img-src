@@ -1,4 +1,7 @@
-engines:
+version: "2"
+plugins:
+  eslint:
+    enabled: true
   markdownlint:
     enabled: true
     checks:
