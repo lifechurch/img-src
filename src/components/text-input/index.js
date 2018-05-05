@@ -15,14 +15,14 @@ function TextInput(props) {
 
 TextInput.propTypes = {
 	name: PropTypes.string.isRequired,
-	className: PropTypes.string,
-	defaultValue: PropTypes.string
+	defaultValue: PropTypes.string,
+	className: PropTypes.string
 }
 
 TextInput.defaultProps = {
-	// Clear inset shadow
-	className: 'b--transparent',
-	defaultValue: ''
+	defaultValue: '',
+	// Clear inset shadow by default
+	className: 'b--transparent'
 }
 
 export default TextInput
