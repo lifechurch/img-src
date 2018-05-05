@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 
 function Card({ children }) {
 	return (
-		<div className="mw7 center bg-white pa4 br2 shadow-2 ma4">{children}</div>
+		<div className="w-100 bg-white pa4 br2 shadow-2">
+			{children}
+		</div>
 	)
 }
 
