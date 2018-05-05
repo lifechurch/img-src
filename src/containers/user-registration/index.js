@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import TextInput from '../../components/text-input'
 import Card from '../../components/card'
 
 function UserRegistration() {
@@ -9,8 +10,8 @@ function UserRegistration() {
 				<FormattedMessage id="userRegistration" />
 			</h1>
 			<Card>
-				<input type="text" placeholder="FIRST NAME" />
-				<input type="text" placeholder="LAST NAME" /><br />
+				<TextInput type="text" placeholder="FIRST NAME" />
+				<TextInput type="text" placeholder="LAST NAME" /><br />
 				Why do you want to be on the volunteering team for YouVersion?<br />
 				<textarea />
 			</Card>
