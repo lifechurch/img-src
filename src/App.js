@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import SecureRoute from './components/secure-route'
 import SidebarNavMenu from './components/sidebar-nav-menu'
+import TextInput from './components/text-input'
 import Admin from './containers/admin'
 import SplashPage from './containers/splash-page'
 import UserRegistration from './containers/user-registration'
@@ -14,6 +15,7 @@ function App() {
 	return (
 		<Router>
 			<div className="h-100">
+				<TextInput placeholder='hey!' />
 
 				<Helmet
 					title="Image Source: A YouVersion Design Community"
