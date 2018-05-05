@@ -3,21 +3,20 @@ import PropTypes from 'prop-types'
 
 function TextInput(props) {
 	return (
-		<div className="pa4">
-			<input type='text' {...props} />
-		</div>
+		<input type='text' {...props} className={`input-reset br3 bg-white pa3 outline-0 ${props.className}`} />
 	)
 }
 
 TextInput.propTypes = {
 	name: PropTypes.string.isRequired,
-	placeholder: PropTypes.string,
-	value: PropTypes.string
+	className: PropTypes.string,
+	defaultValue: PropTypes.string
 }
 
 TextInput.defaultProps = {
-	placeholder: null,
-	value: null
+	// Clear inset shadow
+	className: 'b--transparent',
+	defaultValue: ''
 }
 
 export default TextInput
