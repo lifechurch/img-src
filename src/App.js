@@ -13,7 +13,7 @@ import SidebarNav from './layouts/sidebar-nav'
 function App() {
 	return (
 		<Router>
-			<div className="h-100 bg-near-white">
+			<div className="h-100">
 
 				<Helmet
 					title="Image Source: A YouVersion Design Community"
