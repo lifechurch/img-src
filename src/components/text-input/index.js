@@ -1,14 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const addDefaultBorderClass = (classNames) => {
+	const hasBorderClass = classNames.includes('b--')
+	if (hasBorderClass) return classNames
+	// There's no border class, so add one
+	return `${classNames} b--transparent`
+}
+
 function TextInput(props) {
+
+	let classNames = `input-reset br3 bg-white pa3 outline-0 ${props.className}`
+	// Make sure there is a border class so we don't get inset border
+	classNames = addDefaultBorderClass(classNames)
+
 	return (
 		<input
 			type='text'
 			{...props}
 			name={props.name}
 			defaultValue={props.defaultValue}
-			className={`input-reset br3 bg-white pa3 outline-0 ${props.className}`}
+			className={classNames}
 		/>
 	)
 }
@@ -21,8 +33,7 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
 	defaultValue: '',
-	// Clear inset shadow by default
-	className: 'b--transparent'
+	className: ''
 }
 
 export default TextInput
