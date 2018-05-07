@@ -24,19 +24,17 @@ class Modal extends Component {
 	}
 
 	render() {
-		const { isOpen } = this.state
-
-		const {
-			children,
-			overlayColor,
-			heightClass,
-			widthClass,
-			intl
-		} = this.props
-
-		const closeMessage = intl.formatMessage({ id: 'close' })
-
 		const modal = () => {
+			const {
+				children,
+				overlayColor,
+				heightClass,
+				widthClass,
+				intl
+			} = this.props
+
+			const closeMessage = intl.formatMessage({ id: 'close' })
+
 			return (
 				<div className="fixed w-100 h-100 left-0 top-0 flex items-center justify-center" style={{ backgroundColor: overlayColor }}>
 					<div className={`${heightClass} ${widthClass}`}>
@@ -45,7 +43,7 @@ class Modal extends Component {
 								className="absolute top-1 right-1 dim outline-0 pointer bn bg-transparent"
 								title={closeMessage}
 								onClick={() => { this.setState({ isOpen: false }) }}
-							>
+       >
 								<img src={CloseIcon} alt={closeMessage} />
 							</button>
 							{children}
@@ -55,7 +53,7 @@ class Modal extends Component {
 			)
 		}
 
-		return isOpen ? modal() : null
+		return this.state.isOpen ? modal() : null
 	}
 }
 
