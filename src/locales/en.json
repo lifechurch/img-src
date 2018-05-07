@@ -3,5 +3,7 @@
   "userRegistration": "User Registration",
   "userVerseAssignment": "User Verse Assignment",
   "userProfile": "User Profile: {user}",
-  "admin": "Admin"
+  "admin": "Admin",
+
+  "close": "Close"
 }
