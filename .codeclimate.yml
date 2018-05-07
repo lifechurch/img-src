@@ -1,7 +1,13 @@
 version: "2"
+checks:
+  method-lines:
+    enabled: false
 plugins:
   eslint:
     enabled: true
+    checks:
+      jsx-a11y/anchor-is-valid:
+        enabled: false
   markdownlint:
     enabled: true
     checks:
