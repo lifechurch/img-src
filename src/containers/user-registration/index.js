@@ -10,8 +10,17 @@ function UserRegistration() {
 				<FormattedMessage id="userRegistration" />
 			</h1>
 			<Card>
-				<TextInput type="text" placeholder="FIRST NAME" />
-				<TextInput type="text" placeholder="LAST NAME" /><br />
+				<div className='pa3 bg-black-10'>
+					<h3>Email/Password Style</h3>
+					<TextInput type="text" placeholder="EMAIL" className='ma3' />
+					<TextInput type="password" placeholder="PASSWORD" className='ma3' />
+				</div>
+				<div className='pa3'>
+					<h3>First Name/Last Name Style</h3>
+					<TextInput type="text" placeholder="FIRST NAME" className='b--moon-gray ma3' />
+					<TextInput type="text" placeholder="LAST NAME" className='b--moon-gray ma3' /><br />
+				</div>
+
 				Why do you want to be on the volunteering team for YouVersion?<br />
 				<textarea />
 			</Card>
