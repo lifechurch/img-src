@@ -15,7 +15,7 @@ function UserRegistration() {
 				<input type="text" placeholder="LAST NAME" /><br />
 				Why do you want to be on the volunteering team for YouVersion?<br />
 				<TextArea />
-				<Button to='/' render='solid' onClick={() => alert('hey')}>Sign In</Button>
+				<Button to='/' buttontype='solid'>Submit</Button>
 			</Card>
 			<Card>
 				Another card

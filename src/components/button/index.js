@@ -2,17 +2,21 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-function Button({ to, onClick, ...props }) {
-	const classes = ['pointer', 'link', 'h2', 'br-pill', 'ph3', 'pv1']
+function Button(props) {
+	const {
+		to,
+		onClick,
+		children
+	} = props
 
-	classes.push(
-		props.render === 'solid' ? 'bg-mid-gray white' : 'ba mid-gray',
-		props.disabled ? 'o-50' : 'dim'
-	)
+	const disabledClasses = props.disabled ? 'o-50' : 'dim'
+	const buttontypeClasses = props.buttontype === 'solid' ? 'bg-mid-gray white' : 'ba mid-gray'
+
+	const classes = `pointer link br-pill ph4 pv2 f4 dib ${disabledClasses} ${buttontypeClasses}`
 
 	if (props.disabled) {
 		return (
-			<a {...props} className={classes.join(' ')}>{props.children}</a>
+			<a {...props} className={classes}>{children}</a>
 		)
 	}
 
@@ -21,9 +25,9 @@ function Button({ to, onClick, ...props }) {
 			{...props}
 			to={to}
 			onClick={onClick}
-			className={classes.join(' ')}
+			className={classes}
 		>
-			{props.children}
+			{children}
 		</Link>
 	) : (
 		<a
@@ -32,9 +36,9 @@ function Button({ to, onClick, ...props }) {
 			role='button'
 			tabIndex={0}
 			onKeyDown={onClick}
-			className={classes.join(' ')}
+			className={classes}
 		>
-			{props.children}
+			{children}
 		</a>
 	)
 }
@@ -43,7 +47,7 @@ Button.propTypes = {
 	children: PropTypes.node,
 	to: PropTypes.node,
 	disabled: PropTypes.bool,
-	render: PropTypes.oneOf(['solid', 'outline-only']),
+	buttontype: PropTypes.oneOf(['solid', 'outline-only']),
 	onClick: PropTypes.func
 }
 
@@ -51,7 +55,7 @@ Button.defaultProps = {
 	children: null,
 	to: null,
 	disabled: false,
-	render: 'solid',
+	buttontype: 'solid',
 	onClick: null
 }
 
