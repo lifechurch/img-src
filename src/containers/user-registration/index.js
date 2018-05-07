@@ -1,7 +1,8 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import TextInput from '../../components/text-input'
 import Card from '../../components/card'
+import TextInput from '../../components/text-input'
+import TextArea from '../../components/textarea'
 
 function UserRegistration() {
 	return (
@@ -22,7 +23,7 @@ function UserRegistration() {
 				</div>
 
 				Why do you want to be on the volunteering team for YouVersion?<br />
-				<textarea />
+				<TextArea />
 			</Card>
 			<Card>
 				Another card
