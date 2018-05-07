@@ -2,6 +2,7 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import Card from '../../components/card'
 import TextArea from '../../components/textarea'
+import Button from '../../components/button'
 
 function UserRegistration() {
 	return (
@@ -14,6 +15,7 @@ function UserRegistration() {
 				<input type="text" placeholder="LAST NAME" /><br />
 				Why do you want to be on the volunteering team for YouVersion?<br />
 				<TextArea />
+				<Button to='/' onClick={() => alert('hey')}>Submit</Button>
 			</Card>
 			<Card>
 				Another card
