@@ -21,7 +21,7 @@ function IconButton(props) {
 			onClick={onClick}
 			className={classes}
 		>
-			<img width='45px' height='45px' src={icon} alt={props.alt} />
+			<img width='43px' height='43px' src={icon} alt={props.alt} />
 			{children}
 		</Link>
 	) : (
@@ -33,7 +33,7 @@ function IconButton(props) {
 			onKeyDown={onClick}
 			className={classes}
 		>
-			<img className='v-mid' width='45px' height='45px' src={icon} alt={props.alt} />
+			<img className='v-mid' width='43px' height='43px' src={icon} alt={props.alt} />
 			<span className="ml2 mr3">{children}</span>
 		</a>
 	)
