@@ -6,10 +6,11 @@ function IconButton(props) {
 	const {
 		to,
 		onClick,
-		children
+		children,
+		icon
 	} = props
 
-	const classes = 'flex items-center inline-flex pointer link ba b--white br3 bg-white pv1 ph2 gray dib'
+	const classes = 'pointer link b--white br3 bg-white pv1 ph2 gray dib'
 
 	return to ? (
 		<Link
@@ -18,7 +19,7 @@ function IconButton(props) {
 			onClick={onClick}
 			className={classes}
 		>
-			<img width='40px' height='40px' src={props.icon} alt={props.alt} />
+			<img width='40px' height='40px' src={icon} alt={props.alt} />
 			{children}
 		</Link>
 	) : (
@@ -30,8 +31,8 @@ function IconButton(props) {
 			onKeyDown={onClick}
 			className={classes}
 		>
-			<img width='40px' height='40px' src={props.icon} alt={props.alt} />
-			<span className="ml2">{children}</span>
+			<img className='v-mid' width='45px' height='45px' src={icon} alt={props.alt} />
+			<span className="ml2 mr3">{children}</span>
 		</a>
 	)
 }

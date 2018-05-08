@@ -15,7 +15,7 @@ function UserRegistration() {
 			<Card>
 				<div className='pa3 bg-black-10'>
 					<h3>Email/Password Style</h3>
-					<IconButton icon="http://icons.iconarchive.com/icons/yootheme/social-bookmark/48/social-facebook-box-blue-icon.png" alt="Google">Continue with Google</IconButton>
+					<IconButton icon="http://icons.iconarchive.com/icons/yootheme/social-bookmark/48/social-facebook-box-blue-icon.png" alt="Facebook">Continue with Facebook</IconButton>
 					<TextInput name="email" type="text" placeholder="EMAIL" className='ma3' />
 					<TextInput name="password" type="password" placeholder="PASSWORD" className='ma3' />
 				</div>
