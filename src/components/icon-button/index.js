@@ -12,7 +12,7 @@ function IconButton(props) {
 
 	const disabledClasses = props.disabled ? 'o-50' : 'dim'
 
-	const classes = `flex pointer link b--white br3 bg-white pv1 ph2 gray w-20 ${disabledClasses}`
+	const classes = `flex relative pointer link b--white br3 bg-white pv1 ph2 h2 gray ${disabledClasses}`
 
 	return to ? (
 		<Link
@@ -20,8 +20,9 @@ function IconButton(props) {
 			to={to}
 			onClick={onClick}
 			className={classes}
+			style={{ height: 51 }}
 		>
-			<img className='v-mid' width={43} height={43} src={icon} alt={props.alt} />
+			<img className='v-mid absolute left-1' width={43} height={43} src={icon} alt={props.alt} />
 			<span className="center self-center">{children}</span>
 		</Link>
 	) : (
@@ -32,8 +33,9 @@ function IconButton(props) {
 			tabIndex={0}
 			onKeyDown={onClick}
 			className={classes}
+			style={{ height: 51 }}
 		>
-			<img className='v-mid' width={43} height={43} src={icon} alt={props.alt} />
+			<img className='v-mid absolute left-1' width={43} height={43} src={icon} alt={props.alt} />
 			<span className="center self-center">{children}</span>
 		</a>
 	)
