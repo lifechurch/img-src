@@ -2,41 +2,45 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-function IconButton(props) {
-	const {
-		to,
-		onClick,
-		children,
-		icon
-	} = props
-
-	const disabledClasses = props.disabled ? 'o-50' : 'dim'
-
+function IconButton({
+	to, children, icon, disabled, ...props
+}) {
+	const disabledClasses = disabled ? 'o-50' : 'dim'
 	const classes = `flex relative pointer link b--white br3 bg-white pv1 ph2 h2 gray ${disabledClasses}`
+	const buttonContent = (
+		<div className="flex w-100">
+			<img className='v-mid absolute left-1' width={43} height={43} src={icon} alt={props.alt} />
+			<span className="center self-center">{children}</span>
+		</div>
+	)
+	const buttonStyle = {
+		height: 51
+	}
+
+	if (disabled) {
+		return (
+			<a {...props} className={classes} style={buttonStyle}>
+				{buttonContent}
+			</a>
+		)
+	}
 
 	return to ? (
 		<Link
 			{...props}
 			to={to}
-			onClick={onClick}
 			className={classes}
-			style={{ height: 51 }}
+			style={buttonStyle}
 		>
-			<img className='v-mid absolute left-1' width={43} height={43} src={icon} alt={props.alt} />
-			<span className="center self-center">{children}</span>
+			{buttonContent}
 		</Link>
 	) : (
 		<a
 			{...props}
-			onClick={onClick}
-			role='button'
-			tabIndex={0}
-			onKeyDown={onClick}
 			className={classes}
-			style={{ height: 51 }}
+			style={buttonStyle}
 		>
-			<img className='v-mid absolute left-1' width={43} height={43} src={icon} alt={props.alt} />
-			<span className="center self-center">{children}</span>
+			{buttonContent}
 		</a>
 	)
 }
@@ -46,7 +50,7 @@ IconButton.propTypes = {
 	to: PropTypes.node,
 	disabled: PropTypes.bool,
 	icon: PropTypes.node.isRequired,
-	alt: PropTypes.node,
+	alt: PropTypes.string,
 	onClick: PropTypes.func,
 }
 
