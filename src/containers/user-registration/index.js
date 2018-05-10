@@ -21,8 +21,8 @@ function UserRegistration({ intl }) {
 			<div className="flex flex-column items-center pa4 w-100 h-100 bg-light-gray tl">
 				<div className="mw8 w-100">
 					<Card>
-						<div className="flex-ns w-100-m">
-							<TextInput name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mr3-ns' />
+						<div className="flex flex-column flex-row-ns">
+							<TextInput name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mb2 mb0-ns mr3-ns' />
 							<TextInput name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray flex-auto ml3-ns' />
 						</div>
 
@@ -31,15 +31,18 @@ function UserRegistration({ intl }) {
 						</BodyText>
 						<TextArea />
 
-						<Button className="mt2">Submit</Button>
+						<div className="flex justify-center justify-end-ns">
+							<Button className="mt2">Submit</Button>
+						</div>
 					</Card>
 				</div>
 
-				<div className="mw8 w-100 mt4">
+				<div className="mw8 w-100 mt4 mb5">
 					<Card>
 						<TextArea disabled value={termsConditions} />
-
-						<Button className="mt2">Continue</Button>
+						<div className="flex justify-center justify-end-ns">
+							<Button className="mt2">Continue</Button>
+						</div>
 					</Card>
 				</div>
 			</div>
