@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './index.css'
 
 const styles = {
@@ -6,9 +7,19 @@ const styles = {
 }
 
 function TextArea(props) {
+	const classes = `bg-animate br2 pa2 w-100 h3 input-reset black b--moon-gray outline-0 ${props.className}`
+
 	return (
-		<textarea {...props} style={styles} className="bg-animate br2 pa2 w-100 h3 input-reset b--moon-gray outline-0" />
+		<textarea {...props} style={styles} className={classes} />
 	)
+}
+
+TextArea.propTypes = {
+	className: PropTypes.string
+}
+
+TextArea.defaultProps = {
+	className: ''
 }
 
 export default TextArea

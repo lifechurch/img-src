@@ -1,39 +1,54 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import Card from '../../components/card'
 import TextInput from '../../components/text-input'
 import TextArea from '../../components/textarea'
 import Button from '../../components/button'
-import IconButton from '../../components/icon-button'
+import PrimaryHeading from '../../components/typography/primary-heading'
+import BodyText from '../../components/typography/body-text'
 
-function UserRegistration() {
+function UserRegistration({ intl }) {
+	const termsConditions = intl.formatMessage({ id: 'termsConditions' })
+
 	return (
-		<div className="pa4">
-			<h1 className="ma0 pa0">
-				<FormattedMessage id="userRegistration" />
-			</h1>
-			<Card>
-				<div className='pa3 bg-black-10'>
-					<h3>Email/Password Style</h3>
-					<IconButton icon="http://icons.iconarchive.com/icons/yootheme/social-bookmark/48/social-facebook-box-blue-icon.png" alt="Facebook">Continue with Facebook</IconButton>
-					<TextInput name="email" type="text" placeholder="EMAIL" className='ma3' />
-					<TextInput name="password" type="password" placeholder="PASSWORD" className='ma3' />
-				</div>
-				<div className='pa3'>
-					<h3>First Name/Last Name Style</h3>
-					<TextInput name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray ma3' />
-					<TextInput name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray ma3' /><br />
+		<div className="h-100">
+			<div className="w-100 tc">
+				<PrimaryHeading>
+					<FormattedMessage id="welcomeHeader" />
+				</PrimaryHeading>
+			</div>
+
+			<div className="flex flex-column items-center pa4 w-100 h-100 bg-light-gray tl">
+				<div className="mw8 w-100">
+					<Card>
+						<div className="flex-ns w-100-m">
+							<TextInput name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mr3-ns' />
+							<TextInput name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray flex-auto ml3-ns' />
+						</div>
+
+						<BodyText>
+							<FormattedMessage id="userRegistrationWhyJoin" />
+						</BodyText>
+						<TextArea />
+
+						<Button className="mt2">Submit</Button>
+					</Card>
 				</div>
 
-				Why do you want to be on the volunteering team for YouVersion?<br />
-				<TextArea />
-				<Button to='/' buttontype='solid'>Submit</Button>
-			</Card>
-			<Card>
-				Another card
-			</Card>
+				<div className="mw8 w-100 mt4">
+					<Card>
+						<TextArea disabled value={termsConditions} />
+
+						<Button className="mt2">Continue</Button>
+					</Card>
+				</div>
+			</div>
 		</div>
 	)
 }
 
-export default UserRegistration
+UserRegistration.propTypes = {
+	intl: intlShape.isRequired
+}
+
+export default injectIntl(UserRegistration)

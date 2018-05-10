@@ -4,6 +4,8 @@
   "userVerseAssignment": "User Verse Assignment",
   "userProfile": "User Profile: {user}",
   "admin": "Admin",
-
-  "close": "Close"
+  "close": "Close",
+	"welcomeHeader": "Welcome to Image Source",
+	"userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
+	"termsConditions": "Terms and Conditions go here"
 }
