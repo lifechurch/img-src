@@ -1,0 +1,30 @@
+.upload-image {
+    background: none;
+    color: #6ab750;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.dropzone > div {
+    overflow: hidden;
+}
+
+.dropzone-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    text-shadow: 0px 0px 10px #000;
+    align-items: center;
+    padding: 2.5em 0;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: #fff
+}

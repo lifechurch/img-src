@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import Modal from '../../components/modal'
+import MinorHeading from './../../components/typography/minor-heading'
+import BodyText from './../../components/typography/body-text'
+import ImageDrop from './../../components/image-drop'
 
 class UserVerseAssignment extends Component {
 	constructor(props) {
@@ -27,6 +30,12 @@ class UserVerseAssignment extends Component {
 				>
 					<h1 className="tc">Hello Modal</h1>
 				</Modal>
+				<ImageDrop>
+					<MinorHeading>2 Corinthians 3:17</MinorHeading>
+					<BodyText>
+						Now the Lord is the Spirit, and where the Spirit of the Lord is, there is freedom.
+					</BodyText>
+				</ImageDrop>
 			</div>
 		)
 	}
