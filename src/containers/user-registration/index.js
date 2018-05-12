@@ -6,15 +6,13 @@ import TextArea from '../../components/textarea'
 import Button from '../../components/button'
 import PrimaryHeading from '../../components/typography/primary-heading'
 import BodyText from '../../components/typography/body-text'
-import './index.css'
 
 class UserRegistration extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			submitted: false,
-			tcAccepted: false,
-			submitClicked: false
+			tcAccepted: false
 		}
 
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -46,20 +44,20 @@ class UserRegistration extends React.Component {
 						<Card>
 							<form onSubmit={this.handleSubmit}>
 								<div className="flex flex-column flex-row-ns">
-									<TextInput required={this.state.submitClicked} disabled={this.state.submitted} name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mb2 mb0-ns mr3-ns' />
-									<TextInput required={this.state.submitClicked} disabled={this.state.submitted} name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray flex-auto ml3-ns' />
+									<TextInput required disabled={this.state.submitted} name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mb2 mb0-ns mr3-ns' />
+									<TextInput required disabled={this.state.submitted} name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray flex-auto ml3-ns' />
 								</div>
 
 								<BodyText>
 									<FormattedMessage id="userRegistrationWhyJoin" />
 								</BodyText>
-								<TextArea required={this.state.submitClicked} disabled={this.state.submitted} className="h4" />
+								<TextArea required disabled={this.state.submitted} className="h4" />
 
 								{
 									!this.state.submitted ? (
 										<div className="flex justify-center justify-end-ns">
 											<button className="bn bg-transparent" type="submit">
-												<Button className="mt2" onClick={() => { this.setState({ submitClicked: true }) }}>
+												<Button className="mt2">
 													<FormattedMessage id="submit" />
 												</Button>
 											</button>
