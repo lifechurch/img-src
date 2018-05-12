@@ -14,6 +14,14 @@ class UserRegistration extends React.Component {
 			submitted: false,
 			tcAccepted: false
 		}
+
+		this.handleSubmit = this.handleSubmit.bind(this)
+	}
+
+	handleSubmit(e) {
+		this.setState({ submitted: true })
+
+		e.preventDefault()
 	}
 
 	render() {
@@ -34,26 +42,29 @@ class UserRegistration extends React.Component {
 				<div className="flex flex-column items-center pa4 w-100 h-100 bg-light-gray tl">
 					<div className="mw8 w-100">
 						<Card>
-							<div className="flex flex-column flex-row-ns">
-								<TextInput disabled={this.state.submitted} name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mb2 mb0-ns mr3-ns' />
-								<TextInput disabled={this.state.submitted} name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray flex-auto ml3-ns' />
-							</div>
+							<form onSubmit={this.handleSubmit}>
+								<div className="flex flex-column flex-row-ns">
+									<TextInput disabled={this.state.submitted} name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mb2 mb0-ns mr3-ns' />
+									<TextInput disabled={this.state.submitted} name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray flex-auto ml3-ns' />
+								</div>
 
-							<BodyText>
-								<FormattedMessage id="userRegistrationWhyJoin" />
-							</BodyText>
-							<TextArea disabled={this.state.submitted} className="h4" />
+								<BodyText>
+									<FormattedMessage id="userRegistrationWhyJoin" />
+								</BodyText>
+								<TextArea required disabled={this.state.submitted} className="h4" />
 
-							{
-								!this.state.submitted ? (
-									<div className="flex justify-center justify-end-ns">
-										<Button className="mt2" onClick={() => { this.setState({ submitted: true }) }}>
-											<FormattedMessage id="submit" />
-										</Button>
-									</div>
-								) : null
-							}
-
+								{
+									!this.state.submitted ? (
+										<div className="flex justify-center justify-end-ns">
+											<button className="bn bg-transparent" type="submit">
+												<Button className="mt2">
+													<FormattedMessage id="submit" />
+												</Button>
+											</button>
+										</div>
+									) : null
+								}
+							</form>
 						</Card>
 					</div>
 
