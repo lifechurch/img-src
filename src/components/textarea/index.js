@@ -7,7 +7,7 @@ const styles = {
 }
 
 function TextArea(props) {
-	const classes = `bg-animate br2 pa2 w-100 h3 input-reset black b--moon-gray outline-0 ${props.className}`
+	const classes = `bg-animate br2 pa2 w-100 h3 input-reset b--moon-gray outline-0 ${props.className}`
 
 	return (
 		<textarea {...props} style={styles} className={classes} />

@@ -5,7 +5,10 @@
   "userProfile": "User Profile: {user}",
   "admin": "Admin",
   "close": "Close",
+	"submit": "Submit",
+	"continue": "Continue",
 	"welcomeHeader": "Welcome to Image Source",
 	"userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
-	"termsConditions": "Terms and Conditions go here"
+	"termsConditions": "Terms and Conditions go here",
+  "agreeTermsConditions": "I agree to these terms and conditions"
 }

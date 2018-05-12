@@ -10,7 +10,7 @@ const addDefaultBorderClass = (classNames) => {
 
 function TextInput(props) {
 
-	let classNames = `input-reset ba br3 bg-white pv3 ph4 outline-0 ${props.className}`
+	let classNames = `bg-animate input-reset ba br3 pv3 ph4 outline-0 ${props.className}`
 	// Make sure there is a border class so we don't get inset border
 	classNames = addDefaultBorderClass(classNames)
 
