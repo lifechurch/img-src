@@ -40,7 +40,7 @@ class UserRegistration extends React.Component {
 				</div>
 
 				<div className="flex flex-column items-center pa4 w-100 h-100 bg-light-gray tl">
-					<div className="mw8 w-100">
+					<div className="mw7 w-100">
 						<Card>
 							<form onSubmit={this.handleSubmit}>
 								<div className="flex flex-column flex-row-ns">
@@ -51,13 +51,16 @@ class UserRegistration extends React.Component {
 								<BodyText>
 									<FormattedMessage id="userRegistrationWhyJoin" />
 								</BodyText>
-								<TextArea required disabled={this.state.submitted} className="h4" />
+
+								<div className="h4">
+									<TextArea required disabled={this.state.submitted} className="h4" />
+								</div>
 
 								{
 									!this.state.submitted ? (
-										<div className="flex justify-center justify-end-ns">
+										<div className="flex justify-center justify-end-ns mt2">
 											<button className="bn bg-transparent" type="submit">
-												<Button className="mt2">
+												<Button>
 													<FormattedMessage id="submit" />
 												</Button>
 											</button>
@@ -68,9 +71,11 @@ class UserRegistration extends React.Component {
 						</Card>
 					</div>
 
-					<div className="mw8 w-100 mt4">
+					<div className="mw7 w-100 mt4 mb6">
 						<Card>
-							<TextArea disabled value={termsConditions} className="h4 black" />
+							<div className="h4 black">
+								<TextArea disabled value={termsConditions} />
+							</div>
 
 							<div className="flex justify-center justify-end-ns mv1">
 								<input
@@ -85,11 +90,8 @@ class UserRegistration extends React.Component {
 								</label>
 							</div>
 
-							<div className="flex justify-center justify-end-ns">
-								<Button
-									className="mt2"
-									disabled={!this.state.tcAccepted}
-								>
+							<div className="flex justify-center justify-end-ns mt2">
+								<Button disabled={!this.state.tcAccepted}>
 									<FormattedMessage id="continue" />
 								</Button>
 							</div>
