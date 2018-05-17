@@ -32,7 +32,7 @@ class UserRegistration extends React.Component {
 		const termsConditions = intl.formatMessage({ id: 'termsConditions' })
 
 		return (
-			<div className="h-100">
+			<div>
 				<div className="w-100 tc">
 					<PrimaryHeading>
 						<FormattedMessage className="mw1" id="welcomeHeader" />
@@ -43,7 +43,7 @@ class UserRegistration extends React.Component {
 					<div className="mw7 w-100">
 						<Card>
 							<form onSubmit={this.handleSubmit}>
-								<div className="flex flex-column flex-row-ns">
+								<div className="flex flex-column flex-row-ns mb4">
 									<TextInput required disabled={this.state.submitted} name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mb2 mb0-ns mr3-ns' />
 									<TextInput required disabled={this.state.submitted} name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray flex-auto ml3-ns' />
 								</div>
@@ -52,18 +52,16 @@ class UserRegistration extends React.Component {
 									<FormattedMessage id="userRegistrationWhyJoin" />
 								</BodyText>
 
-								<div className="h4">
+								<div className="h4 black">
 									<TextArea required disabled={this.state.submitted} className="h4" />
 								</div>
 
 								{
 									!this.state.submitted ? (
-										<div className="flex justify-center justify-end-ns mt2">
-											<button className="bn bg-transparent" type="submit">
-												<Button>
-													<FormattedMessage id="submit" />
-												</Button>
-											</button>
+										<div className="flex justify-center justify-end-ns mt3">
+											<Button submit disabled>
+												<FormattedMessage id="submit" />
+											</Button>
 										</div>
 									) : null
 								}
@@ -77,7 +75,7 @@ class UserRegistration extends React.Component {
 								<TextArea disabled value={termsConditions} />
 							</div>
 
-							<div className="flex justify-center justify-end-ns mv1">
+							<div className="flex justify-center justify-end-ns mt3">
 								<input
 									type="checkbox"
 									checked={this.state.tcAccepted}
@@ -90,8 +88,8 @@ class UserRegistration extends React.Component {
 								</label>
 							</div>
 
-							<div className="flex justify-center justify-end-ns mt2">
-								<Button disabled={!this.state.tcAccepted}>
+							<div className="flex justify-center justify-end-ns mt3">
+								<Button submit disabled={!this.state.tcAccepted}>
 									<FormattedMessage id="continue" />
 								</Button>
 							</div>
