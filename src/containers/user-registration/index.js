@@ -59,7 +59,7 @@ class UserRegistration extends React.Component {
 								{
 									!this.state.submitted ? (
 										<div className="flex justify-center justify-end-ns mt3">
-											<Button submit disabled>
+											<Button submit>
 												<FormattedMessage id="submit" />
 											</Button>
 										</div>
