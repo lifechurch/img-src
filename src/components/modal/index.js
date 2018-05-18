@@ -43,7 +43,7 @@ class Modal extends Component {
 								className="absolute top-1 right-1 dim outline-0 pointer bn bg-transparent"
 								title={closeMessage}
 								onClick={() => { this.setState({ isOpen: false }) }}
-       >
+							>
 								<img src={CloseIcon} alt={closeMessage} />
 							</button>
 							{children}
