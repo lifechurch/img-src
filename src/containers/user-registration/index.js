@@ -17,12 +17,11 @@ class UserRegistration extends React.Component {
 	}
 
 	handleClick() {
-
 		if (this.state.checked) {
-			window.confirm('Agreed to the terms and condition?') // This is just a placeholder
+			// This is just a placeholder
 		}
-
 	}
+
 	render() {
 		return (
 			<div className="pa4">
