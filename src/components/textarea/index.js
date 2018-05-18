@@ -17,12 +17,10 @@ function TextArea(props) {
 }
 
 TextArea.propTypes = {
-	className: PropTypes.string,
 	disabled: PropTypes.bool
 }
 
 TextArea.defaultProps = {
-	className: '',
 	disabled: false
 }
 
