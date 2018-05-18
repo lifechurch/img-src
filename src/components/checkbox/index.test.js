@@ -4,7 +4,7 @@ import CheckBox from './index'
 
 it('renders without crashing', () => {
 	const div = document.createElement('div')
-	ReactDOM.render(<CheckBox onChange={() => { return false }} checked={false} />, div)
+	ReactDOM.render(<CheckBox />, div)
 })
 
 it('checks the checkbox', () => {

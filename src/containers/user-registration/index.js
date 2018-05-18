@@ -10,7 +10,7 @@ import IconButton from '../../components/icon-button'
 class UserRegistration extends React.Component {
 
 	constructor(props) {
-		super()
+		super(props)
 		this.state = {
 			checked: false
 		}
@@ -32,7 +32,7 @@ class UserRegistration extends React.Component {
 				<Card>
 					<div className='pa3 bg-black-10'>
 						<h3>Email/Password Style</h3>
-                        <IconButton icon="http://icons.iconarchive.com/icons/yootheme/social-bookmark/48/social-facebook-box-blue-icon.png" alt="Facebook">Continue with Facebook</IconButton>
+						<IconButton icon="http://icons.iconarchive.com/icons/yootheme/social-bookmark/48/social-facebook-box-blue-icon.png" alt="Facebook">Continue with Facebook</IconButton>
 						<TextInput type="text" placeholder="EMAIL" className='ma3' name="email" />
 						<TextInput type="password" placeholder="PASSWORD" className='ma3' name="password" />
 					</div>
@@ -49,14 +49,22 @@ class UserRegistration extends React.Component {
 				<Card heightClass='mv4'>
 					<div className='flex flex-column items-end-l items-center'>
 						<TextArea
-							rows={ 10 } disabled={true} value="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+							rows={ 10 }
+							disabled={true}
+							value="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 							Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
 							when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 							It has survived not only five centuries, but also the leap into electronic typesetting,
 							remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
 							sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-							like Aldus PageMaker including versions of Lorem Ipsum." />
-						<Checkbox labelName='I agree to those terms and conditions' id='agree-checkbox' onChange={ (event) => { this.setState({ checked: event.target.checked }) } } checked={this.state.checked} />
+							like Aldus PageMaker including versions of Lorem Ipsum."
+						/>
+						<Checkbox
+							labelName='I agree to those terms and conditions'
+							id='agree-checkbox'
+							onChange={ (event) => { this.setState({ checked: event.target.checked }) } }
+							checked={this.state.checked}
+						/>
 						<Button onClick={() => { this.handleClick() }} buttontype='solid' disabled={!this.state.checked}>
                             Continue
 						</Button>
