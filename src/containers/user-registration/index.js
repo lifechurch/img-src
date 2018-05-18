@@ -39,13 +39,17 @@ class UserRegistration extends React.Component {
 					</PrimaryHeading>
 				</div>
 
-				<div className="flex flex-column items-center pa4 w-100 h-100 bg-light-gray tl">
-					<div className="mw7 w-100">
+				<div className="flex flex-column items-center pa3 pa4-ns w-100 h-100 bg-light-gray tl">
+					<div className="f3 measure-wide w-100">
 						<Card>
-							<form onSubmit={this.handleSubmit}>
+							<form onSubmit={this.handleSubmit} className="f5">
 								<div className="flex flex-column flex-row-ns mb4">
-									<TextInput required disabled={this.state.submitted} name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray flex-auto mb2 mb0-ns mr3-ns' />
-									<TextInput required disabled={this.state.submitted} name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray flex-auto ml3-ns' />
+									<div className="flex-auto mb2 mb0-ns mr3-ns">
+										<TextInput required border disabled={this.state.submitted} name="firstname" type="text" placeholder="FIRST NAME" />
+									</div>
+									<div className='flex-auto ml3-ns'>
+										<TextInput required border disabled={this.state.submitted} name="lastname" type="text" placeholder="LAST NAME" />
+									</div>
 								</div>
 
 								<BodyText>
@@ -69,13 +73,13 @@ class UserRegistration extends React.Component {
 						</Card>
 					</div>
 
-					<div className="mw7 w-100 mt4 mb6">
+					<div className="f3 measure-wide w-100 mt4 mb6">
 						<Card>
-							<div className="h4 black">
+							<div className="h4 f5 black">
 								<TextArea disabled value={termsConditions} />
 							</div>
 
-							<div className="flex justify-center justify-end-ns mt3">
+							<div className="flex justify-center justify-end-ns mt3 f5">
 								<input
 									type="checkbox"
 									checked={this.state.tcAccepted}
@@ -88,7 +92,7 @@ class UserRegistration extends React.Component {
 								</label>
 							</div>
 
-							<div className="flex justify-center justify-end-ns mt3">
+							<div className="flex justify-center justify-end-ns mt3 f5">
 								<Button submit disabled={!this.state.tcAccepted}>
 									<FormattedMessage id="continue" />
 								</Button>
