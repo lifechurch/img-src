@@ -10,5 +10,7 @@
 	"welcomeHeader": "Welcome to Image Source",
 	"userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
 	"termsConditions": "Terms and Conditions go here",
-  "agreeTermsConditions": "I agree to these terms and conditions"
+  "agreeTermsConditions": "I agree to these terms and conditions",
+  "firstName": "First Name",
+  "lastName": "Last Name"
 }

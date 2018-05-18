@@ -30,6 +30,8 @@ class UserRegistration extends React.Component {
 		} = this.props
 
 		const termsConditions = intl.formatMessage({ id: 'termsConditions' })
+		const firstName = intl.formatMessage({ id: 'firstName' }).toUpperCase()
+		const lastName = intl.formatMessage({ id: 'lastName' }).toUpperCase()
 
 		return (
 			<div>
@@ -45,10 +47,10 @@ class UserRegistration extends React.Component {
 							<form onSubmit={this.handleSubmit} className="f5">
 								<div className="flex flex-column flex-row-ns mb4">
 									<div className="flex-auto mb2 mb0-ns mr3-ns">
-										<TextInput required border disabled={this.state.submitted} name="firstname" type="text" placeholder="FIRST NAME" />
+										<TextInput required border disabled={this.state.submitted} name="firstname" type="text" placeholder={firstName} />
 									</div>
 									<div className='flex-auto ml3-ns'>
-										<TextInput required border disabled={this.state.submitted} name="lastname" type="text" placeholder="LAST NAME" />
+										<TextInput required border disabled={this.state.submitted} name="lastname" type="text" placeholder={lastName} />
 									</div>
 								</div>
 
