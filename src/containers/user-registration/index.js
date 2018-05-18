@@ -5,6 +5,7 @@ import TextInput from '../../components/text-input'
 import TextArea from '../../components/textarea'
 import Button from '../../components/button'
 import Checkbox from '../../components/checkbox'
+import IconButton from '../../components/icon-button'
 
 class UserRegistration extends React.Component {
 
@@ -31,6 +32,7 @@ class UserRegistration extends React.Component {
 				<Card>
 					<div className='pa3 bg-black-10'>
 						<h3>Email/Password Style</h3>
+                        <IconButton icon="http://icons.iconarchive.com/icons/yootheme/social-bookmark/48/social-facebook-box-blue-icon.png" alt="Facebook">Continue with Facebook</IconButton>
 						<TextInput type="text" placeholder="EMAIL" className='ma3' name="email" />
 						<TextInput type="password" placeholder="PASSWORD" className='ma3' name="password" />
 					</div>
