@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 
@@ -7,7 +7,12 @@ function CheckBox({
 }) {
 	return (
 		<label htmlFor={id} className='pv3'>
-			<input type="checkbox" id={id} className='mr2' onChange={(event) => { onChange(event) }} checked={checked} />
+			<input
+				type="checkbox"
+				id={id} className='mr2'
+				onChange={(event) => { onChange(event) }}
+				checked={checked}
+			/>
 			{labelName}
 		</label>
 	)
@@ -20,6 +25,9 @@ CheckBox.propTypes = {
 	id: PropTypes.string
 }
 
-CheckBox.defaultProps = { labelName: 'Agree to something?', id: 'checkbox' }
+CheckBox.defaultProps = {
+	labelName: 'Agree to something?',
+	id: `checkbox${Date.now()}`
+}
 
 export default CheckBox
