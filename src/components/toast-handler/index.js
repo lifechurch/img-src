@@ -4,16 +4,20 @@ import Toast from '../toast'
 
 const DEFAULT_TIMEOUT = 3000
 
-const display = (text, timeout, autoHide, ...rest) => {
-	if (!document.getElementById('notifications').hasChildNodes()) {
-		ReactDOM.render(<Toast text={text} delay={timeout} {...rest} />, document.getElementById('notifications'))
+const clear = () => {
+	ReactDOM.unmountComponentAtNode(document.getElementById('notifications'))
+}
 
-		if (autoHide) {
+const display = (text, timeout, autoHide) => {
+	if (!document.getElementById('notifications').hasChildNodes()) {
+		ReactDOM.render(<Toast text={text} delay={timeout} autoHide={autoHide} />, document.getElementById('notifications'))
+
+		/* if (timeout === -1) {
 			return false
-		}
+		} */
 
 		setTimeout(() => {
-			ReactDOM.unmountComponentAtNode(document.getElementById('notifications'))
+			clear()
 		}, timeout)
 
 		return true
@@ -25,6 +29,7 @@ const display = (text, timeout, autoHide, ...rest) => {
 const notify = (initRecall = 500, recallIncrement = 500) => {
 	this.queued = []
 	this.currentlyNotifying = false
+	this.currentRecall = initRecall
 
 	this.displayNext = () => {
 		if (this.queued.length === 0) {
@@ -33,19 +38,16 @@ const notify = (initRecall = 500, recallIncrement = 500) => {
 		}
 
 		this.currentlyNotifying = true
-		this.currentRecall = initRecall
 
 		const currentMessage = this.queued.pop()
 		const { text, timeout, autoHide } = currentMessage
 
 		if (display(text, timeout, autoHide)) {
 
-			if (currentMessage.timeout > 0) {
-				this.currentRecall = initRecall
-				setTimeout(() => {
-					this.displayNext()
-				}, currentMessage.timeout)
-			}
+			this.currentRecall = initRecall
+			setTimeout(() => {
+				this.displayNext()
+			}, timeout)
 
 		} else {
 
@@ -53,13 +55,18 @@ const notify = (initRecall = 500, recallIncrement = 500) => {
 			setTimeout(() => {
 				this.displayNext()
 			}, this.currentRecall)
+			console.log(this.queued)
 			this.currentRecall += recallIncrement
 
 		}
 	}
 
-	return (text, timeout = DEFAULT_TIMEOUT, autoHide = true, ...rest) => {
-		this.queued.push({ text, timeout, autoHide, ...rest })
+	return (text = '', timeout = DEFAULT_TIMEOUT, autoHide = true) => {
+		this.queued.push({
+			text,
+			timeout,
+			autoHide
+		})
 		if (!this.currentlyNotifying) {
 			this.displayNext()
 		}
@@ -74,5 +81,6 @@ function ToastHandler() {
 
 export default ToastHandler
 export const notifier = {
-	notify
+	notify,
+	clear
 }

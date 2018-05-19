@@ -26,7 +26,7 @@ class UserVerseAssignment extends Component {
 				<Button onClick={() => { this.notify('hey') }}>
 					Notify
 				</Button>
-				<Button onClick={() => { this.notify('hey2', 3000, false) }}>
+				<Button onClick={() => { this.notify('hey2') }}>
 					Notify
 				</Button>
 				<Modal

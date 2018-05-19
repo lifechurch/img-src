@@ -21,6 +21,8 @@ function App() {
 					description="A web application for YouVersion design community to submit verse image art for use in the Bible App."
 				/>
 
+				<ToastHandler />
+
 				{/*
           This is temporary navigation while we build out the full application
           This will be removed once we have real navigation developed
@@ -33,7 +35,7 @@ function App() {
 					<Link to="/user-profile/Tommy" className="mr3 link dim moon-gray">User Profile: Tommy</Link>
 					<Link to="/admin" className="mr3 link dim moon-gray">Admin</Link>
 				</nav>
-				<ToastHandler />
+
 				<Route exact path="/" component={SplashPage} />
 				<Route path="/user-registration" component={UserRegistration} />
 				<Route
