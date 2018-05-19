@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import Modal from '../../components/modal'
+import Toast from '../../components/toast'
+import Button from '../../components/button'
 
 class UserVerseAssignment extends Component {
 	constructor(props) {
@@ -17,9 +19,10 @@ class UserVerseAssignment extends Component {
 				<h1 className="ma0 pa0">
 					<FormattedMessage id="userVerseAssignment" />
 				</h1>
-				<button onClick={() => { this.setState({ modalIsOpen: true }) }}>
+				<Button onClick={() => { this.setState({ modalIsOpen: true }) }}>
           Open Modal
-				</button>
+				</Button>
+				<Toast>THIS IS A TOASTER TOASTER TOASTER TOASTER</Toast>
 				<Modal
 					isOpen={modalIsOpen}
 					widthClass="w-30"
