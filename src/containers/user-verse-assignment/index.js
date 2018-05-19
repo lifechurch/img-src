@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import Modal from '../../components/modal'
-import Toast from '../../components/toast'
+import { notifier } from '../../components/toast-handler'
 import Button from '../../components/button'
 
 class UserVerseAssignment extends Component {
@@ -10,6 +10,7 @@ class UserVerseAssignment extends Component {
 		this.state = {
 			modalIsOpen: false
 		}
+		this.notify = notifier.notify()
 	}
 
 	render() {
@@ -22,7 +23,12 @@ class UserVerseAssignment extends Component {
 				<Button onClick={() => { this.setState({ modalIsOpen: true }) }}>
           Open Modal
 				</Button>
-				<Toast>THIS IS A TOASTER TOASTER TOASTER TOASTER</Toast>
+				<Button onClick={() => { this.notify('hey') }}>
+					Notify
+				</Button>
+				<Button onClick={() => { this.notify('hey2', 3000, false) }}>
+					Notify
+				</Button>
 				<Modal
 					isOpen={modalIsOpen}
 					widthClass="w-30"

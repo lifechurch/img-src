@@ -15,21 +15,21 @@ class Toast extends React.Component {
 		const toast = () => {
 			const {
 				intl,
-				children
+				text
 			} = this.props
 
-			const closeMessage = intl.formatMessage({ id: 'close' })
+			// const closeMessage = intl.formatMessage({ id: 'close' })
 
 			return (
 				<div className="fixed top-0 left-0 w-100 h3 bg-white shadow-2 ph2 flex justify-center items-center f3">
-					{children}
+					{text}
 
 					<button
 						className="absolute right-1 dim outline-0 pointer bn bg-transparent"
-						title={closeMessage}
+
 						onClick={() => { this.setState({ isOpen: false }) }}
 					>
-						<img src={CloseIcon} alt={closeMessage} />
+						<img src={CloseIcon}  />
 					</button>
 				</div>
 			)
@@ -40,16 +40,15 @@ class Toast extends React.Component {
 }
 
 Toast.propTypes = {
-	children: PropTypes.node,
 	intl: intlShape.isRequired,
 	delay: PropTypes.number,
-	autoHide: PropTypes.bool
+	autoHide: PropTypes.bool,
+	text: PropTypes.string.isRequired
 }
 
 Toast.defaultProps = {
-	children: null,
-	delay: 3,
+	delay: 3000,
 	autoHide: true
 }
 
-export default injectIntl(Toast)
+export default Toast

@@ -9,6 +9,7 @@ import UserRegistration from './containers/user-registration'
 import UserVerseAssignment from './containers/user-verse-assignment'
 import UserProfile from './containers/user-profile'
 import SidebarNav from './layouts/sidebar-nav'
+import ToastHandler from './components/toast-handler'
 
 function App() {
 	return (
@@ -32,6 +33,7 @@ function App() {
 					<Link to="/user-profile/Tommy" className="mr3 link dim moon-gray">User Profile: Tommy</Link>
 					<Link to="/admin" className="mr3 link dim moon-gray">Admin</Link>
 				</nav>
+				<ToastHandler />
 				<Route exact path="/" component={SplashPage} />
 				<Route path="/user-registration" component={UserRegistration} />
 				<Route
