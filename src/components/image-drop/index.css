@@ -7,10 +7,6 @@
     outline: inherit;
 }
 
-.dropzone > div {
-    overflow: hidden;
-}
-
 .dropzone-overlay {
     position: absolute;
     top: 0;

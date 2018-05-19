@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
-import Card from './../card'
+import { FormattedMessage } from 'react-intl'
 import './index.css'
 
 class ImageDrop extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			rejected: [],
+			rejectedSmall: [],
+			rejectedLarge: [],
+			rejectedType: [],
 			accepted: [],
 			dropzoneActive: false
 		}
@@ -27,26 +29,54 @@ class ImageDrop extends Component {
 	}
 
 
-	onDrop(files) {
+	onDrop(accept, reject) {
 
-		const MIN_IMAGE_WIDTH = 960
-		const MAX_IMAGE_WIDTH = 4000
-		const MIN_IMAGE_HEIGHT = 960
-		const MAX_IMAGE_HEIGHT = 4000
+		this.setState({
+			rejectedSmall: [],
+			rejectedLarge: [],
+			rejectedType: [],
+			accepted: []
+		})
 
-		const rejected = []
+		const {
+			minWidth,
+			maxWidth,
+			minHeight,
+			maxHeight,
+			onDrop
+		} = this.props
+
+		const rejectedSmall = []
+		const rejectedLarge = []
+		const rejectedType = []
 		const accepted = []
-		files.map((file) => {
+		const rejectList = []
+
+
+		reject.map((file) => {
+			rejectList.push(file)
+			rejectedType.push(file)
+			this.setState({ rejectedType })
+			return (rejectedType)
+		})
+
+		accept.map((file) => {
 			const reader = new FileReader()
 			reader.onload = (loadEvent) => {
 				const image = new Image()
 				const handleLoad = () => {
-					if ((image.width < MIN_IMAGE_WIDTH) || (image.width > MAX_IMAGE_WIDTH) || (image.height < MIN_IMAGE_HEIGHT) || (image.width > MAX_IMAGE_HEIGHT)) {
-						rejected.push(file)
+
+					if (image.width < minWidth || image.height < minHeight) {
+						rejectedSmall.push(file)
+						rejectList.push(file)
+					} else if ((image.width > maxWidth) || (image.width > maxHeight)) {
+						rejectedLarge.push(file)
+						rejectList.push(file)
 					} else {
 						accepted.push(file)
 					}
-					this.setState({ rejected, accepted })
+
+					this.setState({ rejectedSmall, rejectedLarge, accepted })
 				}
 
 				image.src = loadEvent.target.result
@@ -56,9 +86,12 @@ class ImageDrop extends Component {
 					handleLoad()
 				}
 			}
+
 			reader.readAsDataURL(file)
-			return (rejected, accepted)
+			return (rejectedSmall, rejectedLarge, accepted)
 		})
+
+		onDrop(rejectList, accepted)
 
 		this.setState({
 			dropzoneActive: false
@@ -66,18 +99,28 @@ class ImageDrop extends Component {
 	}
 
 	render() {
+
 		const styles = {
-			height: 'auto',
-			position: 'relative'
+			height: 'auto'
 		}
 
 		let dropzoneRef
 
 		const {
-			rejected,
+			rejectedSmall,
+			rejectedLarge,
+			rejectedType,
 			accepted,
 			dropzoneActive
 		} = this.state
+
+		const {
+			minWidth,
+			maxWidth,
+			minHeight,
+			maxHeight,
+			type
+		} = this.props
 
 		return (
 			<Dropzone
@@ -88,46 +131,77 @@ class ImageDrop extends Component {
 				style={styles}
 				className="dropzone"
 				ref={(node) => { dropzoneRef = node }}
-				accept="image/jpg, image/jpeg"
+				accept={type}
 			>
-				<Card >
-					{dropzoneActive && <div className="dropzone-overlay">Drop Files</div>}
-					{this.props.children}
 
-					<div className="db accepted">
-						{
-							accepted.map((f) => {
-								return (
-									<div key={f.name} className="ma2 w-100 mw3 dib">
-										<img className="w-100" src={f.preview} alt={f.name} />
-									</div>
-								)
-							})
-						}
-					</div>
+				{dropzoneActive && <div className="dropzone-overlay"><FormattedMessage id="imageDropOverlay" /></div>}
+				{this.props.children}
 
-					<div className="db rejected">
-						{
-							rejected.map((f) => {
-								return (
-									<span key={f.name} className="f6 red w-100 db pv3">{f.name} exceeds the maximum image size of 4000px by 4000px</span>
-								)
-							})
-						}
-					</div>
-					<button className="upload-image fr f5-ns f6" onClick={() => { dropzoneRef.open() }}>Upload Image</button>
-				</Card>
+				<div className="db accepted">
+					{
+						accepted.map((f) => {
+							return (
+								<div key={f.name} className="ma2 w-100 mw3 dib">
+									<img className="w-100" src={f.preview} alt={f.name} />
+								</div>
+							)
+						})
+					}
+				</div>
+
+				<div className="db rejected">
+					{
+						rejectedSmall.map((f) => {
+							return (
+								<span key={f.name} className="f6 red w-100 db pv3">
+									<FormattedMessage id="rejectedSmallFile" values={{ file: f.name, minWidth, minHeight }} />
+								</span>
+							)
+						})
+					}
+					{
+						rejectedLarge.map((f) => {
+							return (
+								<span key={f.name} className="f6 red w-100 db pv3">
+									<FormattedMessage id="rejectedLargeFile" values={{ file: f.name, maxWidth, maxHeight }} />
+								</span>
+							)
+						})
+					}
+					{
+						rejectedType.map((f) => {
+							return (
+								<span key={f.name} className="f6 red w-100 db pv3">
+									<FormattedMessage id="rejectedType" values={{ file: f.name, type }} />
+								</span>
+							)
+						})
+					}
+				</div>
+				<button className="upload-image fr f5-ns f6" onClick={() => { dropzoneRef.open() }}><FormattedMessage id="imageDropButton" /></button>
 			</Dropzone>
 		)
 	}
 }
 
 ImageDrop.propTypes = {
-	children: PropTypes.node
+	children: PropTypes.node,
+	minWidth: PropTypes.number,
+	maxWidth: PropTypes.number,
+	minHeight: PropTypes.number,
+	maxHeight: PropTypes.number,
+	type: PropTypes.string,
+	onDrop: PropTypes.func
 }
 
 ImageDrop.defaultProps = {
-	children: null
+	children: null,
+	minWidth: 960,
+	maxWidth: 4000,
+	minHeight: 960,
+	maxHeight: 400,
+	type: 'image/jpg, image/jpeg',
+	onDrop: null
 }
 
 export default ImageDrop

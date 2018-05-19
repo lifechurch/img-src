@@ -5,5 +5,10 @@
   "userProfile": "User Profile: {user}",
   "admin": "Admin",
 
-  "close": "Close"
+  "close": "Close",
+  "rejectedSmallFile": "{file} does not meet the minimum image size of {minWidth}px by {minHeight}px",
+  "rejectedLargeFile": "{file} exceeds the maximum image size of {maxWidth}px by {maxHeight}px",
+  "rejectedType": "{file} is not an accepted file type of: {type}",
+  "imageDropOverlay": "Upload Image",
+  "imageDropButton": "Upload Image"
 }
