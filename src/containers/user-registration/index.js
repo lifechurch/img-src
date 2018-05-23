@@ -4,6 +4,7 @@ import Card from '../../components/card'
 import TextInput from '../../components/text-input'
 import TextArea from '../../components/textarea'
 import Button from '../../components/button'
+import Checkbox from '../../components/checkbox'
 import PrimaryHeading from '../../components/typography/primary-heading'
 import BodyText from '../../components/typography/body-text'
 
@@ -82,16 +83,12 @@ class UserRegistration extends React.Component {
 							</div>
 
 							<div className="flex justify-center justify-end-ns mt3 f5">
-								<input
-									type="checkbox"
-									checked={this.state.tcAccepted}
+								<Checkbox
 									onChange={() => { this.setState({ tcAccepted: !this.state.tcAccepted }) }}
-									id="tcCheck"
-									className="mr2"
+									checked={this.state.tcAccepted}
+									formattedMsgId='agreeTermsConditions'
+									id='tcCheck'
 								/>
-								<label htmlFor="tcCheck">
-									<FormattedMessage id="agreeTermsConditions" />
-								</label>
 							</div>
 
 							<div className="flex justify-center justify-end-ns mt3 f5">
