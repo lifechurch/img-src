@@ -4,18 +4,18 @@
   "close": "Close",
   "continue": "Continue",
   "firstName": "First Name",
-  "imageDropButton": "Upload Image"
+  "imageDropButton": "Upload Image",
   "imageDropOverlay": "Upload Image",
   "lastName": "Last Name",
   "rejectedLargeFile": "{file} exceeds the maximum image size of {maxWidth}px by {maxHeight}px",
   "rejectedSmallFile": "{file} does not meet the minimum image size of {minWidth}px by {minHeight}px",
   "rejectedType": "{file} is not an accepted file type of: {type}",  
   "splashPage": "Splash Page",
-	"submit": "Submit",
-	"termsConditions": "Terms and Conditions go here",
+  "submit": "Submit",
+  "termsConditions": "Terms and Conditions go here",
   "userProfile": "User Profile: {user}",
   "userRegistration": "User Registration",
-	"userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
+  "userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
   "userVerseAssignment": "User Verse Assignment",
-	"welcomeHeader": "Welcome to Image Source"
+  "welcomeHeader": "Welcome to Image Source"
 }
