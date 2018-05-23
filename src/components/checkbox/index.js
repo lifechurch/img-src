@@ -1,19 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { FormattedMessage } from 'react-intl'
 
 function CheckBox({
-	id, caption, onChange, checked
+	id, onChange, checked, formattedMsgId
 }) {
 	return (
 		<label htmlFor={id} className='pv3'>
 			<input
 				type="checkbox"
-				id={id} className='mr2'
+				id={id}
+				className='mr2'
 				onChange={(event) => { onChange(event) }}
 				checked={checked}
 			/>
-			{caption}
+			<FormattedMessage id={formattedMsgId} />
 		</label>
 	)
 }
@@ -21,13 +22,8 @@ function CheckBox({
 CheckBox.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	checked: PropTypes.bool.isRequired,
-	caption: PropTypes.string,
-	id: PropTypes.string
-}
-
-CheckBox.defaultProps = {
-	caption: 'Agree to something?',
-	id: 'checkbox'
+	formattedMsgId: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired
 }
 
 export default CheckBox
