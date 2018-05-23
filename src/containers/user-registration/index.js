@@ -1,77 +1,116 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import Card from '../../components/card'
 import TextInput from '../../components/text-input'
 import TextArea from '../../components/textarea'
 import Button from '../../components/button'
 import Checkbox from '../../components/checkbox'
 import IconButton from '../../components/icon-button'
+import PrimaryHeading from '../../components/typography/primary-heading'
+import BodyText from '../../components/typography/body-text'
 
 class UserRegistration extends React.Component {
-
 	constructor(props) {
 		super(props)
 		this.state = {
-			checked: false
+			submitted: false,
+			tcAccepted: false
 		}
+
+		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
-	handleClick() {
-		if (this.state.checked) {
-			// This is just a placeholder
-		}
+	handleSubmit(e) {
+		this.setState({ submitted: true })
+
+		e.preventDefault()
 	}
 
 	render() {
+		const {
+			intl
+		} = this.props
+
+		const termsConditions = intl.formatMessage({ id: 'termsConditions' })
+		const firstName = intl.formatMessage({ id: 'firstName' }).toUpperCase()
+		const lastName = intl.formatMessage({ id: 'lastName' }).toUpperCase()
+
 		return (
-			<div className="pa4">
-				<h1 className="ma0 pa0">
-					<FormattedMessage id="userRegistration" />
-				</h1>
-				<Card>
-					<div className='pa3 bg-black-10'>
-						<h3>Email/Password Style</h3>
-						<IconButton icon="http://icons.iconarchive.com/icons/yootheme/social-bookmark/48/social-facebook-box-blue-icon.png" alt="Facebook">Continue with Facebook</IconButton>
-						<TextInput type="text" placeholder="EMAIL" className='ma3' name="email" />
-						<TextInput type="password" placeholder="PASSWORD" className='ma3' name="password" />
-					</div>
-					<div className='pa3'>
-						<h3>First Name/Last Name Style</h3>
-						<TextInput type="text" placeholder="FIRST NAME" className='b--moon-gray ma3' name="first_name" />
-						<TextInput type="text" placeholder="LAST NAME" className='b--moon-gray ma3' name="last_name" /><br />
+			<div>
+				<div className="w-100 tc">
+					<PrimaryHeading>
+						<FormattedMessage className="mw1" id="welcomeHeader" />
+					</PrimaryHeading>
+				</div>
+
+				<div className="flex flex-column items-center pa3 pa4-ns w-100 h-100 bg-light-gray tl">
+					<div className="f3 measure-wide w-100">
+						<Card>
+							<form onSubmit={this.handleSubmit} className="f5">
+								<div className="flex flex-column flex-row-ns mb4">
+									<div className="flex-auto mb2 mb0-ns mr3-ns">
+										<TextInput required border disabled={this.state.submitted} name="firstname" type="text" placeholder={firstName} />
+									</div>
+									<div className='flex-auto ml3-ns'>
+										<TextInput required border disabled={this.state.submitted} name="lastname" type="text" placeholder={lastName} />
+									</div>
+								</div>
+
+								<BodyText>
+									<FormattedMessage id="userRegistrationWhyJoin" />
+								</BodyText>
+
+								<div className="h4 black">
+									<TextArea required disabled={this.state.submitted} className="h4" />
+								</div>
+
+								{
+									!this.state.submitted ? (
+										<div className="flex justify-center justify-end-ns mt3">
+											<Button submit>
+												<FormattedMessage id="submit" />
+											</Button>
+										</div>
+									) : null
+								}
+							</form>
+						</Card>
 					</div>
 
-                    Why do you want to be on the volunteering team for YouVersion?<br />
-					<TextArea />
-					<Button to='/' buttontype='solid'>Submit</Button>
-				</Card>
-				<Card heightClass='mv4'>
-					<div className='flex flex-column items-end-l items-center'>
-						<TextArea
-							rows={ 10 }
-							disabled={true}
-							value="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-							Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-							when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-							It has survived not only five centuries, but also the leap into electronic typesetting,
-							remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-							sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-							like Aldus PageMaker including versions of Lorem Ipsum."
-						/>
-						<Checkbox
-							caption='I agree to those terms and conditions'
-							id='agree-checkbox'
-							onChange={ (event) => { this.setState({ checked: event.target.checked }) } }
-							checked={this.state.checked}
-						/>
-						<Button onClick={() => { this.handleClick() }} buttontype='solid' disabled={!this.state.checked}>
-                            Continue
-						</Button>
+					<div className="f3 measure-wide w-100 mt4 mb6">
+						<Card>
+							<div className="h4 f5 black">
+								<TextArea disabled value={termsConditions} />
+							</div>
+
+							<div className="flex justify-center justify-end-ns mt3 f5">
+								<input
+									type="checkbox"
+									checked={this.state.tcAccepted}
+									onChange={() => { this.setState({ tcAccepted: !this.state.tcAccepted }) }}
+									id="tcCheck"
+									className="mr2"
+								/>
+								<label htmlFor="tcCheck">
+									<FormattedMessage id="agreeTermsConditions" />
+								</label>
+							</div>
+
+							<div className="flex justify-center justify-end-ns mt3 f5">
+								<Button submit disabled={!this.state.tcAccepted}>
+									<FormattedMessage id="continue" />
+								</Button>
+							</div>
+						</Card>
 					</div>
-				</Card>
+				</div>
 			</div>
 		)
 	}
 }
 
-export default UserRegistration
+UserRegistration.propTypes = {
+	intl: intlShape.isRequired
+}
+
+export default injectIntl(UserRegistration)
