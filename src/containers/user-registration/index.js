@@ -5,7 +5,6 @@ import TextInput from '../../components/text-input'
 import TextArea from '../../components/textarea'
 import Button from '../../components/button'
 import Checkbox from '../../components/checkbox'
-import IconButton from '../../components/icon-button'
 import PrimaryHeading from '../../components/typography/primary-heading'
 import BodyText from '../../components/typography/body-text'
 
