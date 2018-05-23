@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 
 function CheckBox({
-	id, labelName, onChange, checked
+	id, caption, onChange, checked
 }) {
 	return (
 		<label htmlFor={id} className='pv3'>
@@ -13,7 +13,7 @@ function CheckBox({
 				onChange={(event) => { onChange(event) }}
 				checked={checked}
 			/>
-			{labelName}
+			{caption}
 		</label>
 	)
 }
@@ -21,13 +21,13 @@ function CheckBox({
 CheckBox.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	checked: PropTypes.bool.isRequired,
-	labelName: PropTypes.string,
+	caption: PropTypes.string,
 	id: PropTypes.string
 }
 
 CheckBox.defaultProps = {
-	labelName: 'Agree to something?',
-	id: `checkbox${Date.now()}`
+	caption: 'Agree to something?',
+	id: 'checkbox'
 }
 
 export default CheckBox

@@ -59,7 +59,7 @@ class UserRegistration extends React.Component {
 							like Aldus PageMaker including versions of Lorem Ipsum."
 						/>
 						<Checkbox
-							labelName='I agree to those terms and conditions'
+							caption='I agree to those terms and conditions'
 							id='agree-checkbox'
 							onChange={ (event) => { this.setState({ checked: event.target.checked }) } }
 							checked={this.state.checked}
