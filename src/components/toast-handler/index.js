@@ -3,14 +3,19 @@ import ReactDOM from 'react-dom'
 import Toast from '../toast'
 
 const DEFAULT_TIMEOUT = 3000
+const ANIMATION_DURATION = 300
 
 const clear = () => {
-	ReactDOM.unmountComponentAtNode(document.getElementById('notifications'))
+	if (document.getElementById('notifications').hasChildNodes()) {
+		ReactDOM.unmountComponentAtNode(document.getElementById('notifications'))
+	}
 }
 
 const display = (text, timeout, autoHide) => {
 	if (!document.getElementById('notifications').hasChildNodes()) {
-		ReactDOM.render(<Toast text={text} delay={timeout} autoHide={autoHide} />, document.getElementById('notifications'))
+		const component = <Toast text={text} delay={timeout} autoHide={autoHide} />
+
+		ReactDOM.render(component, document.getElementById('notifications'))
 
 		/* if (timeout === -1) {
 			return false
@@ -18,7 +23,7 @@ const display = (text, timeout, autoHide) => {
 
 		setTimeout(() => {
 			clear()
-		}, timeout)
+		}, timeout + ANIMATION_DURATION)
 
 		return true
 	}
@@ -47,7 +52,7 @@ const notify = (initRecall = 500, recallIncrement = 500) => {
 			this.currentRecall = initRecall
 			setTimeout(() => {
 				this.displayNext()
-			}, timeout)
+			}, timeout + ANIMATION_DURATION)
 
 		} else {
 
@@ -55,7 +60,7 @@ const notify = (initRecall = 500, recallIncrement = 500) => {
 			setTimeout(() => {
 				this.displayNext()
 			}, this.currentRecall)
-			console.log(this.queued)
+
 			this.currentRecall += recallIncrement
 
 		}
