@@ -1,18 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const addDefaultBorderClass = (classNames) => {
-	const hasBorderClass = classNames.includes('b--')
-	if (hasBorderClass) return classNames
-	// There's no border class, so add one
-	return `${classNames} b--transparent`
-}
-
 function TextInput(props) {
+	const borderClasses = props.border ? 'b--moon-gray' : 'b--transparent'
+	const disabledClasses = props.disabled ? 'b--transparent bg-light-gray black' : 'b--moon-gray'
 
-	let classNames = `input-reset ba br3 bg-white pv3 ph4 outline-0 ${props.className}`
-	// Make sure there is a border class so we don't get inset border
-	classNames = addDefaultBorderClass(classNames)
+	const classNames = `bg-animate input-reset ba br2 pv3 ph4 outline-0 w-100 ${borderClasses} ${disabledClasses}`
 
 	return (
 		<input
@@ -28,12 +21,14 @@ function TextInput(props) {
 TextInput.propTypes = {
 	name: PropTypes.string.isRequired,
 	defaultValue: PropTypes.string,
-	className: PropTypes.string
+	border: PropTypes.bool,
+	disabled: PropTypes.bool
 }
 
 TextInput.defaultProps = {
 	defaultValue: '',
-	className: ''
+	border: false,
+	disabled: false
 }
 
 export default TextInput

@@ -1,39 +1,111 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import Card from '../../components/card'
 import TextInput from '../../components/text-input'
 import TextArea from '../../components/textarea'
 import Button from '../../components/button'
-import IconButton from '../../components/icon-button'
+import Checkbox from '../../components/checkbox'
+import PrimaryHeading from '../../components/typography/primary-heading'
+import BodyText from '../../components/typography/body-text'
 
-function UserRegistration() {
-	return (
-		<div className="pa4">
-			<h1 className="ma0 pa0">
-				<FormattedMessage id="userRegistration" />
-			</h1>
-			<Card>
-				<div className='pa3 bg-black-10'>
-					<h3>Email/Password Style</h3>
-					<IconButton icon="http://icons.iconarchive.com/icons/yootheme/social-bookmark/48/social-facebook-box-blue-icon.png" alt="Facebook">Continue with Facebook</IconButton>
-					<TextInput name="email" type="text" placeholder="EMAIL" className='ma3' />
-					<TextInput name="password" type="password" placeholder="PASSWORD" className='ma3' />
-				</div>
-				<div className='pa3'>
-					<h3>First Name/Last Name Style</h3>
-					<TextInput name="firstname" type="text" placeholder="FIRST NAME" className='b--moon-gray ma3' />
-					<TextInput name="lastname" type="text" placeholder="LAST NAME" className='b--moon-gray ma3' /><br />
+class UserRegistration extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			submitted: false,
+			tcAccepted: false
+		}
+
+		this.handleSubmit = this.handleSubmit.bind(this)
+	}
+
+	handleSubmit(e) {
+		this.setState({ submitted: true })
+
+		e.preventDefault()
+	}
+
+	render() {
+		const {
+			intl
+		} = this.props
+
+		const termsConditions = intl.formatMessage({ id: 'termsConditions' })
+		const firstName = intl.formatMessage({ id: 'firstName' }).toUpperCase()
+		const lastName = intl.formatMessage({ id: 'lastName' }).toUpperCase()
+
+		return (
+			<div>
+				<div className="w-100 tc">
+					<PrimaryHeading>
+						<FormattedMessage className="mw1" id="welcomeHeader" />
+					</PrimaryHeading>
 				</div>
 
-				Why do you want to be on the volunteering team for YouVersion?<br />
-				<TextArea />
-				<Button to='/' buttontype='solid'>Submit</Button>
-			</Card>
-			<Card>
-				Another card
-			</Card>
-		</div>
-	)
+				<div className="flex flex-column items-center pa3 pa4-ns w-100 h-100 bg-light-gray tl">
+					<div className="f3 measure-wide w-100">
+						<Card>
+							<form onSubmit={this.handleSubmit} className="f5">
+								<div className="flex flex-column flex-row-ns mb4">
+									<div className="flex-auto mb2 mb0-ns mr3-ns">
+										<TextInput required border disabled={this.state.submitted} name="firstname" type="text" placeholder={firstName} />
+									</div>
+									<div className='flex-auto ml3-ns'>
+										<TextInput required border disabled={this.state.submitted} name="lastname" type="text" placeholder={lastName} />
+									</div>
+								</div>
+
+								<BodyText>
+									<FormattedMessage id="userRegistrationWhyJoin" />
+								</BodyText>
+
+								<div className="h4 black">
+									<TextArea required disabled={this.state.submitted} className="h4" />
+								</div>
+
+								{
+									!this.state.submitted ? (
+										<div className="flex justify-center justify-end-ns mt3">
+											<Button submit>
+												<FormattedMessage id="submit" />
+											</Button>
+										</div>
+									) : null
+								}
+							</form>
+						</Card>
+					</div>
+
+					<div className="f3 measure-wide w-100 mt4 mb6">
+						<Card>
+							<div className="h4 f5 black">
+								<TextArea disabled value={termsConditions} />
+							</div>
+
+							<div className="flex justify-center justify-end-ns mt3 f5">
+								<Checkbox
+									onChange={() => { this.setState({ tcAccepted: !this.state.tcAccepted }) }}
+									checked={this.state.tcAccepted}
+									formattedMsgId='agreeTermsConditions'
+									id='tcCheck'
+								/>
+							</div>
+
+							<div className="flex justify-center justify-end-ns mt3 f5">
+								<Button submit disabled={!this.state.tcAccepted}>
+									<FormattedMessage id="continue" />
+								</Button>
+							</div>
+						</Card>
+					</div>
+				</div>
+			</div>
+		)
+	}
 }
 
-export default UserRegistration
+UserRegistration.propTypes = {
+	intl: intlShape.isRequired
+}
+
+export default injectIntl(UserRegistration)

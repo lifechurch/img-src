@@ -10,13 +10,17 @@ function Button(props) {
 	} = props
 
 	const disabledClasses = props.disabled ? 'o-50' : 'dim'
-	const buttontypeClasses = props.buttontype === 'solid' ? 'bg-mid-gray white' : 'ba mid-gray'
+	const buttontypeClasses = props.buttontype === 'solid' ? 'bg-mid-gray white bn' : 'ba bw1 mid-gray bg-transparent'
 
 	const classes = `pointer link br-pill ph4 pv2 f4 dib ${disabledClasses} ${buttontypeClasses}`
 
 	if (props.disabled) {
 		return (
 			<a {...props} className={classes}>{children}</a>
+		)
+	} else if (props.submit) {
+		return (
+			<button {...props} onClick={onClick} type="submit" className={classes}>{children}</button>
 		)
 	}
 
@@ -48,7 +52,8 @@ Button.propTypes = {
 	to: PropTypes.node,
 	disabled: PropTypes.bool,
 	buttontype: PropTypes.oneOf(['solid', 'outline-only']),
-	onClick: PropTypes.func
+	onClick: PropTypes.func,
+	submit: PropTypes.bool
 }
 
 Button.defaultProps = {
@@ -56,7 +61,8 @@ Button.defaultProps = {
 	to: null,
 	disabled: false,
 	buttontype: 'solid',
-	onClick: null
+	onClick: null,
+	submit: false
 }
 
 export default Button
