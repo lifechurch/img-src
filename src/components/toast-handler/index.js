@@ -20,12 +20,7 @@ const clear = () => {
 const display = (text, timeout, autoHide) => {
 	if (!document.getElementById('notifications').hasChildNodes()) {
 		const component = <Toast text={text} delay={timeout} autoHide={autoHide} />
-
 		ReactDOM.render(component, document.getElementById('notifications'))
-
-		/* if (timeout === -1) {
-			return false
-		} */
 
 		return true
 	}
