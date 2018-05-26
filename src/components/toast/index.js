@@ -53,13 +53,14 @@ class Toast extends React.Component {
 			this.updateStyle(styles.show)
 		}, 100)
 
-		setTimeout(() => {
-			this.updateStyle(styles.hide)
+		this.closeTimeout = setTimeout(() => {
+			this.handleClose()
 		}, this.props.delay)
 	}
 
 	handleClose() {
 		this.updateStyle(styles.hide)
+		clearTimeout(this.closeTimeout)
 
 		setTimeout(() => {
 			notifier.clear()

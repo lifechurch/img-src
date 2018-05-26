@@ -5,9 +5,15 @@ import Toast from '../toast'
 const DEFAULT_TIMEOUT = 3000
 const ANIMATION_DURATION = 300
 
+let skipCurrent
+let closeTimeout
+
 const clear = () => {
 	if (document.getElementById('notifications').hasChildNodes()) {
 		ReactDOM.unmountComponentAtNode(document.getElementById('notifications'))
+
+		skipCurrent()
+		clearTimeout(closeTimeout)
 	}
 }
 
@@ -20,10 +26,6 @@ const display = (text, timeout, autoHide) => {
 		/* if (timeout === -1) {
 			return false
 		} */
-
-		setTimeout(() => {
-			clear()
-		}, timeout + ANIMATION_DURATION)
 
 		return true
 	}
@@ -50,9 +52,14 @@ const notify = (initRecall = 500, recallIncrement = 500) => {
 		if (display(text, timeout, autoHide)) {
 
 			this.currentRecall = initRecall
-			setTimeout(() => {
+			const nextTimeout = setTimeout(() => {
 				this.displayNext()
 			}, timeout + ANIMATION_DURATION)
+
+			skipCurrent = () => {
+				clearTimeout(nextTimeout)
+				this.displayNext()
+			}
 
 		} else {
 
