@@ -11,20 +11,11 @@
 }
 
 .togglebar a {
-	text-decoration: none;
-	color: #626262;
-	border-color: #626262;
-	border-style: solid;
 	border-width: 2px 1px 2px 1px;
-	font-size: 0.6em;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
-	padding-left: 1.5rem;
-	padding-right: 1.5rem;
 	transition: all 0.3s;
 }
 
 .togglebar a:hover {
-	background-color: #626262;
+	background-color: #555;
 	color: white;
 }

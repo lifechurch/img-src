@@ -20,7 +20,7 @@ function UserProfile(props) {
 
 				<div className="w-100 tc">
 					<ToggleBar>
-						<Link activeClassName="bg-green" to={`/user-profile/${userId}/submissions`}>Submissions</Link>
+						<Link to={`/user-profile/${userId}/submissions`}>Submissions</Link>
 						<Link to={`/user-profile/${userId}/approved`}>Approved</Link>
 						<Link to={`/user-profile/${userId}/declined`}>Declined</Link>
 						<Link to={`/user-profile/${userId}/pending`}>Pending</Link>
