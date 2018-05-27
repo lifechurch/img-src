@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
+import ToggleBar from '../../components/toggle-bar'
 
 function UserProfile(props) {
 	const {
@@ -15,6 +17,16 @@ function UserProfile(props) {
 		<div className="pa4">
 			<h1 className="ma0 pa0">
 				<FormattedMessage id="userProfile" values={{ user: userId }} />
+
+				<div className="w-100 tc">
+					<ToggleBar>
+						<Link activeClassName="bg-green" to={`/user-profile/${userId}/submissions`}>Submissions</Link>
+						<Link to={`/user-profile/${userId}/approved`}>Approved</Link>
+						<Link to={`/user-profile/${userId}/declined`}>Declined</Link>
+						<Link to={`/user-profile/${userId}/pending`}>Pending</Link>
+					</ToggleBar>
+				</div>
+
 			</h1>
 		</div>
 	)
