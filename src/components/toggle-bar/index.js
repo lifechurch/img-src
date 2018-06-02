@@ -2,21 +2,37 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import './index.css'
+import UpArrow from '../../assets/up-arrow.svg'
+import DownArrow from '../../assets/down-arrow.svg'
+
+const getCurrent = (links) => {
+	const url = window.location.pathname
+	let match = null
+	for (let i = 0; i < links.length; i++) {
+		if (links[i].address === url) {
+			match = links[i].text
+			break
+		}
+	}
+
+	return match || 'Select'
+}
 
 class ToggleBar extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			isOpen: false,
+			current: getCurrent(props.links)
+		}
 
 		this.onResize = this.onResize.bind(this)
-	}
-
-	componentWillMount() {
-		this.setState({ width: document.documentElement.clientWidth })
+		this.handleDropdown = this.handleDropdown.bind(this)
 	}
 
 	componentDidMount() {
 		window.addEventListener('resize', this.onResize)
+		this.onResize()
 	}
 
 	componentWillUnmount() {
@@ -29,50 +45,81 @@ class ToggleBar extends React.Component {
 		})
 	}
 
-	render() {
-		const {
-			children
-		} = this.props
+	handleChange(text) {
+		this.setState({	current: text, isOpen: false })
+	}
 
-		const { width } = this.state
-		console.log(width)
+	handleDropdown() {
+		this.setState({ isOpen: !this.state.isOpen })
+	}
+
+	render() {
+		const { links } = this.props
+		const { width, isOpen, current } = this.state
+
 		if (width > 1100) {
+			// Normal toggle display
 			return (
 				<div className="togglebar">
-					{children.map((link) => {
-						const {
-							to,
-							...rest
-						} = link.props
+					{links.map((link, i) => {
+						const { text, address } = link
 
 						return (
 							<NavLink
-								key={to}
-								to={to}
+								key={i}
+								to={address}
+								onClick={() => { this.handleChange(text) }}
 								className="mid-gray no-underline ph4 pv2 b--mid-gray ba f4"
 								activeClassName="bg-mid-gray white"
-								{...rest}
 							>
-								{link.props.children}
+								{text}
 							</NavLink>
 						)
 					})}
 				</div>
 			)
 		} else {
+			// Dropdown
 			return (
-				<select>
-					{children.map((link) => {
-						return <option>{link.props.children}</option>
-					})}
-				</select>
+				<div className="w-100 mw6 relative">
+					<div
+						className="relative w-100 mw6 ph3 pv1 f4 br-pill tl mid-gray ba pointer outline-0"
+						onClick={this.handleDropdown}
+						onKeyDown={this.handleDropdown}
+						role="menu"
+						tabIndex={0}
+					>
+						{current}
+						<img src={isOpen ? UpArrow : DownArrow} alt="" className="absolute right-1" />
+					</div>
+
+					{isOpen &&
+						<div className="absolute center left-0 right-0 w-90 f4 flex flex-column bg-white">
+							{links.map((link, i) => {
+								const { text, address } = link
+
+								return (
+									<NavLink
+										key={i}
+										to={address}
+										onClick={() => { this.handleChange(text) }}
+										className="w-100 ph3 pv1 mid-gray no-underline bb"
+										activeClassName="bg-mid-gray white bb"
+									>
+										{text}
+									</NavLink>
+								)
+							})}
+						</div>
+					}
+				</div>
 			)
 		}
 	}
 }
 
 ToggleBar.propTypes = {
-	children: PropTypes.node.isRequired
+	links: PropTypes.array.isRequired
 }
 
 export default ToggleBar
