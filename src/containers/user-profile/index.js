@@ -38,16 +38,6 @@ function UserProfile(props) {
 					]}
 					/>
 				</div>
-				PAGE CONTENT
-				PAGE CONTENT
-				PAGE CONTENT
-				PAGE CONTENT
-				PAGE CONTENT
-				PAGE CONTENT
-				PAGE CONTENT
-				PAGE CONTENT
-				PAGE CONTENT
-				PAGE CONTENT
 			</h1>
 		</div>
 	)

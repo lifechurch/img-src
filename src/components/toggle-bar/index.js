@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
+import shortid from 'shortid'
 import './index.css'
 import UpArrow from '../../assets/up-arrow.svg'
 import DownArrow from '../../assets/down-arrow.svg'
@@ -66,7 +67,7 @@ class ToggleBar extends React.Component {
 
 						return (
 							<NavLink
-								key={i}
+								key={shortid.generate()}
 								to={address}
 								onClick={() => { this.handleChange(text) }}
 								className="mid-gray no-underline ph4 pv2 b--mid-gray ba f4"
@@ -100,7 +101,7 @@ class ToggleBar extends React.Component {
 
 								return (
 									<NavLink
-										key={i}
+										key={shortid.generate()}
 										to={address}
 										onClick={() => { this.handleChange(text) }}
 										className="w-100 ph3 pv1 mid-gray no-underline bb"
