@@ -62,7 +62,7 @@ class ToggleBar extends React.Component {
 			// Normal toggle display
 			return (
 				<div className="togglebar">
-					{links.map((link, i) => {
+					{links.map((link) => {
 						const { text, address } = link
 
 						return (
@@ -96,7 +96,7 @@ class ToggleBar extends React.Component {
 
 					{isOpen &&
 						<div className="absolute center left-0 right-0 w-90 f4 flex flex-column bg-white">
-							{links.map((link, i) => {
+							{links.map((link) => {
 								const { text, address } = link
 
 								return (

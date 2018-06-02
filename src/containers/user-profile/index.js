@@ -18,24 +18,25 @@ function UserProfile(props) {
 				<FormattedMessage id="userProfile" values={{ user: userId }} />
 
 				<div className="w-100 flex justify-center ma3">
-					<ToggleBar links={[
-						{
-							text: 'Submissions',
-							address: `/user-profile/${userId}/submissions`
-						},
-						{
-							text: 'Approved',
-							address: `/user-profile/${userId}/approved`
-						},
-						{
-							text: 'Declined',
-							address: `/user-profile/${userId}/declined`
-						},
-						{
-							text: 'Pending',
-							address: `/user-profile/${userId}/pending`
-						}
-					]}
+					<ToggleBar
+						links={[
+							{
+								text: 'Submissions',
+								address: `/user-profile/${userId}/submissions`
+							},
+							{
+								text: 'Approved',
+								address: `/user-profile/${userId}/approved`
+							},
+							{
+								text: 'Declined',
+								address: `/user-profile/${userId}/declined`
+							},
+							{
+								text: 'Pending',
+								address: `/user-profile/${userId}/pending`
+							}
+						]}
 					/>
 				</div>
 			</h1>
