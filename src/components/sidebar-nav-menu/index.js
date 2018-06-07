@@ -22,13 +22,13 @@ function SidebarNavMenu(props) {
 						</NavLink>
 					</div>
 
-					<div className="pl3 mb3" style={{ marginLeft: 30 }}>
+					<div className="pl3 mb3" style={{ marginLeft: 35 }}>
 						<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/admin/pending">
 							<div className="bg-mid-gray br-100 mr2 bullet" style={{ width: 7, height: 7 }} />
 							<FormattedMessage id="pending" />
 						</NavLink>
 					</div>
-					<div className="pl3 mb4" style={{ marginLeft: 30 }}>
+					<div className="pl3 mb4" style={{ marginLeft: 35 }}>
 						<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/admin/images">
 							<div className="bg-mid-gray br-100 mr2 bullet" style={{ width: 7, height: 7 }} />
 							<FormattedMessage id="images" />
