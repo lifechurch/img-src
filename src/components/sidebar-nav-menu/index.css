@@ -1,0 +1,12 @@
+a.active {
+	/* Tachyons dark-gray */
+	color: #333333
+}
+
+.bullet {
+	opacity: 0
+}
+
+a.active .bullet {
+	opacity: 100
+}

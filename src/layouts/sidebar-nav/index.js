@@ -5,7 +5,7 @@ function SidebarNav({ menu, children }) {
 	return children ? (
 		<div className="h-100">
 			<div className="cf h-100">
-				<div className="fl w7 br b--moon-gray h-100">
+				<div className="fl w7 br bg-white b--moon-gray h-100">
 					{menu}
 				</div>
 				<div className="pa4 fl w-80">
