@@ -1,5 +1,9 @@
 {
   "admin": "Admin",
+	"pending": "Pending",
+	"images": "Images",
+	"todo": "To Do",
+	"myImages": "My Images",
   "agreeTermsConditions": "I agree to these terms and conditions",
   "close": "Close",
   "continue": "Continue",
@@ -9,7 +13,7 @@
   "lastName": "Last Name",
   "rejectedLargeFile": "{file} exceeds the maximum image size of {maxWidth}px by {maxHeight}px",
   "rejectedSmallFile": "{file} does not meet the minimum image size of {minWidth}px by {minHeight}px",
-  "rejectedType": "{file} is not an accepted file type of: {type}",  
+  "rejectedType": "{file} is not an accepted file type of: {type}",
   "splashPage": "Splash Page",
   "submit": "Submit",
   "termsConditions": "Terms and Conditions go here",
