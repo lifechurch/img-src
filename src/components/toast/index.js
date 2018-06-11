@@ -85,7 +85,7 @@ class Toast extends React.Component {
 				onKeyDown={this.handleClose}
 				role="button"
 				onClick={this.handleClose}
-				className="fixed top-0 left-0 w-100 bg-white shadow-2 ph4 pv3 flex justify-center items-center f3 pointer outline-0"
+				className="fixed top-0 left-0 w-100 bg-white shadow-2 ph4 pv3 flex justify-center items-center f3 pointer outline-0 z-5"
 			>
 				{text}
 

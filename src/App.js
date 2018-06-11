@@ -59,7 +59,7 @@ function App() {
 				<SecureRoute
 					path="/admin" component={() => {
 						return (
-							<SidebarNav menu={<SidebarNavMenu />}>
+							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
 								<Route path="/admin" component={Admin} />
 							</SidebarNav>
 						)

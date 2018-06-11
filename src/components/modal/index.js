@@ -36,7 +36,7 @@ class Modal extends Component {
 			const closeMessage = intl.formatMessage({ id: 'close' })
 
 			return (
-				<div className="fixed w-100 h-100 left-0 top-0 flex items-center justify-center" style={{ backgroundColor: overlayColor }}>
+				<div className="fixed w-100 h-100 left-0 top-0 flex items-center justify-center z-5" style={{ backgroundColor: overlayColor }}>
 					<div className={`${heightClass} ${widthClass}`}>
 						<Card heightClass="h-100">
 							<button
