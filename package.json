@@ -9,7 +9,8 @@
     "react-helmet": "^5.2.0",
     "react-intl": "^2.4.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "shortid": "^2.2.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -18,12 +19,12 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.2",
-    "eslint": "^4.9.0",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0"
+    "eslint-plugin-react": "^7.8.2"
   },
   "proxy": "http://localhost:5000"
 }
