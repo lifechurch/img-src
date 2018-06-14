@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import YVLogo from '../../assets/youversion.png'
 import YVBible from '../../assets/YV_bible.png'
 import FacebookLogo from '../../assets/facebook-app-logo.svg'
@@ -14,7 +14,14 @@ import BodyText from '../../components/typography/body-text'
 import images from './assets/images'
 import './index.css'
 
-function SplashPage() {
+function SplashPage(props) {
+	const {
+		intl
+	} = props
+
+	const email = intl.formatMessage({ id: 'email' }).toUpperCase()
+	const password = intl.formatMessage({ id: 'password' }).toUpperCase()
+
 	return (
 		<div className="h-100">
 			<div className="w-100 ph3 mt2 mb2 flex items-center justify-between">
@@ -26,7 +33,7 @@ function SplashPage() {
 				</div>
 			</div>
 
-			<div className="">
+			<div className="mb4-ns">
 				<div className="splashBackground w-100 bg-light-gray absolute" />
 				<div className="splashDisplayUnit relative">
 					<img src={images[0]} alt="" className="image1" />
@@ -60,10 +67,10 @@ function SplashPage() {
 				</div>
 
 				<div className="w-100 mw6 mb2">
-					<IconButton to="/" icon={FacebookLogo} alt="Facebook">Continue with Facebook</IconButton>
+					<IconButton to="/" icon={FacebookLogo} alt="Facebook"><FormattedMessage id="continueFacebook" /></IconButton>
 				</div>
 				<div className="w-100 mw6 mb2">
-					<IconButton to="/" icon={GoogleLogo} alt="Google">Continue with Google</IconButton>
+					<IconButton to="/" icon={GoogleLogo} alt="Google"><FormattedMessage id="continueGoogle" /></IconButton>
 				</div>
 
 				<div className="w5 bg-light-silver self-center mv4" style={{ height: 1 }} />
@@ -71,10 +78,10 @@ function SplashPage() {
 				<form className="w-100">
 					<div className="w-100 flex items-center flex-column">
 						<div className="w-100 mw6 mb3">
-							<TextInput required name="email" placeholder="EMAIL" type="text" />
+							<TextInput required name="email" placeholder={email} type="text" />
 						</div>
 						<div className="w-100 mw6 mb3">
-							<TextInput required name="password" placeholder="PASSWORD" type="password" />
+							<TextInput required name="password" placeholder={password} type="password" />
 						</div>
 						<Button submit buttontype="outline-only">
 							<FormattedMessage id="signIn" />
@@ -95,4 +102,8 @@ function SplashPage() {
 	)
 }
 
-export default SplashPage
+SplashPage.propTypes = {
+	intl: intlShape.isRequired
+}
+
+export default injectIntl(SplashPage)
