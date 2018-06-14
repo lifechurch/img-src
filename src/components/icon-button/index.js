@@ -9,7 +9,7 @@ function IconButton({
 	const classes = `flex relative pointer link w-100 b--white br3 bg-white pv1 ph2 h2 gray ${disabledClasses}`
 	const buttonContent = (
 		<div className="flex w-100">
-			<img className='v-mid absolute left-1' width={43} height={43} src={icon} alt={props.alt} />
+			<img className='v-mid absolute-ns left-1 self-center' width={40} height={40} src={icon} alt={props.alt} />
 			<span className="center self-center">{children}</span>
 		</div>
 	)

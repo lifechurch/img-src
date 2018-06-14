@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import YVLogo from '../../assets/LC_YouVersion_Logo_with_icon_Light.png'
+import YVLogo from '../../assets/youversion.png'
+import YVBible from '../../assets/YV_bible.png'
 import FacebookLogo from '../../assets/facebook-app-logo.svg'
 import GoogleLogo from '../../assets/google-icon.svg'
 import Button from '../../components/button'
@@ -16,8 +17,8 @@ import './index.css'
 function SplashPage() {
 	return (
 		<div className="h-100">
-			<div className="w-100 ph3 mt2 mb4 flex items-center justify-between">
-				<img src={YVLogo} alt="YouVersion" className="w5" />
+			<div className="w-100 ph3 mt2 mb2 flex items-center justify-between">
+				<img src={YVLogo} alt="YouVersion" width={150} />
 				<div className="fr">
 					<Button to="/sign-in" buttontype="outline-only">
 						<FormattedMessage id="signIn" />
@@ -25,7 +26,7 @@ function SplashPage() {
 				</div>
 			</div>
 
-			<div className="mb4">
+			<div className="">
 				<div className="splashBackground w-100 bg-light-gray absolute" />
 				<div className="splashDisplayUnit relative">
 					<img src={images[0]} alt="" className="image1" />
@@ -50,6 +51,8 @@ function SplashPage() {
 			</div>
 
 			<div className="flex flex-column w-100 items-center pa4 bg-light-gray">
+				<img src={YVBible} alt="" className="w3" />
+
 				<div className="tc">
 					<SecondaryHeading>
 						<FormattedMessage id="toGetStarted" />
@@ -73,7 +76,7 @@ function SplashPage() {
 						<div className="w-100 mw6 mb3">
 							<TextInput required name="password" placeholder="PASSWORD" type="password" />
 						</div>
-						<Button to="/sign-in" buttontype="outline-only">
+						<Button submit buttontype="outline-only">
 							<FormattedMessage id="signIn" />
 						</Button>
 					</div>
@@ -82,6 +85,9 @@ function SplashPage() {
 				<div className="mt2 tc">
 					<BodyText>
 						<FormattedMessage id="dontHaveAccount" />
+					</BodyText>
+					<BodyText>
+						<a className="color-inherit" href="https://www.bible.com/sign-up"><FormattedMessage id="createOneHere" /></a>
 					</BodyText>
 				</div>
 			</div>

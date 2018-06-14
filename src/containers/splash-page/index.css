@@ -7,6 +7,7 @@
 	width: 710px;
 	display: block;
 	margin: auto;
+	overflow: hidden;
 }
 
 .splashDisplayUnit img {
@@ -63,4 +64,58 @@
 .splashSubText {
 	width: 450px;
 	margin-top: 800px;
+}
+
+@media only screen and (max-width: 740px) {
+	.splashBackground {
+		height: 350px;
+	}
+
+	.splashDisplayUnit {
+		height: 620px;
+		width: 100%;
+		display: block;
+		margin: auto;
+	}
+
+	.image1 {
+		width: 300px;
+		margin-top: 130px;
+		margin-left: -265px;
+	}
+
+	.image3 {
+		width: 300px;
+		margin-top: 130px;
+		margin-left: 375px;
+	}
+
+	.image4 {
+		width: 300px;
+		margin-top: 130px;
+		margin-left: 55px;
+	}
+
+	.image2, .image5, .image6 {
+		display: none;
+	}
+
+	.splashHeading {
+		width: 350px;
+		margin-top: 0px;
+		margin-left: 20px;
+	}
+
+	.splashSubText {
+		width: 90%;
+		margin-top: 450px;
+		margin-left: 20px;
+	}
+}
+
+@media only screen and (max-width: 479px) {
+	.splashHeading {
+		width: 300px;
+		margin-top: 60px;
+	}
 }
