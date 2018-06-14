@@ -14,12 +14,16 @@
   "rejectedLargeFile": "{file} exceeds the maximum image size of {maxWidth}px by {maxHeight}px",
   "rejectedSmallFile": "{file} does not meet the minimum image size of {minWidth}px by {minHeight}px",
   "rejectedType": "{file} is not an accepted file type of: {type}",
-  "splashPage": "Splash Page",
   "submit": "Submit",
   "termsConditions": "Terms and Conditions go here",
   "userProfile": "User Profile: {user}",
   "userRegistration": "User Registration",
   "userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
   "userVerseAssignment": "User Verse Assignment",
-  "welcomeHeader": "Welcome to Image Source"
+  "welcomeHeader": "Welcome to Image Source",
+	"signIn": "Sign In",
+	"designVerseImages": "Design Verse Images. Inspire the world.",
+	"joinTheCommunity": "Join the YouVersion Community of volunteer designers and help create Verse Images for the Bible App.",
+	"toGetStarted": "To get started, sign in with your YouVersion account",
+	"dontHaveAccount": "Don't have a YouVersion account? Create one here."
 }

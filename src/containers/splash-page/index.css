@@ -1,0 +1,66 @@
+.splashBackground {
+	height: 410px;
+}
+
+.splashDisplayUnit {
+	height: 910px;
+	width: 710px;
+	display: block;
+	margin: auto;
+}
+
+.splashDisplayUnit img {
+	position: absolute;
+}
+
+/* Matt 5:14 */
+.image1 {
+	width: 210px;
+	margin-top: 430px;
+	margin-left: 500px;
+}
+
+/* Matt 5:44 */
+.image2 {
+	width: 210px;
+	margin-top: 660px;
+	margin-left: 500px;
+}
+
+/* Matt 28:6 */
+.image3 {
+	width: 165px;
+	margin-top: 615px;
+}
+
+/* Matt 28:19 */
+.image4 {
+	width: 425px;
+	margin-top: 40px;
+	margin-left: 55px;
+}
+
+/* Romans 4:7 */
+.image5 {
+	width: 110px;
+	margin-top: 485px;
+	margin-left: 55px;
+}
+
+/* Romans 8:31 */
+.image6 {
+	width: 295px;
+	margin-top: 485px;
+	margin-left: 185px;
+}
+
+.splashHeading {
+	width: 250px;
+	margin-top: 40px;
+	margin-left: 450px;
+}
+
+.splashSubText {
+	width: 450px;
+	margin-top: 800px;
+}
