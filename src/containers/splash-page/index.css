@@ -1,0 +1,121 @@
+.splashBackground {
+	height: 410px;
+}
+
+.splashDisplayUnit {
+	height: 910px;
+	width: 710px;
+	display: block;
+	margin: auto;
+	overflow: hidden;
+}
+
+.splashDisplayUnit img {
+	position: absolute;
+}
+
+/* Matt 5:14 */
+.image1 {
+	width: 210px;
+	margin-top: 430px;
+	margin-left: 500px;
+}
+
+/* Matt 5:44 */
+.image2 {
+	width: 210px;
+	margin-top: 660px;
+	margin-left: 500px;
+}
+
+/* Matt 28:6 */
+.image3 {
+	width: 165px;
+	margin-top: 615px;
+}
+
+/* Matt 28:19 */
+.image4 {
+	width: 425px;
+	margin-top: 40px;
+	margin-left: 55px;
+}
+
+/* Romans 4:7 */
+.image5 {
+	width: 110px;
+	margin-top: 485px;
+	margin-left: 55px;
+}
+
+/* Romans 8:31 */
+.image6 {
+	width: 295px;
+	margin-top: 485px;
+	margin-left: 185px;
+}
+
+.splashHeading {
+	width: 250px;
+	margin-top: 40px;
+	margin-left: 450px;
+}
+
+.splashSubText {
+	width: 450px;
+	margin-top: 800px;
+}
+
+@media only screen and (max-width: 740px) {
+	.splashBackground {
+		height: 350px;
+	}
+
+	.splashDisplayUnit {
+		height: 620px;
+		width: 100%;
+		display: block;
+		margin: auto;
+	}
+
+	.image1 {
+		width: 300px;
+		margin-top: 130px;
+		margin-left: -265px;
+	}
+
+	.image3 {
+		width: 300px;
+		margin-top: 130px;
+		margin-left: 375px;
+	}
+
+	.image4 {
+		width: 300px;
+		margin-top: 130px;
+		margin-left: 55px;
+	}
+
+	.image2, .image5, .image6 {
+		display: none;
+	}
+
+	.splashHeading {
+		width: 350px;
+		margin-top: 0px;
+		margin-left: 20px;
+	}
+
+	.splashSubText {
+		width: 90%;
+		margin-top: 450px;
+		margin-left: 20px;
+	}
+}
+
+@media only screen and (max-width: 479px) {
+	.splashHeading {
+		width: 300px;
+		margin-top: 60px;
+	}
+}
