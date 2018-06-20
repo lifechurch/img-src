@@ -40,7 +40,7 @@ function SidebarNavMenu(props) {
 			}
 
 			<div className="pl3 mb4">
-				<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/todo">
+				<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/user-verse-assignment">
 					<img src={ToDoIcon} alt="" className="mr3" />
 					<FormattedMessage id="todo" />
 				</NavLink>

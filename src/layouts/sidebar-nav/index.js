@@ -92,7 +92,7 @@ class SidebarNav extends React.Component {
 							<img src={HamburgerIcon} alt="" />
 						</div>
 					}
-					<div className="pa4 fl">
+					<div className="fl">
 						{this.props.children}
 					</div>
 				</div>

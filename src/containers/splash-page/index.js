@@ -60,7 +60,7 @@ function SplashPage(props) {
 			<div className="flex flex-column w-100 items-center pa4 bg-light-gray">
 				<img src={YVBible} alt="" className="w3" />
 
-				<div className="tc">
+				<div className="tc mv4">
 					<SecondaryHeading>
 						<FormattedMessage id="toGetStarted" />
 					</SecondaryHeading>
@@ -89,7 +89,7 @@ function SplashPage(props) {
 					</div>
 				</form>
 
-				<div className="mt2 tc">
+				<div className="mt2 tc mt4">
 					<BodyText>
 						<FormattedMessage id="dontHaveAccount" />
 					</BodyText>
