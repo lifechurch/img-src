@@ -60,41 +60,39 @@ class SidebarNav extends React.Component {
 		} = this.props
 
 		const hiddenClasses = this.state.sidebarHidden && this.state.width < MOBILE_WIDTH ? 'hidden' : ''
-		const mobileClasses = this.state.width < MOBILE_WIDTH ? 'absolute' : ''
+		const mobileClasses = this.state.width < MOBILE_WIDTH ? 'fixed' : ''
 
-		const sidebarClasses = `sidebar w-100 mw5 z-999 fl br br bg-white b--moon-gray h-100 ${hiddenClasses} ${mobileClasses}`
+		const sidebarClasses = `sidebar w-100 min-h-100 mw5 z-999 fl br br bg-white b--moon-gray ${hiddenClasses} ${mobileClasses}`
 
 		const closeMessage = intl.formatMessage({ id: 'close' })
 
 		return (
-			<div className="h-100">
-				<div className="cf h-100 relative">
-					<div className={sidebarClasses}>
-						{this.props.menu}
-						{this.state.width < MOBILE_WIDTH &&
-							<button
-								className="absolute top-2 right-1 dim outline-0 pointer bn bg-transparent"
-								title={closeMessage}
-								onClick={this.handleClose}
-							>
-								<img src={CloseIcon} alt={closeMessage} />
-							</button>
-						}
-					</div>
+			<div className="cf min-h-100 relative flex">
+				<div className={sidebarClasses}>
+					{this.props.menu}
 					{this.state.width < MOBILE_WIDTH &&
-						<div
-							className="absolute right-1 top-1"
-							onClick={this.handleToggle}
-							onKeyDown={this.handleToggle}
-							role="button"
-							tabIndex={0}
+						<button
+							className="absolute top-2 right-1 dim outline-0 pointer bn bg-transparent"
+							title={closeMessage}
+							onClick={this.handleClose}
 						>
-							<img src={HamburgerIcon} alt="" />
-						</div>
+							<img src={CloseIcon} alt={closeMessage} />
+						</button>
 					}
-					<div className="fl">
-						{this.props.children}
+				</div>
+				{this.state.width < MOBILE_WIDTH &&
+					<div
+						className="absolute right-1 top-2"
+						onClick={this.handleToggle}
+						onKeyDown={this.handleToggle}
+						role="button"
+						tabIndex={0}
+					>
+						<img src={HamburgerIcon} alt="" />
 					</div>
+				}
+				<div className="fl flex-auto">
+					{this.props.children}
 				</div>
 			</div>
 		)
