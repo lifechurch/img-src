@@ -9,6 +9,7 @@ import UserRegistration from './containers/user-registration'
 import UserVerseAssignment from './containers/user-verse-assignment'
 import UserProfile from './containers/user-profile'
 import SidebarNav from './layouts/sidebar-nav'
+import ToastHandler from './components/toast-handler'
 
 function App() {
 	return (
@@ -19,6 +20,8 @@ function App() {
 					title="Image Source: A YouVersion Design Community"
 					description="A web application for YouVersion design community to submit verse image art for use in the Bible App."
 				/>
+
+				<ToastHandler />
 
 				{/*
           This is temporary navigation while we build out the full application
@@ -32,6 +35,7 @@ function App() {
 					<Link to="/user-profile/Tommy" className="mr3 link dim moon-gray">User Profile: Tommy</Link>
 					<Link to="/admin" className="mr3 link dim moon-gray">Admin</Link>
 				</nav>
+
 				<Route exact path="/" component={SplashPage} />
 				<Route path="/user-registration" component={UserRegistration} />
 				<Route
@@ -55,7 +59,7 @@ function App() {
 				<SecureRoute
 					path="/admin" component={() => {
 						return (
-							<SidebarNav menu={<SidebarNavMenu />}>
+							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
 								<Route path="/admin" component={Admin} />
 							</SidebarNav>
 						)

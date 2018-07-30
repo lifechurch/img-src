@@ -10,7 +10,7 @@ function Button(props) {
 	} = props
 
 	const disabledClasses = props.disabled ? 'o-50' : 'dim'
-	const buttontypeClasses = props.buttontype === 'solid' ? 'bg-mid-gray white bn' : 'ba bw1 mid-gray bg-transparent'
+	const buttontypeClasses = props.buttontype === 'solid' ? 'bg-mid-gray white bn' : 'ba bw1 b--mid-gray mid-gray bg-transparent'
 
 	const classes = `pointer link br-pill ph4 pv2 f4 dib ${disabledClasses} ${buttontypeClasses}`
 

@@ -1,0 +1,11 @@
+.sidebar {
+	transition: all 0.5s ease;
+}
+
+.sidebar.hidden {
+	margin-left: -100%;
+}
+
+.sidebar.hidden.absolute {
+	
+}

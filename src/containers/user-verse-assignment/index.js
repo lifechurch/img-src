@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import Modal from '../../components/modal'
 import Card from './../../components/card'
+import { notifier } from '../../components/toast-handler'
+import Button from '../../components/button'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
@@ -13,6 +15,7 @@ class UserVerseAssignment extends Component {
 		this.state = {
 			modalIsOpen: false
 		}
+		this.notify = notifier.notify()
 	}
 
 	render() {
@@ -33,9 +36,15 @@ class UserVerseAssignment extends Component {
 				<h1 className="ma0 pa0">
 					<FormattedMessage id="userVerseAssignment" />
 				</h1>
-				<button onClick={() => { this.setState({ modalIsOpen: true }) }}>
-					Open Modal
-				</button>
+				<Button onClick={() => { this.setState({ modalIsOpen: true }) }}>
+          Open Modal
+				</Button>
+				<Button onClick={() => { this.notify('hey', 3000, false) }}>
+					Notify without autoHide
+				</Button>
+				<Button onClick={() => { this.notify('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.') }}>
+					Big Notify
+				</Button>
 				<Modal
 					isOpen={modalIsOpen}
 					widthClass="w-30"
