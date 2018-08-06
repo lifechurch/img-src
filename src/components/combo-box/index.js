@@ -16,7 +16,12 @@ class ComboBox extends Component {
 
 	handleSearch(e) {
 		if (e.target.value.length > 0) {
-			const options = this.state.options.filter((i) => i.name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1 || i.value.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1)
+
+			const isMatch = (obj) => {
+				return obj.name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1 || obj.value.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1
+			}
+
+			const options = this.state.options.filter(isMatch)
 
 			this.setState({
 				options: (options.length > 0) ? options : this.props.options,
