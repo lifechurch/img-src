@@ -3,7 +3,7 @@
   "methods": {
     "getOne": {
       "description": "Fetch partner from API",
-      "url": "http://viewmaster.sl.lifechurchcloud.com/api/partners/:partnerId",
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/partners/:partnerId",
       "urlParams": {
         "partnerId": "number"
       }
@@ -11,7 +11,7 @@
     "getMany": {
       "description": "Fetch list of partners from API",
       "returnType": "array",
-      "url": "http://viewmaster.sl.lifechurchcloud.com/api/partners"
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/partners"
     }
   },
   "sample": {

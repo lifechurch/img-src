@@ -40,14 +40,14 @@ class Partner extends TuposModel {
   */
 	static async getOne(partnerId) {
 		const json = await TuposModel.get({
-			url: `http://viewmaster.sl.lifechurchcloud.com/api/partners/${partnerId}`,
+			url: `https://viewmaster.sl.lifechurchcloud.com/api/partners/${partnerId}`,
 		})
 		return new Partner(json)
 	}
 
 	static async getMany() {
 		const json = await TuposModel.get({
-			url: 'http://viewmaster.sl.lifechurchcloud.com/api/partners',
+			url: 'https://viewmaster.sl.lifechurchcloud.com/api/partners',
 		})
 		return json.map((item) => {
 			return new Partner(item)

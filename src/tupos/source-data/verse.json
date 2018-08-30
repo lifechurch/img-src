@@ -3,16 +3,16 @@
   "methods": {
     "getOne": {
       "description": "Fetch verse from API",
-      "url": "http://viewmaster.sl.lifechurchcloud.com/api/verse",
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/verse",
       "query": {
         "version_id": "number",
         "usfm": "string"
       }
     },
     "getMany": {
-      "description": "Fetch list of verses from API",            
+      "description": "Fetch list of verses from API",
       "returnType": "array",
-      "url": "http://viewmaster.sl.lifechurchcloud.com/api/verses"
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/verses"
     }
   },
   "sample": {

@@ -27,7 +27,7 @@ class Language extends TuposModel {
 
 	static async getMany() {
 		const json = await TuposModel.get({
-			url: 'http://viewmaster.sl.lifechurchcloud.com/api/languages',
+			url: 'https://viewmaster.sl.lifechurchcloud.com/api/languages',
 		})
 		return json.map((item) => {
 			return new Language(item)

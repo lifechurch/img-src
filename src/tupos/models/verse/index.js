@@ -33,7 +33,7 @@ class Verse extends TuposModel {
   */
 	static async getOne(usfm, versionId) {
 		const json = await TuposModel.get({
-			url: 'http://viewmaster.sl.lifechurchcloud.com/api/verse',
+			url: 'https://viewmaster.sl.lifechurchcloud.com/api/verse',
 			query: {
 				version_id: versionId,
 				usfm
@@ -44,7 +44,7 @@ class Verse extends TuposModel {
 
 	static async getMany() {
 		const json = await TuposModel.get({
-			url: 'http://viewmaster.sl.lifechurchcloud.com/api/verses',
+			url: 'https://viewmaster.sl.lifechurchcloud.com/api/verses',
 		})
 		return json.map((item) => {
 			return new Verse(item)

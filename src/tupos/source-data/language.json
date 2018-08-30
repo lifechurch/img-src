@@ -2,9 +2,9 @@
   "description": "Language model",
   "methods": {
     "getMany": {
-      "description": "Fetch list of languages from API",            
+      "description": "Fetch list of languages from API",
       "returnType": "array",
-      "url": "http://viewmaster.sl.lifechurchcloud.com/api/languages"
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/languages"
     }
   },
   "sample": {

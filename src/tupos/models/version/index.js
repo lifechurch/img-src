@@ -32,7 +32,7 @@ class Version extends TuposModel {
   */
 	static async getMany() {
 		const json = await TuposModel.get({
-			url: 'http://viewmaster.sl.lifechurchcloud.com/api/versions',
+			url: 'https://viewmaster.sl.lifechurchcloud.com/api/versions',
 		})
 		return new Version(json)
 	}

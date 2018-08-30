@@ -4,7 +4,7 @@
     "getMany": {
       "description": "Fetch list of versions from API",
       "returnType": "many",
-      "url": "http://viewmaster.sl.lifechurchcloud.com/api/versions"
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/versions"
     }
   },
   "sample": {
