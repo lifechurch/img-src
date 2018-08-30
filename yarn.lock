@@ -162,24 +162,24 @@
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@koa/cors/-/cors-2.2.2.tgz#9084ab7f58107734e6b19d602d99538eda73f2d0"
 
-"@youversion/tupos-auth@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@youversion/tupos-auth/-/tupos-auth-0.0.1.tgz#9e45b6c017451a6c0c28672f775f9325be1b0925"
+"@youversion/tupos-auth@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@youversion/tupos-auth/-/tupos-auth-0.0.2.tgz#13890f6e46fb6b0cae84cec930bc7b9585c0ffd6"
   dependencies:
     react-router-dom "^4.3.1"
 
-"@youversion/tupos-base@0.0.1", "@youversion/tupos-base@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@youversion/tupos-base/-/tupos-base-0.0.1.tgz#f3624aa72f1611ec8fa4dbfac9e105dbd6befe4c"
+"@youversion/tupos-base@0.0.2", "@youversion/tupos-base@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@youversion/tupos-base/-/tupos-base-0.0.2.tgz#117485fb010cf5cab0d45137a35d40f788f1a6b7"
   dependencies:
     cross-fetch "^2.2.2"
-    query-string "^6.1.0"
+    query-string "^5.1.1"
 
-"@youversion/tupos-cli@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@youversion/tupos-cli/-/tupos-cli-0.0.1.tgz#a1ed6f3c31b91ca1328b55c71ac192c7fcb7a2f8"
+"@youversion/tupos-cli@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@youversion/tupos-cli/-/tupos-cli-0.0.2.tgz#f343f946923ef0ab28891ad4e66d413d18223090"
   dependencies:
-    "@youversion/tupos-base" "^0.0.1"
+    "@youversion/tupos-base" "^0.0.2"
     babel-polyfill "^6.26.0"
     docdash "^0.4.0"
     fs-extra "^7.0.0"
@@ -188,7 +188,7 @@
     local-web-server "2.6.0"
     localstorage-polyfill "^1.0.1"
     node-fetch "^2.2.0"
-    query-string "^6.1.0"
+    query-string "^5.1.1"
 
 JSONStream@^1.3.1:
   version "1.3.4"
@@ -6440,12 +6440,13 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.1.0.tgz#01e7d69f6a0940dac67a937d6c6325647aa4532a"
+query-string@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-5.1.1.tgz#a78c012b71c17e05f2e3fa2319dd330682efb3cb"
   dependencies:
     decode-uri-component "^0.2.0"
-    strict-uri-encode "^2.0.0"
+    object-assign "^4.1.0"
+    strict-uri-encode "^1.0.0"
 
 querystring-es3@^0.2.0:
   version "0.2.1"
@@ -7479,10 +7480,6 @@ streaming-json-stringify@3:
 strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
-
-strict-uri-encode@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
 
 string-length@^1.0.1:
   version "1.0.1"
