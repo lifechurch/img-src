@@ -1,0 +1,25 @@
+{
+  "description": "Partner model",
+  "methods": {
+    "getOne": {
+      "description": "Fetch partner from API",
+      "url": "http://viewmaster.sl.lifechurchcloud.com/api/partners/:partnerId",
+      "urlParams": {
+        "partnerId": "number"
+      }
+    },
+    "getMany": {
+      "description": "Fetch list of partners from API",
+      "returnType": "array",
+      "url": "http://viewmaster.sl.lifechurchcloud.com/api/partners"
+    }
+  },
+  "sample": {
+    "jsonRootNode": false,
+    "sampleMethod": "getOne",
+    "sampleUrlParams": {
+      "partnerId": 1
+    }
+  },
+  "template": "generic"
+}

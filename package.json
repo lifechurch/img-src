@@ -2,9 +2,12 @@
   "name": "img-src-client",
   "version": "0.1.0",
   "dependencies": {
-    "prop-types": "^15.6.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "@youversion/tupos-auth": "0.0.1-alpha.10",
+    "@youversion/tupos-base": "0.0.1-alpha.10",
+    "babel-polyfill": "^6.26.0",
+    "prop-types": "15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-dropzone": "^4.2.9",
     "react-helmet": "^5.2.0",
     "react-intl": "^2.4.0",
@@ -13,12 +16,15 @@
     "shortid": "^2.2.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=8001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "models": "tupos make-models ./src/tupos",
+    "model-docs": "tupos serve-docs ./src/tupos"
   },
   "devDependencies": {
+    "@youversion/tupos-cli": "0.0.1-alpha.10",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",

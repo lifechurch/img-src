@@ -1,0 +1,15 @@
+{
+  "description": "Language model",
+  "methods": {
+    "getMany": {
+      "description": "Fetch list of languages from API",            
+      "returnType": "array",
+      "url": "http://viewmaster.sl.lifechurchcloud.com/api/languages"
+    }
+  },
+  "sample": {
+    "jsonRootNode": [ 0 ],
+    "sampleMethod": "getMany"
+  },
+  "template": "generic"
+}

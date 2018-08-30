@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
+import { Redirect } from 'react-router-dom'
+import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import YVLogo from '../../assets/youversion.png'
 import YVBible from '../../assets/YV_bible.png'
 import FacebookLogo from '../../assets/facebook-app-logo.svg'
@@ -14,20 +16,45 @@ import BodyText from '../../components/typography/body-text'
 import images from './assets/images'
 import './index.css'
 
-function SplashPage(props) {
+class SplashPage extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			username: '',
+			password: ''
+		}
+	}
+
+handleChange = (e) => {
+	const { name, value } = e.target
+	this.setState({
+		[name]: value
+	})
+}
+
+handleSubmit = (e) => {
+	const { login } = this.props
+	const { username, password } = this.state
+	login({ username, password })
+}
+
+render() {
 	const {
-		intl
-	} = props
+		intl,
+		isSignedIn
+	} = this.props
 
 	const email = intl.formatMessage({ id: 'email' }).toUpperCase()
 	const password = intl.formatMessage({ id: 'password' }).toUpperCase()
+
+	if (isSignedIn) return (<Redirect to="/user-verse-assignment" />)
 
 	return (
 		<div className="h-100">
 			<div className="w-100 ph3 mt2 mb2 flex items-center justify-between">
 				<img src={YVLogo} alt="YouVersion" width={150} />
 				<div className="fr">
-					<Button to="/sign-in" buttontype="outline-only">
+					<Button href="#sign-in" buttontype="outline-only">
 						<FormattedMessage id="signIn" />
 					</Button>
 				</div>
@@ -57,6 +84,7 @@ function SplashPage(props) {
 				</div>
 			</div>
 
+			<a id="sign-in" />
 			<div className="flex flex-column w-100 items-center pa4 bg-light-gray">
 				<img src={YVBible} alt="" className="w3" />
 
@@ -78,12 +106,12 @@ function SplashPage(props) {
 				<form className="w-100">
 					<div className="w-100 flex items-center flex-column">
 						<div className="w-100 mw6 mb3">
-							<TextInput required name="email" placeholder={email} type="text" />
+							<TextInput required name="username" placeholder={email} type="text" onChange={this.handleChange} />
 						</div>
 						<div className="w-100 mw6 mb3">
-							<TextInput required name="password" placeholder={password} type="password" />
+							<TextInput required name="password" placeholder={password} type="password" onChange={this.handleChange} />
 						</div>
-						<Button submit buttontype="outline-only">
+						<Button buttontype="outline-only" onClick={this.handleSubmit}>
 							<FormattedMessage id="signIn" />
 						</Button>
 					</div>
@@ -101,9 +129,10 @@ function SplashPage(props) {
 		</div>
 	)
 }
+}
 
 SplashPage.propTypes = {
 	intl: intlShape.isRequired
 }
 
-export default injectIntl(SplashPage)
+export default withYVAuth(injectIntl(SplashPage))

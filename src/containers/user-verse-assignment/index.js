@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
+import Verse from '../../tupos/models/verse'
 import Modal from '../../components/modal'
 import { notifier } from '../../components/toast-handler'
 import Button from '../../components/button'
@@ -17,8 +18,13 @@ class UserVerseAssignment extends Component {
 		this.notify = notifier.notify()
 	}
 
+	async componentDidMount() {
+		const verse = await Verse.getOne('EPH.3.20', 116)
+		this.setState({ verse })
+	}
+
 	render() {
-		const { modalIsOpen } = this.state
+		const { modalIsOpen, verse } = this.state
 		return (
 			<div className="pa4">
 				<h1 className="ma0 pa0">
@@ -40,20 +46,22 @@ class UserVerseAssignment extends Component {
 				>
 					<h1 className="tc">Hello Modal</h1>
 				</Modal>
-				<Card>
-					<ImageDrop
-						minWidth={960}
-						maxWidth={4000}
-						minHeight={960}
-						maxHeight={4000}
-						onDrop={(rejected, accepted) => { return (rejected, accepted) }}
-					>
-						<MinorHeading>2 Corinthians 3:17</MinorHeading>
-						<BodyText>
-							Now the Lord is the Spirit, and where the Spirit of the Lord is, there is freedom.
-						</BodyText>
-					</ImageDrop>
-				</Card>
+				{ verse && (
+					<Card>
+						<ImageDrop
+							minWidth={960}
+							maxWidth={4000}
+							minHeight={960}
+							maxHeight={4000}
+							onDrop={(rejected, accepted) => { return (rejected, accepted) }}
+						>
+							<MinorHeading>{verse.reference.human}</MinorHeading>
+							<BodyText>
+								{verse.content}
+							</BodyText>
+						</ImageDrop>
+					</Card>
+				)}
 			</div>
 		)
 	}

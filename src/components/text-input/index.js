@@ -2,17 +2,25 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 function TextInput(props) {
-	const borderClasses = props.border ? 'b--moon-gray' : 'b--transparent'
-	const disabledClasses = props.disabled ? 'b--transparent bg-light-gray black' : 'b--moon-gray'
+	const {
+		border,
+		disabled,
+		name,
+		defaultValue,
+		...remainingProps
+	} = props
+
+	const borderClasses = border ? 'b--moon-gray' : 'b--transparent'
+	const disabledClasses = disabled ? 'b--transparent bg-light-gray black' : 'b--moon-gray'
 
 	const classNames = `bg-animate input-reset ba br2 pv3 ph4 outline-0 w-100 ${borderClasses} ${disabledClasses}`
 
 	return (
 		<input
 			type='text'
-			{...props}
-			name={props.name}
-			defaultValue={props.defaultValue}
+			{...remainingProps}
+			name={name}
+			defaultValue={defaultValue}
 			className={classNames}
 		/>
 	)
