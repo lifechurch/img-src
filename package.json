@@ -2,8 +2,8 @@
   "name": "img-src-client",
   "version": "0.1.0",
   "dependencies": {
-    "@youversion/tupos-auth": "0.0.1-alpha.10",
-    "@youversion/tupos-base": "0.0.1-alpha.10",
+    "@youversion/tupos-auth": "0.0.1",
+    "@youversion/tupos-base": "0.0.1",
     "babel-polyfill": "^6.26.0",
     "prop-types": "15.6.2",
     "react": "^16.4.2",
@@ -24,7 +24,7 @@
     "model-docs": "tupos serve-docs ./src/tupos"
   },
   "devDependencies": {
-    "@youversion/tupos-cli": "0.0.1-alpha.10",
+    "@youversion/tupos-cli": "0.0.1",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
