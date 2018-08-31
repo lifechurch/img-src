@@ -31,8 +31,8 @@ function App() {
 					<Link to="/" className="mr3 link dim moon-gray">Splash Page</Link>
 					<Link to="/user-registration" className="mr3 link dim moon-gray">Sign Up</Link>
 					<Link to="/user-verse-assignment" className="mr3 link dim moon-gray">Verse Assignment</Link>
-					<Link to="/user-profile/Michael" className="mr3 link dim moon-gray">User Profile: Michael</Link>
-					<Link to="/user-profile/Tommy" className="mr3 link dim moon-gray">User Profile: Tommy</Link>
+					<Link to="/user-profile/Michael/submissions" className="mr3 link dim moon-gray">User Profile: Michael</Link>
+					<Link to="/user-profile/Tommy/submissions" className="mr3 link dim moon-gray">User Profile: Tommy</Link>
 					<Link to="/admin" className="mr3 link dim moon-gray">Admin</Link>
 				</nav>
 
@@ -51,7 +51,7 @@ function App() {
 					path="/user-profile/:userId" render={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu />}>
-								<Route path="/user-profile/:userId" component={UserProfile} />
+								<Route path="/user-profile/:userId/:imageSort" component={UserProfile} />
 							</SidebarNav>
 						)
 					}}

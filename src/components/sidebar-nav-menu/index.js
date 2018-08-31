@@ -47,7 +47,7 @@ function SidebarNavMenu(props) {
 			</div>
 
 			<div className="pl3 mb4">
-				<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/myimages">
+				<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/user-profile">
 					<img src={MyImagesIcon} alt="" className="mr3" />
 					<FormattedMessage id="myImages" />
 				</NavLink>
