@@ -1,0 +1,27 @@
+{
+  "description": "Verse model",
+  "methods": {
+    "getOne": {
+      "description": "Fetch verse from API",
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/verse",
+      "query": {
+        "version_id": "number",
+        "usfm": "string"
+      }
+    },
+    "getMany": {
+      "description": "Fetch list of verses from API",
+      "returnType": "array",
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/verses"
+    }
+  },
+  "sample": {
+    "jsonRootNode": false,
+    "sampleMethod": "getOne",
+    "sampleQuery": {
+      "version_id": 1,
+      "usfm": "GEN.1.1"
+    }
+  },
+  "template": "generic"
+}

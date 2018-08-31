@@ -1,7 +1,8 @@
 import React from 'react'
-import shortid from 'shortid'
 import { FormattedMessage } from 'react-intl'
+
 import PrimaryHeading from './../../components/typography/primary-heading'
+import Verse from '../../tupos/models/verse'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
@@ -23,14 +24,17 @@ const tempData = {
 class UserVerseAssignment extends React.Component {
 	constructor(props) {
 		super(props)
+
 		this.state = {}
 
 		this.onResize = this.onResize.bind(this)
+		this.loadData = this.loadData.bind(this)
 	}
 
 	componentDidMount() {
 		window.addEventListener('resize', this.onResize)
 		this.onResize()
+		this.loadData()
 	}
 
 	componentWillUnmount() {
@@ -44,8 +48,13 @@ class UserVerseAssignment extends React.Component {
 		})
 	}
 
+	async loadData() {
+		const verse = await Verse.getOne('EPH.3.20', 116)
+		this.setState({ verse })
+	}
+
 	render() {
-		const { width } = this.state
+		const { width, verse } = this.state
 
 		return (
 			<div className="flex flex-column w-100 min-h-100">
@@ -88,28 +97,25 @@ class UserVerseAssignment extends React.Component {
 							<FormattedMessage id="verseGuidelines" />
 						</BodyText>
 					</div>
-					{tempData.verses.map(verse => {
-						return (
-							<div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
-								<Card>
-									<ImageDrop
-										minWidth={960}
-										maxWidth={4000}
-										minHeight={960}
-										maxHeight={4000}
-										onDrop={(rejected, accepted) => { return (rejected, accepted) }}
-									>
-										<div className="b mb2">
-											<BodyText>{verse.name}</BodyText>
-										</div>
-										<BodyText>{verse.text}</BodyText>
-									</ImageDrop>
-								</Card>
-							</div>
-						)
-					})}
+					{ verse && (
+						<div className={width > 700 ? 'mv4' : 'mv2'}>
+							<Card>
+								<ImageDrop
+									minWidth={960}
+									maxWidth={4000}
+									minHeight={960}
+									maxHeight={4000}
+									onDrop={(rejected, accepted) => { return (rejected, accepted) }}
+								>
+									<div className="b mb2">
+										<BodyText>{verse.reference.human}</BodyText>
+									</div>
+									<BodyText>{verse.content}</BodyText>
+								</ImageDrop>
+							</Card>
+						</div>
+					)}
 				</div>
-
 			</div>
 		)
 	}

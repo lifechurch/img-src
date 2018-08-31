@@ -1,0 +1,15 @@
+{
+  "description": "Version model",
+  "methods": {
+    "getMany": {
+      "description": "Fetch list of versions from API",
+      "returnType": "many",
+      "url": "https://viewmaster.sl.lifechurchcloud.com/api/versions"
+    }
+  },
+  "sample": {
+    "jsonRootNode": [ 0 ],
+    "sampleMethod": "getMany"
+  },
+  "template": "generic"
+}

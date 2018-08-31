@@ -1,5 +1,7 @@
+import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { YVAuthProvider } from '@youversion/tupos-auth/dist/YVAuth.context'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import localeData from 'react-intl/locale-data/en'
 import App from './App'
@@ -15,9 +17,11 @@ addLocaleData(localeData)
 
 ReactDOM.render(
 	(
-		<IntlProvider locale="en" messages={localeMessages}>
-			<App />
-		</IntlProvider>
+		<YVAuthProvider>
+			<IntlProvider locale="en" messages={localeMessages}>
+				<App />
+			</IntlProvider>
+		</YVAuthProvider>
 	), document.getElementById('root')
 )
 
