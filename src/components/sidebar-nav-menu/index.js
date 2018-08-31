@@ -55,22 +55,28 @@ function SidebarNavMenu(props) {
 				</NavLink>
 			</div>
 
-			{ isSignedIn && (<div className="pl3 mb4">
-				<a className="no-underline light-silver link dim flex items-center pointer" onClick={logout} role="button" tabIndex={0}>
-					<img src={MyImagesIcon} alt="" className="mr3" />
-					<FormattedMessage id="signOut" />
-				</a>
-			</div>)}
+			{ isSignedIn && (
+				<div className="pl3 mb4">
+					<button className="no-underline light-silver link dim flex items-center pointer" onClick={logout} tabIndex={0}>
+						<img src={MyImagesIcon} alt="" className="mr3" />
+						<FormattedMessage id="signOut" />
+					</button>
+				</div>
+			)}
 		</div>
 	)
 }
 
 SidebarNavMenu.propTypes = {
-	isAdmin: PropTypes.bool
+	isAdmin: PropTypes.bool,
+	isSignedIn: PropTypes.bool,
+	logout: PropTypes.func
 }
 
 SidebarNavMenu.defaultProps = {
-	isAdmin: false
+	isAdmin: false,
+	isSignedIn: false,
+	logout: null
 }
 
 export default withYVAuth(injectIntl(SidebarNavMenu))

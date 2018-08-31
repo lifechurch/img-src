@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { Redirect } from 'react-router-dom'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
@@ -32,7 +33,7 @@ handleChange = (e) => {
 	})
 }
 
-handleSubmit = (e) => {
+handleSubmit = () => {
 	const { login } = this.props
 	const { username, password } = this.state
 	login({ username, password })
@@ -84,8 +85,7 @@ render() {
 				</div>
 			</div>
 
-			<a id="sign-in" />
-			<div className="flex flex-column w-100 items-center pa4 bg-light-gray">
+			<div id="sign-in" className="flex flex-column w-100 items-center pa4 bg-light-gray">
 				<img src={YVBible} alt="" className="w3" />
 
 				<div className="tc">
@@ -132,7 +132,14 @@ render() {
 }
 
 SplashPage.propTypes = {
-	intl: intlShape.isRequired
+	intl: intlShape.isRequired,
+	login: PropTypes.func,
+	isSignedIn: PropTypes.bool
+}
+
+SplashPage.defaultProps = {
+	login: null,
+	isSignedIn: false
 }
 
 export default withYVAuth(injectIntl(SplashPage))

@@ -16,9 +16,14 @@ class UserVerseAssignment extends Component {
 			modalIsOpen: false
 		}
 		this.notify = notifier.notify()
+		this.loadData = this.loadData.bind(this)
 	}
 
-	async componentDidMount() {
+	componentDidMount() {
+		this.loadData()
+	}
+
+	async loadData() {
 		const verse = await Verse.getOne('EPH.3.20', 116)
 		this.setState({ verse })
 	}

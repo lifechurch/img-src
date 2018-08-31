@@ -19,7 +19,7 @@ function App() {
 				<Helmet
 					title="Image Source: A YouVersion Design Community"
 					description="A web application for YouVersion design community to submit verse image art for use in the Bible App."
-    />
+				/>
 
 				<ToastHandler />
 
