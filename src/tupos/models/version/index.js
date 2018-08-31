@@ -34,7 +34,9 @@ class Version extends TuposModel {
 		const json = await TuposModel.get({
 			url: 'https://viewmaster.sl.lifechurchcloud.com/api/versions',
 		})
-		return new Version(json)
+		return json.map((item) => {
+			return new Version(item)
+		})
 	}
 
 

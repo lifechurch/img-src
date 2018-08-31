@@ -1,25 +1,15 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import shortid from 'shortid'
 
 import PrimaryHeading from './../../components/typography/primary-heading'
 import Verse from '../../tupos/models/verse'
+import Language from '../../tupos/models/language'
+import Version from '../../tupos/models/version'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import Card from './../../components/card'
-
-const tempData = {
-	verses: [
-		{
-			name: '2 Corinthians 3:17',
-			text: 'Now the Lord is the Spirit, and where the Spirit of the Lord is, there is freedom.'
-		},
-		{
-			name: '2 Corinthians 3:18',
-			text: 'And we all, who with unveiled faces contemplate the Lord\'s glory, are being transformed into his image with ever-increasing glory, which comes from the Lord, who is the Spirit.'
-		}
-	]
-}
 
 class UserVerseAssignment extends React.Component {
 	constructor(props) {
@@ -50,11 +40,18 @@ class UserVerseAssignment extends React.Component {
 
 	async loadData() {
 		const verse = await Verse.getOne('EPH.3.20', 116)
-		this.setState({ verse })
+		const languages = await Language.getMany()
+		const versions = await Version.getMany()
+		this.setState({ verse, languages, versions })
 	}
 
 	render() {
-		const { width, verse } = this.state
+		const {
+			width,
+			verse,
+			languages,
+			versions
+		} = this.state
 
 		return (
 			<div className="flex flex-column w-100 min-h-100">
@@ -73,20 +70,24 @@ class UserVerseAssignment extends React.Component {
 					<div className="w-100 flex items-center justify-between flex-wrap">
 						<div className={width > 700 ? 'mv4' : 'mv3'}>
 							{/* TODO: Replace with <ComboBox> when ready */}
-							<select className="">
-								<option value="en">English</option>
-								<option value="de">German</option>
-								<option value="es">Spanish</option>
+							<select className="mw4">
+								{
+									languages && languages.map((lang) => {
+										return <option value={lang.language_tag} key={shortid.generate()}>{lang.name}</option>
+									})
+								}
 							</select>
-							<select className="mh4">
-								<option value="nlt">NLT</option>
-								<option value="niv">NIV</option>
-								<option value="kjv">KJV</option>
+							<select className="mw4 mh4">
+								{
+									versions && versions.map((version) => {
+										return <option value={version.abbreviation} key={shortid.generate()}>{version.abbreviation}</option>
+									})
+								}
 							</select>
 						</div>
 
 						<span className="fr green b">
-							<FormattedMessage id="pendingImages" />: {tempData.verses.length}
+							<FormattedMessage id="pendingImages" />: 2
 						</span>
 					</div>
 				</div>
