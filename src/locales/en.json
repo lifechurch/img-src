@@ -30,5 +30,6 @@
 	"dontHaveAccount": "Don't have a YouVersion account?",
 	"createOneHere": "Create one here.",
 	"continueFacebook": "Continue with Facebook",
-	"continueGoogle": "Continue with Google"
+	"continueGoogle": "Continue with Google",
+  "signOut": "Sign Out"
 }

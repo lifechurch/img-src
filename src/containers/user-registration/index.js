@@ -66,7 +66,7 @@ class UserRegistration extends React.Component {
 								{
 									!this.state.submitted ? (
 										<div className="flex justify-center justify-end-ns mt3">
-											<Button submit>
+											<Button isSubmit={true}>
 												<FormattedMessage id="submit" />
 											</Button>
 										</div>
@@ -92,7 +92,7 @@ class UserRegistration extends React.Component {
 							</div>
 
 							<div className="flex justify-center justify-end-ns mt3 f5">
-								<Button submit disabled={!this.state.tcAccepted}>
+								<Button isSubmit={true} disabled={!this.state.tcAccepted}>
 									<FormattedMessage id="continue" />
 								</Button>
 							</div>
