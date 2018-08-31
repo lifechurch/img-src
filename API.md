@@ -1,14 +1,20 @@
+
 # Using the img-src API
+
 There are four Javascript model classes that you need to retrieve data from the `img-src` api.
 
-### Language
-### Partner
-### Verse
-### Version
+## Language
+
+## Partner
+
+## Verse
+
+## Version
 
 ---
 
 ## How to Use
+
 To open the documentation for the API, just run the following command:
 
 ```

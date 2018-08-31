@@ -1,6 +1,10 @@
+
 # Authentication with YouVersion Account
+
 - - - -
+
 ## YVAuthProtectedRoute
+
 A replacement for `Route` from `react-router` that automatically redirects a user to a specified location (usually a login page) if they’re not currently signed in.
 
 ```
@@ -13,7 +17,9 @@ import YVAuthProtectedRoute from '@youversion/tupos-auth/dist/YVAuthProtectedRou
 ```
 
 - - - -
+
 ## YVAuthProvider
+
 A React context provider that provides user authentication info to your app
 
 ```
@@ -33,7 +39,9 @@ ReactDOM.render(
 ```
 
 - - - -
+
 ## withYVAuth
+
 A React Higher-Order Component that adds the following properties to any wrapped component:
 
 * isSignedIn (boolean) - is the user currently authenticated?
