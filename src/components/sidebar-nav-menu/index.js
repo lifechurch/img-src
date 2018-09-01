@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { FormattedMessage, injectIntl } from 'react-intl'
+import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import YVLogo from '../../assets/LC_YouVersion_Logo_with_icon_Light.png'
 import AdminIcon from '../../assets/admin.svg'
 import ToDoIcon from '../../assets/todo.svg'
@@ -9,6 +10,7 @@ import MyImagesIcon from '../../assets/me.svg'
 import './index.css'
 
 function SidebarNavMenu(props) {
+	const { isSignedIn, logout } = props
 	return (
 		<div className="pa3 f3">
 			<img src={YVLogo} alt="YouVersion" style={{ width: 200 }} className="mb4" />
@@ -52,16 +54,29 @@ function SidebarNavMenu(props) {
 					<FormattedMessage id="myImages" />
 				</NavLink>
 			</div>
+
+			{ isSignedIn && (
+				<div className="pl3 mb4">
+					<button className="no-underline light-silver link dim flex items-center pointer" onClick={logout} tabIndex={0}>
+						<img src={MyImagesIcon} alt="" className="mr3" />
+						<FormattedMessage id="signOut" />
+					</button>
+				</div>
+			)}
 		</div>
 	)
 }
 
 SidebarNavMenu.propTypes = {
-	isAdmin: PropTypes.bool
+	isAdmin: PropTypes.bool,
+	isSignedIn: PropTypes.bool,
+	logout: PropTypes.func
 }
 
 SidebarNavMenu.defaultProps = {
-	isAdmin: false
+	isAdmin: false,
+	isSignedIn: false,
+	logout: null
 }
 
-export default injectIntl(SidebarNavMenu)
+export default withYVAuth(injectIntl(SidebarNavMenu))

@@ -1,115 +1,72 @@
 import React from 'react'
-import shortid from 'shortid'
 import { FormattedMessage } from 'react-intl'
-import PrimaryHeading from './../../components/typography/primary-heading'
+import Verse from '../../tupos/models/verse'
+import Modal from '../../components/modal'
+import { notifier } from '../../components/toast-handler'
+import Button from '../../components/button'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import Card from './../../components/card'
 
-const tempData = {
-	verses: [
-		{
-			name: '2 Corinthians 3:17',
-			text: 'Now the Lord is the Spirit, and where the Spirit of the Lord is, there is freedom.'
-		},
-		{
-			name: '2 Corinthians 3:18',
-			text: 'And we all, who with unveiled faces contemplate the Lord\'s glory, are being transformed into his image with ever-increasing glory, which comes from the Lord, who is the Spirit.'
-		}
-	]
-}
-
 class UserVerseAssignment extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
-
-		this.onResize = this.onResize.bind(this)
+		this.state = {
+			modalIsOpen: false
+		}
+		this.notify = notifier.notify()
+		this.loadData = this.loadData.bind(this)
 	}
 
 	componentDidMount() {
-		window.addEventListener('resize', this.onResize)
-		this.onResize()
+		this.loadData()
 	}
 
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.onResize)
-	}
-
-	onResize() {
-		window.requestAnimationFrame(() => {
-			const width = document.documentElement.clientWidth
-			this.setState({ width })
-		})
+	async loadData() {
+		const verse = await Verse.getOne('EPH.3.20', 116)
+		this.setState({ verse })
 	}
 
 	render() {
-		const { width } = this.state
-
+		const { modalIsOpen, verse } = this.state
 		return (
-			<div className="flex flex-column w-100 min-h-100">
-				<div className={width > 700 ? 'pt4 ph4' : 'pa4'}>
-					<PrimaryHeading>
-						<FormattedMessage id={width > 700 ? 'versesNeedImages' : 'verses'} />
-					</PrimaryHeading>
-					{width > 700 &&
-						<div className="mt2">
-							<MinorHeading>
-								<FormattedMessage id="chooseAVerse" />
-							</MinorHeading>
-						</div>
-					}
-
-					<div className="w-100 flex items-center justify-between flex-wrap">
-						<div className={width > 700 ? 'mv4' : 'mv3'}>
-							{/* TODO: Replace with <ComboBox> when ready */}
-							<select className="">
-								<option value="en">English</option>
-								<option value="de">German</option>
-								<option value="es">Spanish</option>
-							</select>
-							<select className="mh4">
-								<option value="nlt">NLT</option>
-								<option value="niv">NIV</option>
-								<option value="kjv">KJV</option>
-							</select>
-						</div>
-
-						<span className="fr green b">
-							<FormattedMessage id="pendingImages" />: {tempData.verses.length}
-						</span>
-					</div>
-				</div>
-
-				<div className="flex-auto pa4 bg-light-gray">
-					<div className="b">
-						<BodyText>
-							<FormattedMessage id="verseGuidelines" />
-						</BodyText>
-					</div>
-					{tempData.verses.map(verse => {
-						return (
-							<div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
-								<Card>
-									<ImageDrop
-										minWidth={960}
-										maxWidth={4000}
-										minHeight={960}
-										maxHeight={4000}
-										onDrop={(rejected, accepted) => { return (rejected, accepted) }}
-									>
-										<div className="b mb2">
-											<BodyText>{verse.name}</BodyText>
-										</div>
-										<BodyText>{verse.text}</BodyText>
-									</ImageDrop>
-								</Card>
-							</div>
-						)
-					})}
-				</div>
-
+			<div className="pa4">
+				<h1 className="ma0 pa0">
+					<FormattedMessage id="userVerseAssignment" />
+				</h1>
+				<Button onClick={() => { this.setState({ modalIsOpen: true }) }}>
+          Open Modal
+				</Button>
+				<Button onClick={() => { this.notify('hey', 3000, false) }}>
+					Notify without autoHide
+				</Button>
+				<Button onClick={() => { this.notify('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.') }}>
+					Big Notify
+				</Button>
+				<Modal
+					isOpen={modalIsOpen}
+					widthClass="w-30"
+					heightClass="h-50"
+				>
+					<h1 className="tc">Hello Modal</h1>
+				</Modal>
+				{ verse && (
+					<Card>
+						<ImageDrop
+							minWidth={960}
+							maxWidth={4000}
+							minHeight={960}
+							maxHeight={4000}
+							onDrop={(rejected, accepted) => { return (rejected, accepted) }}
+						>
+							<MinorHeading>{verse.reference.human}</MinorHeading>
+							<BodyText>
+								{verse.content}
+							</BodyText>
+						</ImageDrop>
+					</Card>
+				)}
 			</div>
 		)
 	}

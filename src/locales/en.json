@@ -36,5 +36,6 @@
 	"continueFacebook": "Continue with Facebook",
 	"continueGoogle": "Continue with Google",
 	"youversionVolunteer": "YouVersion Volunteer",
-	"designerSince": "Designer since {date}"
+	"designerSince": "Designer since {date}",
+  "signOut": "Sign Out"
 }

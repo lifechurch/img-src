@@ -6,27 +6,31 @@ function Button(props) {
 	const {
 		to,
 		onClick,
-		children
+		children,
+		isSubmit,
+		disabled,
+		buttontype,
+		...remainingProps
 	} = props
 
-	const disabledClasses = props.disabled ? 'o-50' : 'dim'
-	const buttontypeClasses = props.buttontype === 'solid' ? 'bg-mid-gray white bn' : 'ba bw1 b--mid-gray mid-gray bg-transparent'
+	const disabledClasses = disabled ? 'o-50' : 'dim'
+	const buttontypeClasses = buttontype === 'solid' ? 'bg-mid-gray white bn' : 'ba bw1 b--mid-gray mid-gray bg-transparent'
 
 	const classes = `pointer link br-pill ph4 pv2 f4 dib ${disabledClasses} ${buttontypeClasses}`
 
-	if (props.disabled) {
+	if (disabled) {
 		return (
-			<a {...props} className={classes}>{children}</a>
+			<a {...remainingProps} className={classes}>{children}</a>
 		)
-	} else if (props.submit) {
+	} else if (isSubmit) {
 		return (
-			<button {...props} onClick={onClick} type="submit" className={classes}>{children}</button>
+			<button {...remainingProps} onClick={onClick} type="submit" className={classes}>{children}</button>
 		)
 	}
 
 	return to ? (
 		<Link
-			{...props}
+			{...remainingProps}
 			to={to}
 			onClick={onClick}
 			className={classes}
@@ -35,7 +39,7 @@ function Button(props) {
 		</Link>
 	) : (
 		<a
-			{...props}
+			{...remainingProps}
 			onClick={onClick}
 			role='button'
 			tabIndex={0}
@@ -53,7 +57,7 @@ Button.propTypes = {
 	disabled: PropTypes.bool,
 	buttontype: PropTypes.oneOf(['solid', 'outline-only']),
 	onClick: PropTypes.func,
-	submit: PropTypes.bool
+	isSubmit: PropTypes.bool
 }
 
 Button.defaultProps = {
@@ -62,7 +66,7 @@ Button.defaultProps = {
 	disabled: false,
 	buttontype: 'solid',
 	onClick: null,
-	submit: false
+	isSubmit: false
 }
 
 export default Button
