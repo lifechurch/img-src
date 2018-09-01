@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import ApprovalItem from './components/approval-item/index'
 
 function Admin() {
 	return (
@@ -7,6 +8,7 @@ function Admin() {
 			<h1 className="ma0 pa0">
 				<FormattedMessage id="admin" />
 			</h1>
+			<ApprovalItem />
 		</div>
 	)
 }
