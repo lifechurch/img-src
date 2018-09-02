@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
+import Verse from '../../tupos/models/verse'
 import Modal from '../../components/modal'
 import Card from './../../components/card'
 import { notifier } from '../../components/toast-handler'
@@ -16,9 +17,20 @@ class UserVerseAssignment extends Component {
 			modalIsOpen: false
 		}
 		this.notify = notifier.notify()
+		this.loadData = this.loadData.bind(this)
+	}
+
+	componentDidMount() {
+		this.loadData()
+	}
+
+	async loadData() {
+		const verse = await Verse.getOne('EPH.3.20', 116)
+		this.setState({ verse })
 	}
 
 	render() {
+
 		const { modalIsOpen } = this.state
 
 		const languages = [
@@ -31,6 +43,7 @@ class UserVerseAssignment extends Component {
 			{ name: 'Reina-Valera Antigua', value: 'RVES' }
 		]
 
+		const { modalIsOpen, verse } = this.state
 		return (
 			<div className="pa4">
 				<h1 className="ma0 pa0">
@@ -78,6 +91,22 @@ class UserVerseAssignment extends Component {
 						</BodyText>
 					</ImageDrop>
 				</Card>
+				{ verse && (
+					<Card>
+						<ImageDrop
+							minWidth={960}
+							maxWidth={4000}
+							minHeight={960}
+							maxHeight={4000}
+							onDrop={(rejected, accepted) => { return (rejected, accepted) }}
+						>
+							<MinorHeading>{verse.reference.human}</MinorHeading>
+							<BodyText>
+								{verse.content}
+							</BodyText>
+						</ImageDrop>
+					</Card>
+				)}
 			</div>
 		)
 	}
