@@ -68,7 +68,7 @@ class SidebarNav extends React.Component {
 
 		return (
 			<div className="h-100">
-				<div className="cf h-100 relative">
+				<div className="cf h-100 relative flex flex-row content-stretch">
 					<div className={sidebarClasses}>
 						{this.props.menu}
 						{this.state.width < MOBILE_WIDTH &&
@@ -92,7 +92,7 @@ class SidebarNav extends React.Component {
 							<img src={HamburgerIcon} alt="" />
 						</div>
 					}
-					<div className="pa4 fl">
+					<div className="pa4 fl w-100">
 						{this.props.children}
 					</div>
 				</div>
