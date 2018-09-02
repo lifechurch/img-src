@@ -31,10 +31,9 @@ class UserVerseAssignment extends Component {
 
 	render() {
 
-		const { modalIsOpen } = this.state
-
 		const languages = [
 			{ name: 'English', value: 'EN' },
+			{ name: 'Portuguese', value: 'PT' },
 			{ name: 'Spanish', value: 'ES' }
 		]
 
@@ -50,7 +49,7 @@ class UserVerseAssignment extends Component {
 					<FormattedMessage id="userVerseAssignment" />
 				</h1>
 				<Button onClick={() => { this.setState({ modalIsOpen: true }) }}>
-          Open Modal
+					Open Modal
 				</Button>
 				<Button onClick={() => { this.notify('hey', 3000, false) }}>
 					Notify without autoHide
