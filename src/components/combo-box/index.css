@@ -1,0 +1,13 @@
+.clear-btn {
+    color: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.combo-box-list .highlighted  {
+    background-color: #CCCCCC;
+}
+
+.combo-box-list button:hover {
+    background-color: #CCCCCC;
+}
