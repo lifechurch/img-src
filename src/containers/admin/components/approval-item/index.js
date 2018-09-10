@@ -12,24 +12,27 @@ const User = (props) => {
             <div className = 'approvalItemUserName pa3 f3 b' >
                 ChuanTao Wang
             </div>
-            <div className='bg-none pa2 bn pointer'>
+            <div className='bg-none pa2 bn pointer dn db-ns'>
                 <img src={like} className='w1'></img>
             </div>
-            <div className='bg-none pa2 bn pointer'>
+            <div className='bg-none pa2 bn pointer dn db-ns'>
                 <img src={like} className='w1 rotate-180'></img>
             </div>
         </div>
     )
 }
 
+
+
 const VerseItem = (props) => {
     return (
-        <div className = 'relative flex flex-row items-stretch pt2 pb2'>
-            <div className='relative w-30'>
-                <div className='relative aspect-ratio--1x1 w-100'>
+        <div className = 'relative flex flex-row-ns flex-column items-stretch pt2 pb2'>
+            <div className='relative w-100 w-30-l'>
+                <div className='relative aspect-ratio aspect-ratio--1x1 w-100 hide-child'>
                     <img className='absolute h-100' src = { picture } />
-                    <div className='absolute h-100 w-100 flex flex-column items-center justify-center child bg-black-80 f3'>
-                        <div className='flex flex-row items-center w-60 mb3 pointer white-80 hover-light-gray'>
+                    <div className='absolute h-100 w-100 bg-black-80 child'  />
+                    <div className='absolute h-100 w-100 flex flex-column items-center justify-center child f3 relative-m'>
+                        <div className='flex flex-row items-center w-60 mb4 pointer white-80 hover-light-gray'>
                             <div className='bg-white-80 h1 w1 br-100 mr3' />
                             <div >Approve</div>
                         </div>
@@ -40,12 +43,12 @@ const VerseItem = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="relative flex-auto flex flex-column w-60 ml2" >
-                <div className = 'flex-auto flex flex-column bg-white pa2 mb2 br2 shadow-2'>
-                    <div>
+            <div className="relative flex-auto flex flex-column w-100 w-60-ns ml2-ns mt2 mt0-ns" >
+                <div className = 'flex-auto flex flex-column bg-white pa4 mb2 br2 shadow-2'>
+                    <div className='mb3 dark-gray f3'>
                         verse title
                     </div>
-                    <div>
+                    <div className='gray f4'>
                         verse body
                     </div>
                 </div>
