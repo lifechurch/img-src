@@ -1,5 +1,6 @@
 import React from 'react' 
 import PropTypes from 'prop-types'
+import { FormattedMessage, injectIntl } from 'react-intl'
 
 import like from '../../../../assets/thumbs-up-solid.svg'
 import picture from '../../../../assets/15549_320x320.jpg'
@@ -45,14 +46,14 @@ const VerseItem = (props) => {
                         onClick={ ()=>{props.onImageAction('approve', {})} }
                     >
                         <div className='title-circle bg-white-80 h1 w1 br-100 mr3' />
-                        <div >Approve</div>
+                        <div ><FormattedMessage id='approve' /></div>
                     </div>
                     <div 
                         className='option flex flex-row items-center w-60 pointer white-80 hover-light-gray'
                         onClick={ ()=>{props.onImageAction('decline', {})} }
                     >
                         <div className='title-circle bg-white-80 h1 w1 br-100 mr3' />
-                        <div >Decline</div>
+                        <div ><FormattedMessage id='decline' /></div>
                     </div>
                 </div>
             </div>
@@ -118,4 +119,4 @@ ApprovalItem.defaultProps = {
 	onImageAction: ()=>{}
 }
 
-export default ApprovalItem
+export default injectIntl(ApprovalItem)
