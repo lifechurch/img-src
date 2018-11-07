@@ -3,7 +3,7 @@ import setString from '@youversion/tupos-base/dist/setters/string'
 
 
 
-/**
+/** *
  * Verse model
  */
 class Copyright {

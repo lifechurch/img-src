@@ -2,8 +2,8 @@
   "name": "img-src-client",
   "version": "0.1.0",
   "dependencies": {
-    "@youversion/tupos-auth": "0.0.2",
-    "@youversion/tupos-base": "0.0.2",
+    "@youversion/tupos-auth": "^0.1.6",
+    "@youversion/tupos-base": "^0.1.6",
     "babel-polyfill": "^6.26.0",
     "prop-types": "15.6.2",
     "react": "^16.4.2",
@@ -16,7 +16,7 @@
     "shortid": "^2.2.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -24,7 +24,7 @@
     "model-docs": "tupos serve-docs ./src/tupos"
   },
   "devDependencies": {
-    "@youversion/tupos-cli": "0.0.2",
+    "@youversion/tupos-cli": "^0.1.6",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",

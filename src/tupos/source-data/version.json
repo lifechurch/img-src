@@ -3,13 +3,18 @@
   "methods": {
     "getMany": {
       "description": "Fetch list of versions from API",
-      "returnType": "many",
-      "url": "https://viewmaster.sl.lifechurchcloud.com/api/versions"
+      "returnType": "array",
+      "endpoint": "viewmaster",
+      "method": "versions",
+      "version": "api",
+      "auth": true,
+      "parseJson": true,
+      "jsonRootNode": "data"
     }
   },
   "sample": {
-    "jsonRootNode": [ 0 ],
+    "jsonRootNode": [ "data", 0 ],
     "sampleMethod": "getMany"
   },
-  "template": "generic"
+  "template": "youversion"
 }

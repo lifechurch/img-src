@@ -1,11 +1,11 @@
 {
-  "description": "Language model",
+  "description": "Verse model",
   "methods": {
     "getMany": {
-      "description": "Fetch list of languages from API",
+      "description": "Fetch list of verses from API",
       "returnType": "array",
       "endpoint": "viewmaster",
-      "method": "languages",
+      "method": "verses",
       "version": "api",
       "auth": true,
       "parseJson": true,

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>verse/index.js - Documentation</title>
+    <title>image/index.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">verse/index.js</h1>
+    <h1 class="page-title">image/index.js</h1>
     
 
     
@@ -38,83 +38,166 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { TuposModel } from '@youversion/tupos-base'
+import setDate from '@youversion/tupos-base/dist/setters/date'
+import setNumber from '@youversion/tupos-base/dist/setters/number'
 import setString from '@youversion/tupos-base/dist/setters/string'
 import api4 from '@youversion/tupos-base/dist/fetchers/api4'
-import Copyright from './copyright'
-import Reference from './reference'
+
 
 /** *
- * Verse model
+ * Image model
  * @extends TuposModel
  */
-class Verse extends TuposModel {
+class Image extends TuposModel {
 	constructor(json) {
 		super(json)
 		if (!json || typeof json !== 'object') return
-		this.content = json.content
-		this.reference = json.reference
-		this.copyright = json.copyright
+		this.versionId = json.version_id
+		this.usfm = json.usfm
+		this.createdDt = json.created_dt
+		this.userId = json.user_id
+		this.status = json.status
+		this.languageTag = json.language_tag
+		this.weight = json.weight
+		this.id = json.id
+		this.category = json.category
 	}
 
-	/** Convert Verse to simple object */
+	/** Convert Image to simple object */
 	toObject() {
 		return {
-			content: this.content,
-			reference: this.reference.toObject(),
-			copyright: this.copyright.toObject()
+			version_id: this.versionId,
+			usfm: this.usfm,
+			created_dt: this.createdDt,
+			user_id: this.userId,
+			status: this.status,
+			language_tag: this.languageTag,
+			weight: this.weight,
+			id: this.id,
+			category: this.category
 		}
 	}
 
-	/** Fetch verse from API */
-	static async getOne(usfm, versionId) {
+	/** Fetch image from API. Must be in editor role or the owner of image. */
+	static async getOne(imageId) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
-			method: 'verse',
+			method: 'images/:imageId',
 			version: 'api',
 			auth: true,
 			parseJson: true,
-			params: {
-				version_id: versionId,
-				usfm
+			urlParams: {
+				imageId
 			}
 		}))
 
 		if (typeof json !== 'object') throw new Error()
 
-		return new Verse(json)
+		return new Image(json)
 	}
 
+	/** Fetch list of images from API. Must be in editor role. */
+	static async getMany() {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'images',
+			version: 'api',
+			auth: true,
+			parseJson: true
+		}))
+
+		if (!Array.isArray(json.data)) throw new Error()
+
+		return json.data.map((item) => {
+			return new Image(item)
+		})
+	}
+
+
+	/** @type {number} */
+	get versionId() {
+		return this._versionId
+	}
+
+	set versionId(versionId) {
+		this._versionId = setNumber(versionId, 'versionId')
+	}
 
 	/** @type {string} */
-	get content() {
-		return this._content
+	get usfm() {
+		return this._usfm
 	}
 
-	set content(content) {
-		this._content = setString(content, 'content')
+	set usfm(usfm) {
+		this._usfm = setString(usfm, 'usfm')
 	}
 
-	/** @type {Reference} */
-	get reference() {
-		return this._reference
+	/** @type {Date} */
+	get createdDt() {
+		return this._createdDt
 	}
 
-	set reference(reference) {
-		this._reference = new Reference(reference, 'reference')
+	set createdDt(createdDt) {
+		this._createdDt = setDate(createdDt, 'createdDt')
 	}
 
-	/** @type {Copyright} */
-	get copyright() {
-		return this._copyright
+	/** @type {number} */
+	get userId() {
+		return this._userId
 	}
 
-	set copyright(copyright) {
-		this._copyright = new Copyright(copyright, 'copyright')
+	set userId(userId) {
+		this._userId = setNumber(userId, 'userId')
+	}
+
+	/** @type {number} */
+	get status() {
+		return this._status
+	}
+
+	set status(status) {
+		this._status = setNumber(status, 'status')
+	}
+
+	/** @type {string} */
+	get languageTag() {
+		return this._languageTag
+	}
+
+	set languageTag(languageTag) {
+		this._languageTag = setString(languageTag, 'languageTag')
+	}
+
+	/** @type {string} */
+	get weight() {
+		return this._weight
+	}
+
+	set weight(weight) {
+		this._weight = setString(weight, 'weight')
+	}
+
+	/** @type {number} */
+	get id() {
+		return this._id
+	}
+
+	set id(id) {
+		this._id = setNumber(id, 'id')
+	}
+
+	/** @type {string} */
+	get category() {
+		return this._category
+	}
+
+	set category(category) {
+		this._category = setString(category, 'category')
 	}
 
 }
 
-export default Verse
+export default Image
 </code></pre>
         </article>
     </section>

@@ -3,16 +3,15 @@
   "methods": {
     "getOne": {
       "description": "Fetch verse from API",
-      "url": "https://viewmaster.sl.lifechurchcloud.com/api/verse",
+      "endpoint": "viewmaster",
+      "method": "verse",
+      "version": "api",
+      "auth": true,
+      "parseJson": true,
       "query": {
         "version_id": "number",
         "usfm": "string"
       }
-    },
-    "getMany": {
-      "description": "Fetch list of verses from API",
-      "returnType": "array",
-      "url": "https://viewmaster.sl.lifechurchcloud.com/api/verses"
     }
   },
   "sample": {
@@ -23,5 +22,5 @@
       "usfm": "GEN.1.1"
     }
   },
-  "template": "generic"
+  "template": "youversion"
 }

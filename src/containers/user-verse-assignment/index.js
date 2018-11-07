@@ -9,11 +9,13 @@ import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import Card from './../../components/card'
 
+
 class UserVerseAssignment extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			modalIsOpen: false
+			modalIsOpen: false,
+			verse: null
 		}
 		this.notify = notifier.notify()
 		this.loadData = this.loadData.bind(this)
@@ -36,7 +38,7 @@ class UserVerseAssignment extends Component {
 					<FormattedMessage id="userVerseAssignment" />
 				</h1>
 				<Button onClick={() => { this.setState({ modalIsOpen: true }) }}>
-          Open Modal
+					Open Modal
 				</Button>
 				<Button onClick={() => { this.notify('hey', 3000, false) }}>
 					Notify without autoHide

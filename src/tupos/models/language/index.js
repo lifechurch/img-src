@@ -1,9 +1,9 @@
 import { TuposModel } from '@youversion/tupos-base'
 import setString from '@youversion/tupos-base/dist/setters/string'
+import api4 from '@youversion/tupos-base/dist/fetchers/api4'
 
 
-
-/**
+/** *
  * Language model
  * @extends TuposModel
  */
@@ -25,11 +25,19 @@ class Language extends TuposModel {
 		}
 	}
 
+	/** Fetch list of languages from API */
 	static async getMany() {
-		const json = await TuposModel.get({
-			url: 'https://viewmaster.sl.lifechurchcloud.com/api/languages',
-		})
-		return json.map((item) => {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'languages',
+			version: 'api',
+			auth: true,
+			parseJson: true
+		}))
+
+		if (!Array.isArray(json.data)) throw new Error()
+
+		return json.data.map((item) => {
 			return new Language(item)
 		})
 	}
