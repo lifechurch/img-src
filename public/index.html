@@ -18,11 +18,13 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Image Source</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
+
+    <title>Image Source</title>
     <script type="text/javascript">
-      window.__ENV__ = 'production'
+      window.API_ENV = "%REACT_APP_API_ENV%";
     </script>
+
   </head>
   <body class="sans-serif h-100">
     <noscript>

@@ -1,10 +1,10 @@
 import { TuposModel } from '@youversion/tupos-base'
 import setString from '@youversion/tupos-base/dist/setters/string'
-
+import api4 from '@youversion/tupos-base/dist/fetchers/api4'
 import Copyright from './copyright'
 import Reference from './reference'
 
-/**
+/** *
  * Verse model
  * @extends TuposModel
  */
@@ -21,34 +21,28 @@ class Verse extends TuposModel {
 	toObject() {
 		return {
 			content: this.content,
-			reference: this.reference,
-			copyright: this.copyright
+			reference: this.reference.toObject(),
+			copyright: this.copyright.toObject()
 		}
 	}
 
-	/**
-  * Fetch verse from API
-  * @param {number} versionId
-  * @param {string} usfm
-  */
+	/** Fetch verse from API */
 	static async getOne(usfm, versionId) {
-		const json = await TuposModel.get({
-			url: 'https://viewmaster.sl.lifechurchcloud.com/api/verse',
-			query: {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'verse',
+			version: 'api',
+			auth: true,
+			parseJson: true,
+			params: {
 				version_id: versionId,
 				usfm
 			}
-		})
-		return new Verse(json)
-	}
+		}))
 
-	static async getMany() {
-		const json = await TuposModel.get({
-			url: 'https://viewmaster.sl.lifechurchcloud.com/api/verses',
-		})
-		return json.map((item) => {
-			return new Verse(item)
-		})
+		if (typeof json !== 'object') throw new Error()
+
+		return new Verse(json)
 	}
 
 

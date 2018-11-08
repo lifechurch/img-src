@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>verse/index.js - Documentation</title>
+    <title>image-config/index.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">verse/index.js</h1>
+    <h1 class="page-title">image-config/index.js</h1>
     
 
     
@@ -40,81 +40,76 @@
             <pre class="prettyprint source linenums"><code>import { TuposModel } from '@youversion/tupos-base'
 import setString from '@youversion/tupos-base/dist/setters/string'
 import api4 from '@youversion/tupos-base/dist/fetchers/api4'
-import Copyright from './copyright'
-import Reference from './reference'
+import Params from './params'
 
 /** *
- * Verse model
+ * ImageConfig model
  * @extends TuposModel
  */
-class Verse extends TuposModel {
+class ImageConfig extends TuposModel {
 	constructor(json) {
 		super(json)
 		if (!json || typeof json !== 'object') return
-		this.content = json.content
-		this.reference = json.reference
-		this.copyright = json.copyright
+		this.url = json.url
+		this.imageId = json.image_id
+		this.params = json.params
 	}
 
-	/** Convert Verse to simple object */
+	/** Convert ImageConfig to simple object */
 	toObject() {
 		return {
-			content: this.content,
-			reference: this.reference.toObject(),
-			copyright: this.copyright.toObject()
+			url: this.url,
+			image_id: this.imageId,
+			params: this.params.toObject()
 		}
 	}
 
-	/** Fetch verse from API */
-	static async getOne(usfm, versionId) {
+	/** Get image upload configuration */
+	static async get() {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
-			method: 'verse',
+			method: 'images:upload_configs',
 			version: 'api',
 			auth: true,
-			parseJson: true,
-			params: {
-				version_id: versionId,
-				usfm
-			}
+			parseJson: true
 		}))
 
 		if (typeof json !== 'object') throw new Error()
 
-		return new Verse(json)
+		return new ImageConfig(json)
 	}
 
 
 	/** @type {string} */
-	get content() {
-		return this._content
+	get url() {
+		return this._url
 	}
 
-	set content(content) {
-		this._content = setString(content, 'content')
+	set url(url) {
+		this._url = setString(url, 'url')
 	}
 
-	/** @type {Reference} */
-	get reference() {
-		return this._reference
+	/** @type {string} */
+	get imageId() {
+		return this._imageId
 	}
 
-	set reference(reference) {
-		this._reference = new Reference(reference, 'reference')
+	set imageId(imageId) {
+		this._imageId = setString(imageId, 'imageId')
 	}
 
-	/** @type {Copyright} */
-	get copyright() {
-		return this._copyright
+	/** @type {Params} */
+	get params() {
+		return this._params
 	}
 
-	set copyright(copyright) {
-		this._copyright = new Copyright(copyright, 'copyright')
+	set params(params) {
+		this._params = new Params(params, 'params')
 	}
 
 }
 
-export default Verse
+export default ImageConfig
 </code></pre>
         </article>
     </section>

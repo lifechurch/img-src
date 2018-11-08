@@ -10,11 +10,13 @@ import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import ComboBox from './../../components/combo-box'
 
+
 class UserVerseAssignment extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			modalIsOpen: false
+			modalIsOpen: false,
+			verse: null
 		}
 		this.notify = notifier.notify()
 		this.loadData = this.loadData.bind(this)
