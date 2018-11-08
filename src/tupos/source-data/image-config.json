@@ -1,0 +1,18 @@
+{
+  "description": "ImageConfig model",
+  "methods": {
+    "get": {
+      "description": "Get image upload configuration",
+      "endpoint": "viewmaster",
+      "method": "images:upload_configs",
+      "version": "api",
+      "auth": true,
+      "parseJson": true
+    }
+  },
+  "sample": {
+    "jsonRootNode": false,
+    "sampleMethod": "get"
+  },
+  "template": "youversion"
+}

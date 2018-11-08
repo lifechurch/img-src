@@ -1,10 +1,10 @@
 import { TuposModel } from '@youversion/tupos-base'
 import setNumber from '@youversion/tupos-base/dist/setters/number'
 import setString from '@youversion/tupos-base/dist/setters/string'
+import api4 from '@youversion/tupos-base/dist/fetchers/api4'
 
 
-
-/**
+/** *
  * Version model
  * @extends TuposModel
  */
@@ -26,15 +26,19 @@ class Version extends TuposModel {
 		}
 	}
 
-	/**
-  * Fetch list of versions from API
-
-  */
+	/** Fetch list of versions from API */
 	static async getMany() {
-		const json = await TuposModel.get({
-			url: 'https://viewmaster.sl.lifechurchcloud.com/api/versions',
-		})
-		return json.map((item) => {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'versions',
+			version: 'api',
+			auth: true,
+			parseJson: true
+		}))
+
+		if (!Array.isArray(json.data)) throw new Error()
+
+		return json.data.map((item) => {
 			return new Version(item)
 		})
 	}

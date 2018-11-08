@@ -9,7 +9,7 @@ import Version from '../../tupos/models/version'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
-import Card from './../../components/card'
+import ComboBox from './../../components/combo-box'
 
 class UserVerseAssignment extends React.Component {
 	constructor(props) {

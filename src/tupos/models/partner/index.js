@@ -1,10 +1,10 @@
 import { TuposModel } from '@youversion/tupos-base'
 import setNumber from '@youversion/tupos-base/dist/setters/number'
 import setString from '@youversion/tupos-base/dist/setters/string'
+import api4 from '@youversion/tupos-base/dist/fetchers/api4'
 
 
-
-/**
+/** *
  * Partner model
  * @extends TuposModel
  */
@@ -18,7 +18,6 @@ class Partner extends TuposModel {
 		this.permission = json.permission
 		this.status = json.status
 		this.versionId = json.version_id
-		this.externalId = json.external_id
 	}
 
 	/** Convert Partner to simple object */
@@ -29,27 +28,41 @@ class Partner extends TuposModel {
 			attribution: this.attribution,
 			permission: this.permission,
 			status: this.status,
-			version_id: this.versionId,
-			external_id: this.externalId
+			version_id: this.versionId
 		}
 	}
 
-	/**
-  * Fetch partner from API
-  * @param {number} partnerId
-  */
+	/** Fetch partner from API */
 	static async getOne(partnerId) {
-		const json = await TuposModel.get({
-			url: `https://viewmaster.sl.lifechurchcloud.com/api/partners/${partnerId}`,
-		})
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'partners/:partnerId',
+			version: 'api',
+			auth: true,
+			parseJson: true,
+			urlParams: {
+				partnerId
+			}
+		}))
+
+		if (typeof json !== 'object') throw new Error()
+
 		return new Partner(json)
 	}
 
+	/** Fetch list of partners from API */
 	static async getMany() {
-		const json = await TuposModel.get({
-			url: 'https://viewmaster.sl.lifechurchcloud.com/api/partners',
-		})
-		return json.map((item) => {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'partners',
+			version: 'api',
+			auth: true,
+			parseJson: true
+		}))
+
+		if (!Array.isArray(json.data)) throw new Error()
+
+		return json.data.map((item) => {
 			return new Partner(item)
 		})
 	}
@@ -82,40 +95,31 @@ class Partner extends TuposModel {
 		this._attribution = setString(attribution, 'attribution')
 	}
 
-	/** @type {string} */
+	/** @type {number} */
 	get permission() {
 		return this._permission
 	}
 
 	set permission(permission) {
-		this._permission = setString(permission, 'permission')
+		this._permission = setNumber(permission, 'permission')
 	}
 
-	/** @type {string} */
+	/** @type {number} */
 	get status() {
 		return this._status
 	}
 
 	set status(status) {
-		this._status = setString(status, 'status')
+		this._status = setNumber(status, 'status')
 	}
 
-	/** @type {string} */
+	/** @type {number} */
 	get versionId() {
 		return this._versionId
 	}
 
 	set versionId(versionId) {
-		this._versionId = setString(versionId, 'versionId')
-	}
-
-	/** @type {string} */
-	get externalId() {
-		return this._externalId
-	}
-
-	set externalId(externalId) {
-		this._externalId = setString(externalId, 'externalId')
+		this._versionId = setNumber(versionId, 'versionId')
 	}
 
 }
