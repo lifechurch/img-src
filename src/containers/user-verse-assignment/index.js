@@ -1,15 +1,16 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl } from 'react-intl'
 import shortid from 'shortid'
 
 import PrimaryHeading from './../../components/typography/primary-heading'
-import Verse from '../../tupos/models/verse'
+import Verses from '../../tupos/models/verses'
 import Language from '../../tupos/models/language'
 import Version from '../../tupos/models/version'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import ComboBox from './../../components/combo-box'
+import Card from './../../components/card'
 
 class UserVerseAssignment extends React.Component {
 	constructor(props) {
@@ -39,19 +40,41 @@ class UserVerseAssignment extends React.Component {
 	}
 
 	async loadData() {
-		const verse = await Verse.getOne('EPH.3.20', 116)
+		const verses = await Verses.getMany()
+
 		const languages = await Language.getMany()
+      .then((langs) => {
+        // format in way readable by combo-box
+        return langs.map((l) => {
+          return { name: l._name, value: l._languageTag }
+        })
+      })
+
 		const versions = await Version.getMany()
-		this.setState({ verse, languages, versions })
+      .then((vers) => {
+        // format in way readable by combo-box
+        return vers.map((v) => {
+          return { name: v._name, value: v._abbreviation }
+        })
+      })
+
+		this.setState({ verses, languages, versions })
 	}
 
 	render() {
 		const {
 			width,
-			verse,
+			verses,
 			languages,
 			versions
 		} = this.state
+
+    const {
+      intl
+    } = this.props
+
+    const languageString = intl.formatMessage({ id: 'language' })
+    const versionString = intl.formatMessage({ id: 'version' })
 
 		return (
 			<div className="flex flex-column w-100 min-h-100">
@@ -68,26 +91,25 @@ class UserVerseAssignment extends React.Component {
 					}
 
 					<div className="w-100 flex items-center justify-between flex-wrap">
-						<div className={width > 700 ? 'mv4' : 'mv3'}>
-							{/* TODO: Replace with <ComboBox> when ready */}
-							<select className="mw4">
-								{
-									languages && languages.map((lang) => {
-										return <option value={lang.language_tag} key={shortid.generate()}>{lang.name}</option>
-									})
-								}
-							</select>
-							<select className="mw4 mh4">
-								{
-									versions && versions.map((version) => {
-										return <option value={version.abbreviation} key={shortid.generate()}>{version.abbreviation}</option>
-									})
-								}
-							</select>
+						<div className={`flex ${width > 700 ? 'mv4' : 'mv3'}`}>
+              {languages &&
+                <ComboBox
+                  name={languageString}
+                  options={languages}
+                  onSelect={(val) => { return (val) }}
+                />
+              }
+              {versions &&
+                <ComboBox
+                  name={versionString}
+                  options={versions}
+                  onSelect={(val) => { return (val) }}
+                />
+              }
 						</div>
 
 						<span className="fr green b">
-							<FormattedMessage id="pendingImages" />: 2
+							<FormattedMessage id="pendingImages" />: {verses && verses.length}
 						</span>
 					</div>
 				</div>
@@ -98,8 +120,8 @@ class UserVerseAssignment extends React.Component {
 							<FormattedMessage id="verseGuidelines" />
 						</BodyText>
 					</div>
-					{ verse && (
-						<div className={width > 700 ? 'mv4' : 'mv2'}>
+					{ verses && verses.map((verse) => {
+            return <div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
 							<Card>
 								<ImageDrop
 									minWidth={960}
@@ -109,17 +131,17 @@ class UserVerseAssignment extends React.Component {
 									onDrop={(rejected, accepted) => { return (rejected, accepted) }}
 								>
 									<div className="b mb2">
-										<BodyText>{verse.reference.human}</BodyText>
+										<BodyText>{verse.humanReference}</BodyText>
 									</div>
-									<BodyText>{verse.content}</BodyText>
+									<BodyText>{verse.text}</BodyText>
 								</ImageDrop>
 							</Card>
 						</div>
-					)}
+          })}
 				</div>
 			</div>
 		)
 	}
 }
 
-export default UserVerseAssignment
+export default injectIntl(UserVerseAssignment)

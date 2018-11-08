@@ -35,5 +35,7 @@
 	"createOneHere": "Create one here.",
 	"continueFacebook": "Continue with Facebook",
 	"continueGoogle": "Continue with Google",
-  "signOut": "Sign Out"
+  "signOut": "Sign Out",
+  "language": "Language",
+  "version": "Version"
 }
