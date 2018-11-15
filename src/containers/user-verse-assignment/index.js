@@ -2,18 +2,21 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import Verse from '../../tupos/models/verse'
 import Modal from '../../components/modal'
+import Card from './../../components/card'
 import { notifier } from '../../components/toast-handler'
 import Button from '../../components/button'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
-import Card from './../../components/card'
+import ComboBox from './../../components/combo-box'
+
 
 class UserVerseAssignment extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			modalIsOpen: false
+			modalIsOpen: false,
+			verse: null
 		}
 		this.notify = notifier.notify()
 		this.loadData = this.loadData.bind(this)
@@ -29,6 +32,18 @@ class UserVerseAssignment extends React.Component {
 	}
 
 	render() {
+
+		const languages = [
+			{ name: 'English', value: 'EN' },
+			{ name: 'Portuguese', value: 'PT' },
+			{ name: 'Spanish', value: 'ES' }
+		]
+
+		const versions = [
+			{ name: 'American Standard Version', value: 'ASV' },
+			{ name: 'Reina-Valera Antigua', value: 'RVES' }
+		]
+
 		const { modalIsOpen, verse } = this.state
 		return (
 			<div className="pa4">
@@ -36,7 +51,7 @@ class UserVerseAssignment extends React.Component {
 					<FormattedMessage id="userVerseAssignment" />
 				</h1>
 				<Button onClick={() => { this.setState({ modalIsOpen: true }) }}>
-          Open Modal
+					Open Modal
 				</Button>
 				<Button onClick={() => { this.notify('hey', 3000, false) }}>
 					Notify without autoHide
@@ -51,6 +66,32 @@ class UserVerseAssignment extends React.Component {
 				>
 					<h1 className="tc">Hello Modal</h1>
 				</Modal>
+				<div className="filters">
+					<ComboBox
+						name="Languages"
+						options={languages}
+						onSelect={(val) => { return (val) }}
+					/>
+					<ComboBox
+						name="Versions"
+						options={versions}
+						onSelect={(val) => { return (val) }}
+					/>
+				</div>
+				<Card>
+					<ImageDrop
+						minWidth={960}
+						maxWidth={4000}
+						minHeight={960}
+						maxHeight={4000}
+						onDrop={(rejected, accepted) => { return (rejected, accepted) }}
+					>
+						<MinorHeading>2 Corinthians 3:17</MinorHeading>
+						<BodyText>
+							Now the Lord is the Spirit, and where the Spirit of the Lord is, there is freedom.
+						</BodyText>
+					</ImageDrop>
+				</Card>
 				{ verse && (
 					<Card>
 						<ImageDrop

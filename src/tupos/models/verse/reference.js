@@ -1,10 +1,9 @@
 
-import setDate from '@youversion/tupos-base/dist/setters/date'
 import setString from '@youversion/tupos-base/dist/setters/string'
 
 
 
-/**
+/** *
  * Verse model
  */
 class Reference {
@@ -34,13 +33,13 @@ class Reference {
 		this._human = setString(human, 'human')
 	}
 
-	/** @type {Date} */
+	/** @type {string} */
 	get usfm() {
 		return this._usfm
 	}
 
 	set usfm(usfm) {
-		this._usfm = setDate(usfm, 'usfm')
+		this._usfm = setString(usfm, 'usfm')
 	}
 
 }

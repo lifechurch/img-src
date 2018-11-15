@@ -1,22 +1,22 @@
 {
-  "description": "Partner model",
+  "description": "Image model",
   "methods": {
     "getOne": {
-      "description": "Fetch partner from API",
+      "description": "Fetch image from API. Must be in editor role or the owner of image.",
       "endpoint": "viewmaster",
-      "method": "partners/:partnerId",
+      "method": "images/:imageId",
       "version": "api",
       "auth": true,
       "parseJson": true,
       "urlParams": {
-        "partnerId": "number"
+        "imageId": "number"
       }
     },
     "getMany": {
-      "description": "Fetch list of partners from API",
+      "description": "Fetch list of images from API. Must be in editor role.",
       "returnType": "array",
       "endpoint": "viewmaster",
-      "method": "partners",
+      "method": "images",
       "version": "api",
       "auth": true,
       "parseJson": true,
@@ -27,7 +27,7 @@
     "jsonRootNode": false,
     "sampleMethod": "getOne",
     "sampleUrlParams": {
-      "partnerId": 1
+      "imageId": 1
     }
   },
   "template": "youversion"
