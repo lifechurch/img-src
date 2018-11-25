@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import YVAuthProtectedRoute from '@youversion/tupos-auth/dist/YVAuthProtectedRoute'
 import SidebarNavMenu from './components/sidebar-nav-menu'
-import Admin from './containers/admin'
+import admin from './containers/admin'
 import SplashPage from './containers/splash-page'
 import UserRegistration from './containers/user-registration'
 import UserVerseAssignment from './containers/user-verse-assignment'
@@ -60,7 +60,7 @@ function App() {
 					path="/admin" component={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
-								<YVAuthProtectedRoute redirectTo="/" path="/admin" component={Admin} />
+								<YVAuthProtectedRoute redirectTo="/" path="/admin" component={admin} />
 							</SidebarNav>
 						)
 					}}

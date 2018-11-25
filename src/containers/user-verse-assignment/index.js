@@ -10,8 +10,8 @@ import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import ComboBox from './../../components/combo-box'
 
-
 class UserVerseAssignment extends Component {
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -32,7 +32,6 @@ class UserVerseAssignment extends Component {
 	}
 
 	render() {
-
 		const languages = [
 			{ name: 'English', value: 'EN' },
 			{ name: 'Portuguese', value: 'PT' },
