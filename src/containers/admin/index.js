@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import ToggleBar from '../../components/toggle-bar'
 
-
-
 class Admin extends Component {
 	constructor(props) {
 		super(props)
-		this.images =  [
+		this.images = [
 			{
 				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/266/360x240.jpg',
 			},
@@ -27,42 +25,29 @@ class Admin extends Component {
 				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/186/360x240.jpg',
 			}
 		]
-
 	}
 
-	renderImage(img, i) {
-        return (
-	<div class="mw9 center ph3-ns" >
-  					<div class="cf ph2-ns">
-    					<div class="fl w-100 w-third-ns pa2">
-      					<div class="outline bg-white pv4" key={i} >
-									<img src={img.url} />
-								</div>
-    					</div>
-    					<div class="fl w-100 w-third-ns pa2">
-								<div class="outline bg-white pv4" key={i}>
-									<img src={img.url} />
-								</div>
-    					</div>
-    					<div class="fl w-100 w-third-ns pa2">
-								<div class="outline bg-white pv4" key={i}>
-									<img src={img.url} />
-								</div>
-    					</div>
-  				</div>
-				</div>
-
-		)
-	};
-
 	render() {
+
+		const renderImage = (img, i) => {
+			return (
+				<div className="fl w-100 w-third-ns pa2" key={ i }>
+					<div className="outline bg-white pv4" >
+						<img alt={ img.url } src={ img.url } />
+					</div>
+				</div>
+			)
+		}
 
 		return (
 			<div className="pa4">
 				<h1 className="ma0 pa0">
 					<FormattedMessage id="admin" />
-					{ this.images.map(this.renderImage) }
-					<div className="w-100 flex justify-center ma3" ></div>
+					<div className="pa4 fl">
+						<div className="cf ph2-ns">
+							{ this.images.map(renderImage) }
+						</div>
+					</div>
 				</h1>
 			</div>
 		)
