@@ -8,7 +8,7 @@ import Version from './tupos/models/version'
 
 const methods = [
   [ Image, 'Image', 'getOne', [ 1 ] ],
-  [ Image, 'Image', 'getMany', [] ],
+  [ Image, 'Image', 'getMany', [ 'denied' ] ],
   [ ImageConfig, 'ImageConfig', 'get', [] ],
   [ Language, 'Language', 'getMany', [] ],
   [ Partner, 'Partner', 'getOne', [ 1 ] ],

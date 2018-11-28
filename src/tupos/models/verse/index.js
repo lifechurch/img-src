@@ -13,20 +13,24 @@ class Verse extends TuposModel {
 		super(json)
 		if (!json || typeof json !== 'object') return
 		this.content = json.content
-		this.reference = json.reference
 		this.copyright = json.copyright
+		this.reference = json.reference
 	}
 
 	/** Convert Verse to simple object */
 	toObject() {
 		return {
 			content: this.content,
-			reference: this.reference.toObject(),
-			copyright: this.copyright.toObject()
+			copyright: this.copyright.toObject(),
+			reference: this.reference.toObject()
 		}
 	}
 
-	/** Fetch verse from API */
+	/**
+   * Fetch verse from API
+   * @param {string} usfm - the USFM of the Bible Verse to Fetch
+   * @param {number} versionId - the ID of the Bible Version to use when fetching Bible Verse
+   */
 	static async getOne(usfm, versionId) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
@@ -55,15 +59,6 @@ class Verse extends TuposModel {
 		this._content = setString(content, 'content')
 	}
 
-	/** @type {Reference} */
-	get reference() {
-		return this._reference
-	}
-
-	set reference(reference) {
-		this._reference = new Reference(reference, 'reference')
-	}
-
 	/** @type {Copyright} */
 	get copyright() {
 		return this._copyright
@@ -71,6 +66,15 @@ class Verse extends TuposModel {
 
 	set copyright(copyright) {
 		this._copyright = new Copyright(copyright, 'copyright')
+	}
+
+	/** @type {Reference} */
+	get reference() {
+		return this._reference
+	}
+
+	set reference(reference) {
+		this._reference = new Reference(reference, 'reference')
 	}
 
 }
