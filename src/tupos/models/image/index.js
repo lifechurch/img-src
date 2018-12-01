@@ -39,7 +39,10 @@ class Image extends TuposModel {
 		}
 	}
 
-	/** Fetch image from API. Must be in editor role or the owner of image. */
+	/**
+   * Fetch image from API. Must be in editor role or the owner of image.
+   * @param {number} imageId - the ID of the Image to fetch
+   */
 	static async getOne(imageId) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
@@ -57,14 +60,20 @@ class Image extends TuposModel {
 		return new Image(json)
 	}
 
-	/** Fetch list of images from API. Must be in editor role. */
-	static async getMany() {
+	/**
+   * Fetch list of images from API. Must be in editor role.
+   * @param {string} imageStatus - Optional. If specified it must be one of 'pending', 'moderated', 'approved', 'denied'. If omitted, all images are returned.
+   */
+	static async getMany(imageStatus) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
 			method: 'images',
 			version: 'api',
 			auth: true,
-			parseJson: true
+			parseJson: true,
+			params: {
+				image_status: imageStatus
+			}
 		}))
 
 		if (!Array.isArray(json.data)) throw new Error()

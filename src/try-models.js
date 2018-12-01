@@ -7,15 +7,15 @@ import Verses from './tupos/models/verses'
 import Version from './tupos/models/version'
 
 const methods = [
-	[ Image, 'Image', 'getOne', [ 1 ] ],
-	[ Image, 'Image', 'getMany', [] ],
-	[ ImageConfig, 'ImageConfig', 'get', [] ],
-	[ Language, 'Language', 'getMany', [] ],
-	[ Partner, 'Partner', 'getOne', [ 1 ] ],
-	[ Partner, 'Partner', 'getMany', [] ],
-	[ Verse, 'Verse', 'getOne', [ 'JHN.1.1', 1 ] ],
-	[ Verses, 'Verses', 'getMany', [] ],
-	[ Version, 'Version', 'getMany', [] ]
+  [ Image, 'Image', 'getOne', [ 1 ] ],
+  [ Image, 'Image', 'getMany', [ 'denied' ] ],
+  [ ImageConfig, 'ImageConfig', 'get', [] ],
+  [ Language, 'Language', 'getMany', [] ],
+  [ Partner, 'Partner', 'getOne', [ 1 ] ],
+  [ Partner, 'Partner', 'getMany', [] ],
+  [ Verse, 'Verse', 'getOne', [ 'JHN.1.1', 1 ] ],
+  [ Verses, 'Verses', 'getMany', [] ],
+  [ Version, 'Version', 'getMany', [] ]
 ]
 
 async function main() {

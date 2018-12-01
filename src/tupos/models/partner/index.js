@@ -32,7 +32,10 @@ class Partner extends TuposModel {
 		}
 	}
 
-	/** Fetch partner from API */
+	/**
+   * Fetch partner from API
+   * @param {number} partnerId - the ID of the Partner to fetch
+   */
 	static async getOne(partnerId) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
