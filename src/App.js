@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import YVAuthProtectedRoute from '@youversion/tupos-auth/dist/YVAuthProtectedRoute'
 import SidebarNavMenu from './components/sidebar-nav-menu'
@@ -22,19 +22,6 @@ function App() {
 				/>
 
 				<ToastHandler />
-
-				{/*
-          This is temporary navigation while we build out the full application
-          This will be removed once we have real navigation developed
-        */}
-				<nav className="flex pa3 bg-near-black">
-					<Link to="/" className="mr3 link dim moon-gray">Splash Page</Link>
-					<Link to="/user-registration" className="mr3 link dim moon-gray">Sign Up</Link>
-					<Link to="/user-verse-assignment" className="mr3 link dim moon-gray">Verse Assignment</Link>
-					<Link to="/user-profile/Michael" className="mr3 link dim moon-gray">User Profile: Michael</Link>
-					<Link to="/user-profile/Tommy" className="mr3 link dim moon-gray">User Profile: Tommy</Link>
-					<Link to="/admin" className="mr3 link dim moon-gray">Admin</Link>
-				</nav>
 
 				<Route exact path="/" component={SplashPage} />
 				<YVAuthProtectedRoute redirectTo="/" path="/user-registration" component={UserRegistration} />
