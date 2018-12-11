@@ -5,10 +5,7 @@ import { Redirect } from 'react-router-dom'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import YVLogo from '../../assets/youversion.png'
 import YVBible from '../../assets/YV_bible.png'
-import FacebookLogo from '../../assets/facebook-app-logo.svg'
-import GoogleLogo from '../../assets/google-icon.svg'
 import Button from '../../components/button'
-import IconButton from '../../components/icon-button'
 import TextInput from '../../components/text-input'
 import PrimaryHeading from '../../components/typography/primary-heading'
 import SecondaryHeading from '../../components/typography/secondary-heading'
@@ -92,13 +89,6 @@ class SplashPage extends Component {
 						<SecondaryHeading>
 							<FormattedMessage id="toGetStarted" />
 						</SecondaryHeading>
-					</div>
-
-					<div className="w-100 mw6 mb2">
-						<IconButton to="/" icon={FacebookLogo} alt="Facebook"><FormattedMessage id="continueFacebook" /></IconButton>
-					</div>
-					<div className="w-100 mw6 mb2">
-						<IconButton to="/" icon={GoogleLogo} alt="Google"><FormattedMessage id="continueGoogle" /></IconButton>
 					</div>
 
 					<div className="w5 bg-light-silver self-center mv4" style={{ height: 1 }} />

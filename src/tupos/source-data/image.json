@@ -20,7 +20,10 @@
       "version": "api",
       "auth": true,
       "parseJson": true,
-      "jsonRootNode": "data"
+      "jsonRootNode": "data",
+      "query": {
+        "image_status": "string"
+      }
     }
   },
   "sample": {
