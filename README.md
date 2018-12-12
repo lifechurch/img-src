@@ -27,3 +27,8 @@ You can set the token in your environment variable like so:
 
 ### Why am I getting a 404 error for the `@youversion/tupos` package?
 You will get a 404 error for this package if you do not have a valid token set in your system environment variable. The correct token can be requested in the `#yv-img-source` channel on Slack, and set as stated above.
+
+### Guides
+* [Contributing Guide](./CONTRIBUTING.md) - Volunteers guide to contributing.
+* [Authentication Guide](./AUTHENTICATION.md) - A guide to authentication with a YouVersion account.
+* [API Guide](./API.md) - Guide to using the img-src API.
