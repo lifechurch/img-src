@@ -1,11 +1,13 @@
 import React from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import shortid from 'shortid'
-
+import { notifier } from '../../components/toast-handler'
 import PrimaryHeading from './../../components/typography/primary-heading'
 import Verses from '../../tupos/models/verses'
 import Language from '../../tupos/models/language'
 import Version from '../../tupos/models/version'
+import Image from '../../tupos/models/image'
+import ImageConfig from '../../tupos/models/image-config'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
@@ -17,9 +19,10 @@ class UserVerseAssignment extends React.Component {
 		super(props)
 
 		this.state = {}
-
+		this.notify = notifier.notify()
 		this.onResize = this.onResize.bind(this)
 		this.loadData = this.loadData.bind(this)
+		this.handleDrop = this.handleDrop.bind(this)
 	}
 
 	componentDidMount() {
@@ -39,26 +42,80 @@ class UserVerseAssignment extends React.Component {
 		})
 	}
 
+  async handleDrop(accepted, rejected) {
+    if (!Array.isArray(accepted) || accepted.length === 0) return
+
+    /* NOTE: Only accepts single file uploads for now */
+
+    const { intl } = this.props
+    const imageConfig = await ImageConfig.get()
+    const formData = new FormData()
+    const reader = new FileReader()
+    const fileToUpload = accepted[0]
+
+    formData.append('AWSAccessKeyId', imageConfig.awsResponse.fields.AWSAccessKeyId)
+    formData.append('key', imageConfig.awsResponse.fields.key)
+    formData.append('policy', imageConfig.awsResponse.fields.policy)
+    formData.append('acl', imageConfig.awsResponse.fields.acl)
+    // formData.append('x-amz-storage-class', response_init.params['x-amz-storage-class'])
+    formData.append('signature', imageConfig.awsResponse.fields.signature)
+    formData.append('file', fileToUpload)
+
+    reader.onload = (loadEvent) => {
+      const image = new Image()
+      const handleLoad = () => {
+        const xhr = new XMLHttpRequest()
+        xhr.open('POST', imageConfig.awsResponse.url)
+        xhr.send(formData)
+
+        xhr.onload = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              this.notify(intl.formatMessage({ id: 'imageUploadComplete' }))
+              // TO-DO: notify API that image upload is Complete
+              // SEE: https://in.thewardro.be/snippets/58#images-info-and-uploads
+            } else {
+              this.notify(intl.formatMessage({ id: 'imageUploadError' }), 0, false)
+            }
+          }
+        }
+        xhr.onerror = (e) => {
+          this.notify(intl.formatMessage({ id: 'imageUploadError' }), 0, false)
+        }
+      }
+
+      image.src = loadEvent.target.result
+      if (image.width === 0) {
+        image.onload = handleLoad
+      } else {
+        handleLoad()
+      }
+    }
+    reader.readAsDataURL(fileToUpload)
+  }
+
 	async loadData() {
-		const verses = await Verses.getMany()
+		const [
+			verses,
+			images,
+			langs,
+			vers,
+		] = await Promise.all([
+			Verses.getMany(),
+			Image.getMany('pending'),
+			Language.getMany(),
+			Version.getMany()
+		])
 
-		const languages = await Language.getMany()
-      .then((langs) => {
-        // format in way readable by combo-box
-        return langs.map((l) => {
-          return { name: l._name, value: l._languageTag }
-        })
-      })
+		const languages = langs.map((l) => {
+			return { name: l.name, value: l.languageTag }
+		})
 
-		const versions = await Version.getMany()
-      .then((vers) => {
-        // format in way readable by combo-box
-        return vers.map((v) => {
-          return { name: v._name, value: v._abbreviation }
-        })
-      })
+		const versions = vers.map((v) => {
+			return { name: v.name, value: v.abbreviation }
+		})
 
-		this.setState({ verses, languages, versions })
+		this.setState({ verses, languages, versions, images })
 	}
 
 	render() {
@@ -66,15 +123,16 @@ class UserVerseAssignment extends React.Component {
 			width,
 			verses,
 			languages,
-			versions
+			versions,
+			images
 		} = this.state
 
-    const {
-      intl
-    } = this.props
+		const {
+			intl
+		} = this.props
 
-    const languageString = intl.formatMessage({ id: 'language' })
-    const versionString = intl.formatMessage({ id: 'version' })
+		const languageString = intl.formatMessage({ id: 'language' })
+		const versionString = intl.formatMessage({ id: 'version' })
 
 		return (
 			<div className="flex flex-column w-100 min-h-100">
@@ -92,25 +150,27 @@ class UserVerseAssignment extends React.Component {
 
 					<div className="w-100 flex items-center justify-between flex-wrap">
 						<div className={`flex ${width > 700 ? 'mv4' : 'mv3'}`}>
-              {languages &&
-                <ComboBox
-                  name={languageString}
-                  options={languages}
-                  onSelect={(val) => { return (val) }}
-                />
-              }
-              {versions &&
-                <ComboBox
-                  name={versionString}
-                  options={versions}
-                  onSelect={(val) => { return (val) }}
-                />
-              }
+							{languages &&
+								<ComboBox
+									name={languageString}
+									options={languages}
+									onSelect={(val) => { return (val) }}
+								/>
+							}
+							{versions &&
+								<ComboBox
+									name={versionString}
+									options={versions}
+									onSelect={(val) => { return (val) }}
+								/>
+							}
 						</div>
 
-						<span className="fr green b">
-							<FormattedMessage id="pendingImages" />: {verses && verses.length}
-						</span>
+						{ images &&
+							<span className="fr green b">
+								<FormattedMessage id="pendingImages" />: {images.length}
+							</span>
+						}
 					</div>
 				</div>
 
@@ -121,14 +181,14 @@ class UserVerseAssignment extends React.Component {
 						</BodyText>
 					</div>
 					{ verses && verses.map((verse) => {
-            return <div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
+						return <div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
 							<Card>
 								<ImageDrop
-									minWidth={960}
-									maxWidth={4000}
-									minHeight={960}
-									maxHeight={4000}
-									onDrop={(rejected, accepted) => { return (rejected, accepted) }}
+									minWidth={1080}
+									maxWidth={1920}
+									minHeight={1080}
+									maxHeight={1920}
+									onDrop={this.handleDrop}
 								>
 									<div className="b mb2">
 										<BodyText>{verse.humanReference}</BodyText>
@@ -137,7 +197,7 @@ class UserVerseAssignment extends React.Component {
 								</ImageDrop>
 							</Card>
 						</div>
-          })}
+					})}
 				</div>
 			</div>
 		)

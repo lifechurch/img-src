@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>image-config/params.js - Documentation</title>
+    <title>image-config/aws_response/fields.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">image-config/params.js</h1>
+    <h1 class="page-title">image-config/aws_response/fields.js</h1>
     
 
     
@@ -45,7 +45,7 @@ import setString from '@youversion/tupos-base/dist/setters/string'
 /** *
  * ImageConfig model
  */
-class Params {
+class Fields {
 	constructor(json) {
 
 		if (!json || typeof json !== 'object') return
@@ -56,7 +56,7 @@ class Params {
 		this.signature = json.signature
 	}
 
-	/** Convert Params to simple object */
+	/** Convert Fields to simple object */
 	toObject() {
 		return {
 			acl: this.acl,
@@ -116,7 +116,7 @@ class Params {
 
 }
 
-export default Params
+export default Fields
 </code></pre>
         </article>
     </section>

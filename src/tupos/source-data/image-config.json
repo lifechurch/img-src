@@ -4,7 +4,7 @@
     "get": {
       "description": "Get image upload configuration",
       "endpoint": "viewmaster",
-      "method": "images:upload_configs",
+      "method": "images/presigned_upload_config",
       "version": "api",
       "auth": true,
       "parseJson": true
