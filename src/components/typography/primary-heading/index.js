@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 function PrimaryHeading({ children, ...props }) {
 
 	return (
-		<h1 className="f2 f1-ns mid-gray" {...props}>
+		<h1 className="f2 f1-ns mid-gray ma0" {...props}>
 			{children}
 		</h1>
 	)

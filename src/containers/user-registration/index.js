@@ -36,7 +36,7 @@ class UserRegistration extends React.Component {
 
 		return (
 			<div>
-				<div className="w-100 tc">
+				<div className="w-100 tc mv4">
 					<PrimaryHeading>
 						<FormattedMessage className="mw1" id="welcomeHeader" />
 					</PrimaryHeading>
@@ -55,9 +55,11 @@ class UserRegistration extends React.Component {
 									</div>
 								</div>
 
-								<BodyText>
-									<FormattedMessage id="userRegistrationWhyJoin" />
-								</BodyText>
+								<div className="mb3">
+									<BodyText>
+										<FormattedMessage id="userRegistrationWhyJoin" />
+									</BodyText>
+								</div>
 
 								<div className="h4 black">
 									<TextArea required disabled={this.state.submitted} className="h4" />
