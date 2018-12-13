@@ -9,6 +9,7 @@ import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import ComboBox from './../../components/combo-box'
+import Language from './../../tupos/models/language'
 
 
 class UserVerseAssignment extends Component {
@@ -16,7 +17,8 @@ class UserVerseAssignment extends Component {
 		super(props)
 		this.state = {
 			modalIsOpen: false,
-			verse: null
+			verse: null,
+			languages: null
 		}
 		this.notify = notifier.notify()
 		this.loadData = this.loadData.bind(this)
@@ -29,22 +31,18 @@ class UserVerseAssignment extends Component {
 	async loadData() {
 		const verse = await Verse.getOne('EPH.3.20', 116)
 		this.setState({ verse })
+		const languages = await Language.getMany()
+		this.setState({ languages })
 	}
 
 	render() {
-
-		const languages = [
-			{ name: 'English', value: 'EN' },
-			{ name: 'Portuguese', value: 'PT' },
-			{ name: 'Spanish', value: 'ES' }
-		]
 
 		const versions = [
 			{ name: 'American Standard Version', value: 'ASV' },
 			{ name: 'Reina-Valera Antigua', value: 'RVES' }
 		]
 
-		const { modalIsOpen, verse } = this.state
+		const { modalIsOpen, verse, languages } = this.state
 		return (
 			<div className="pa4">
 				<h1 className="ma0 pa0">
@@ -67,11 +65,13 @@ class UserVerseAssignment extends Component {
 					<h1 className="tc">Hello Modal</h1>
 				</Modal>
 				<div className="filters">
-					<ComboBox
-						name="Languages"
-						options={languages}
-						onSelect={(val) => { return (val) }}
-					/>
+					{ languages && (
+						<ComboBox
+							name="Languages"
+							options={languages}
+							onSelect={(val) => { return (val) }}
+						/>
+					)}
 					<ComboBox
 						name="Versions"
 						options={versions}
