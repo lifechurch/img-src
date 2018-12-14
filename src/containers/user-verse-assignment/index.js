@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import shortid from 'shortid'
@@ -10,6 +11,7 @@ import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import ComboBox from './../../components/combo-box'
 import Card from './../../components/card'
+import { notifier } from './../../components/toast-handler'
 
 class UserVerseAssignment extends React.Component {
 	constructor(props) {
@@ -62,9 +64,9 @@ class UserVerseAssignment extends React.Component {
 			languages,
 			versions
 		} = this.state
-		const { intl } = this.props
-		const languageString = intl.formatMessage({ id: 'language' })
-		const versionString = intl.formatMessage({ id: 'version' })
+		// const { intl } = this.props
+		// const languageString = intl.formatMessage({)
+		// const versionString = intl.formatMessage({ id: 'version' })
 
 		return (
 			<div className="flex flex-column w-100 min-h-100">
@@ -84,14 +86,14 @@ class UserVerseAssignment extends React.Component {
 						<div className={`flex ${width > 700 ? 'mv4' : 'mv3'}`}>
 							{languages &&
 								<ComboBox
-									name={languageString}
+									name='Languages'
 									options={languages}
 									onSelect={(val) => { return (val) }}
 								/>
 							}
 							{versions &&
 								<ComboBox
-									name={versionString}
+									name='Version'
 									options={versions}
 									onSelect={(val) => { return (val) }}
 								/>
@@ -111,22 +113,23 @@ class UserVerseAssignment extends React.Component {
 						</BodyText>
 					</div>
 					{ verses && verses.map((verse) => {
-						return (<div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
-							<Card>
-								<ImageDrop
-									minWidth={960}
-									maxWidth={4000}
-									minHeight={960}
-									maxHeight={4000}
-									onDrop={(rejected, accepted) => { return (rejected, accepted) }}
-								>
-									<div className="b mb2">
-										<BodyText>{verse.humanReference}</BodyText>
-									</div>
-									<BodyText>{verse.text}</BodyText>
-								</ImageDrop>
-							</Card>
-						</div>)
+						return (
+							<div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
+								<Card>
+									<ImageDrop
+										minWidth={960}
+										maxWidth={4000}
+										minHeight={960}
+										maxHeight={4000}
+										onDrop={(rejected, accepted) => { return (rejected, accepted) }}
+									>
+										<div className="b mb2">
+											<BodyText>{verse.humanReference}</BodyText>
+										</div>
+										<BodyText>{verse.text}</BodyText>
+									</ImageDrop>
+								</Card>
+							</div>)
 					})}
 				</div>
 			</div>
