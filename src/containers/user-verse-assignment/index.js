@@ -44,7 +44,7 @@ class UserVerseAssignment extends React.Component {
 		const languages = await Language.getMany().then((langs) => {
 		// format in way readable by combo-box
 			return langs.map((l) => {
-				return { name: l._name, value: l._languageTag }
+				return { name: l._name, value: l._local_name }  //_languageTag 
 			})
 		})
 		const versions = await Version.getMany().then((vers) => {
