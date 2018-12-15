@@ -1,0 +1,54 @@
+
+.ApprovalItemVerseItem .image-demo {
+    height: 35%;
+}
+
+.ApprovalItemVerseItem .image-demo img{
+    width: 10%;
+}
+
+@media screen and (max-width: 30em) {
+
+    .ApprovalItemVerseItem .options-container {
+        position: relative;
+        opacity: 1;
+        margin: 1rem 0;
+    }
+
+    .ApprovalItemVerseItem .option {
+        color: rgb(98, 98, 98);
+        font-weight: 300;
+    }
+
+    .ApprovalItemVerseItem .option:hover {
+        color: rgba(98, 98, 98, 0.65);
+    }
+
+    .ApprovalItemVerseItem .option:nth-child(1) {
+        margin-bottom: 4%;
+    }
+
+    .ApprovalItemVerseItem .title-circle {
+        border: 1px solid rgb(98, 98, 98);
+    }
+    .ApprovalItemVerseItem .image-demo img{
+        width: 20%;
+    }
+}
+
+@media screen and (min-width: 30em) and (max-width: 60em) {
+    .ApprovalItemVerseItem .options-container > div{
+        width: 95%;
+        font-size: 1rem;
+        padding-left: 15%;
+    }
+    .ApprovalItemVerseItem .options-container >div:nth-child(1){
+        margin-bottom: 15%;
+    }
+    .ApprovalItemVerseItem .title-circle {
+        width: 0.75rem;
+        height: 0.75rem;
+        min-width: 0.75rem;
+        margin-right: 0.5rem;
+    }
+}

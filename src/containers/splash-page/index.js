@@ -112,7 +112,7 @@ class SplashPage extends Component {
 							<FormattedMessage id="dontHaveAccount" />
 						</BodyText>
 						<BodyText>
-							<a className="color-inherit" href="https://www.bible.com/sign-up"><FormattedMessage id="createOneHere" /></a>
+							<a className="color-inherit" href="https://www.bible.com/sign-up" target='_'><FormattedMessage id="createOneHere" /></a>
 						</BodyText>
 					</div>
 				</div>
