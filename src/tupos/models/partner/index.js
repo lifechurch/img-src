@@ -32,10 +32,7 @@ class Partner extends TuposModel {
 		}
 	}
 
-	/**
-   * Fetch partner from API
-   * @param {number} partnerId - the ID of the Partner to fetch
-   */
+	/** Fetch partner from API */
 	static async getOne(partnerId) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
@@ -68,6 +65,38 @@ class Partner extends TuposModel {
 		return json.data.map((item) => {
 			return new Partner(item)
 		})
+	}
+
+	/** Fetch current user partner status from API */
+	static async me() {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'partners/me',
+			version: 'api',
+			auth: true,
+			parseJson: true
+		}))
+
+		if (typeof json !== 'object') throw new Error()
+
+		return new Partner(json)
+	}
+
+	/** Create partner */
+	static async signUp(bodyParams) {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'signup',
+			version: 'api',
+			auth: true,
+			bodyParams,
+			parseJson: true,
+			fetchArgs: { method: 'POST' }
+		}))
+
+		if (typeof json !== 'object') throw new Error()
+
+		return new Partner(json)
 	}
 
 
