@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 function MinorHeading({ children, ...props }) {
 
 	return (
-		<h3 className="f5 f3-ns mid-gray" {...props}>
+		<h3 className="f5 f3-ns mid-gray ma0" {...props}>
 			{children}
 		</h3>
 	)

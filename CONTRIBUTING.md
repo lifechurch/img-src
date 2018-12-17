@@ -8,20 +8,23 @@ Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use
 
 ## Sections
 
-- [Getting Started](#getting-started)
-- [Package Manager](#package-manager)
-- [Pick Your First Issue](#pick-your-first-issue)
-- [Git Guidelines](#git-guidelines)
-- [Running it Locally](#running-it-locally)
-- [Writing Code](#writing-code)
-  - [ESLint](#eslint)
-  - [CSS](#css)
-  - [PropTypes](#proptypes)
-  - [Component Naming and Folder Structure](#component-naming-and-folder-structure)
-  - [Localization](#localization)
-    - [Dates and Times](#dates-and-times)
-    - [Strings](#strings)
-- [Smoke Tests](#smoke-tests)
+- [Contributor Guide](#contributor-guide)
+  - [Thank You! 😎](#thank-you-%F0%9F%98%8E)
+  - [Sections](#sections)
+  - [Getting Started](#getting-started)
+  - [Package Manager](#package-manager)
+  - [Pick Your First Issue](#pick-your-first-issue)
+  - [Git Guidelines](#git-guidelines)
+  - [Running it Locally](#running-it-locally)
+  - [Writing Code](#writing-code)
+    - [ESLint](#eslint)
+    - [CSS](#css)
+    - [PropTypes](#proptypes)
+    - [Component Naming and Folder Structure](#component-naming-and-folder-structure)
+    - [Localization](#localization)
+      - [Dates and Times](#dates-and-times)
+      - [Strings](#strings)
+    - [Smoke Tests](#smoke-tests)
 
 ## Getting Started
 
@@ -61,7 +64,7 @@ We're using Github Projects and Issues to manage this project. Everything that n
 
 ```Bash
 cd /path/to/cloned/repo
-yarn start
+yarn start || yarn win-start
 ```
 
 ## Writing Code
