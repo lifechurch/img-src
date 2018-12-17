@@ -35,11 +35,15 @@ class Language extends TuposModel {
 			parseJson: true
 		}))
 
-		if (!Array.isArray(json.data)) throw new Error()
+		if (json && json.data) {
+			if (!Array.isArray(json.data)) throw new Error()
 
-		return json.data.map((item) => {
-			return new Language(item)
-		})
+			return json.data.map((item) => {
+				return new Language(item)
+			})
+		 } else {
+			 return false
+		 }
 	}
 
 

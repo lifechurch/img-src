@@ -1,116 +1,141 @@
-import React, { Component } from 'react'
-import { FormattedMessage } from 'react-intl'
-import Verse from '../../tupos/models/verse'
-import Modal from '../../components/modal'
-import Card from './../../components/card'
-import { notifier } from '../../components/toast-handler'
-import Button from '../../components/button'
+/* eslint-disable linebreak-style */
+import React from 'react'
+import { FormattedMessage, injectIntl } from 'react-intl'
+import shortid from 'shortid'
+import PrimaryHeading from './../../components/typography/primary-heading'
+import Verses from '../../tupos/models/verses'
+import Language from '../../tupos/models/language'
+import Version from '../../tupos/models/version'
 import MinorHeading from './../../components/typography/minor-heading'
 import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import ComboBox from './../../components/combo-box'
+import Card from './../../components/card'
+import { notifier } from './../../components/toast-handler'
 
-
-class UserVerseAssignment extends Component {
+class UserVerseAssignment extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			modalIsOpen: false,
-			verse: null
-		}
+		this.state = {}
 		this.notify = notifier.notify()
+		this.onResize = this.onResize.bind(this)
 		this.loadData = this.loadData.bind(this)
 	}
 
 	componentDidMount() {
+		window.addEventListener('resize', this.onResize)
+		this.onResize()
 		this.loadData()
 	}
 
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.onResize)
+	}
+
+	onResize() {
+		window.requestAnimationFrame(() => {
+			const width = document.documentElement.clientWidth
+			this.setState({ width })
+		})
+	}
+
 	async loadData() {
-		const verse = await Verse.getOne('EPH.3.20', 116)
-		this.setState({ verse })
+		const verses = await Verses.getMany()
+		const languages = await Language.getMany().then((langs) => {
+		// format in way readable by combo-box
+			return langs.map((l) => {
+			// value: This is what is displayed when selected, not what is passed to a API or method.
+				return { name: l._name, value: l._name }
+			})
+		})
+		const versions = await Version.getMany().then((vers) => {
+		// format in way readable by combo-box
+			return vers.map((v) => {
+				return { name: v._name, value: v._abbreviation }
+			})
+		})
+
+		this.setState({ verses, languages, versions })
 	}
 
 	render() {
+		const {
+			width,
+			verses,
+			languages,
+			versions
+		} = this.state
+		// const { intl } = this.props
+		// const languageString = intl.formatMessage({)
+		// const versionString = intl.formatMessage({ id: 'version' })
 
-		const languages = [
-			{ name: 'English', value: 'EN' },
-			{ name: 'Portuguese', value: 'PT' },
-			{ name: 'Spanish', value: 'ES' }
-		]
-
-		const versions = [
-			{ name: 'American Standard Version', value: 'ASV' },
-			{ name: 'Reina-Valera Antigua', value: 'RVES' }
-		]
-
-		const { modalIsOpen, verse } = this.state
 		return (
-			<div className="pa4">
-				<h1 className="ma0 pa0">
-					<FormattedMessage id="userVerseAssignment" />
-				</h1>
-				<Button onClick={() => { this.setState({ modalIsOpen: true }) }}>
-					Open Modal
-				</Button>
-				<Button onClick={() => { this.notify('hey', 3000, false) }}>
-					Notify without autoHide
-				</Button>
-				<Button onClick={() => { this.notify('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.') }}>
-					Big Notify
-				</Button>
-				<Modal
-					isOpen={modalIsOpen}
-					widthClass="w-30"
-					heightClass="h-50"
-				>
-					<h1 className="tc">Hello Modal</h1>
-				</Modal>
-				<div className="filters">
-					<ComboBox
-						name="Languages"
-						options={languages}
-						onSelect={(val) => { return (val) }}
-					/>
-					<ComboBox
-						name="Versions"
-						options={versions}
-						onSelect={(val) => { return (val) }}
-					/>
+			<div className="flex flex-column w-100 min-h-100">
+				<div className={width > 700 ? 'pt4 ph4' : 'pa4'}>
+					<PrimaryHeading>
+						<FormattedMessage id={width > 700 ? 'versesNeedImages' : 'verses'} />
+					</PrimaryHeading>
+					{width > 700 &&
+						<div className="mt2">
+							<MinorHeading>
+								<FormattedMessage id="chooseAVerse" />
+							</MinorHeading>
+						</div>
+					}
+
+					<div className="w-100 flex items-center justify-between flex-wrap">
+						<div className={`flex ${width > 700 ? 'mv4' : 'mv3'}`}>
+							{languages &&
+								<ComboBox
+									name='Languages'
+									options={languages}
+									onSelect={(val) => { return (val) }}
+								/>
+							}
+							{versions &&
+								<ComboBox
+									name='Version'
+									options={versions}
+									onSelect={(val) => { return (val) }}
+								/>
+							}
+						</div>
+
+						<span className="fr green b">
+							<FormattedMessage id="pendingImages" />: {verses && verses.length}
+						</span>
+					</div>
 				</div>
-				<Card>
-					<ImageDrop
-						minWidth={960}
-						maxWidth={4000}
-						minHeight={960}
-						maxHeight={4000}
-						onDrop={(rejected, accepted) => { return (rejected, accepted) }}
-					>
-						<MinorHeading>2 Corinthians 3:17</MinorHeading>
+
+				<div className="flex-auto pa4 bg-light-gray">
+					<div className="b">
 						<BodyText>
-							Now the Lord is the Spirit, and where the Spirit of the Lord is, there is freedom.
+							<FormattedMessage id="verseGuidelines" />
 						</BodyText>
-					</ImageDrop>
-				</Card>
-				{ verse && (
-					<Card>
-						<ImageDrop
-							minWidth={960}
-							maxWidth={4000}
-							minHeight={960}
-							maxHeight={4000}
-							onDrop={(rejected, accepted) => { return (rejected, accepted) }}
-						>
-							<MinorHeading>{verse.reference.human}</MinorHeading>
-							<BodyText>
-								{verse.content}
-							</BodyText>
-						</ImageDrop>
-					</Card>
-				)}
+					</div>
+					{ verses && verses.map((verse) => {
+						return (
+							<div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
+								<Card>
+									<ImageDrop
+										minWidth={960}
+										maxWidth={4000}
+										minHeight={960}
+										maxHeight={4000}
+										onDrop={(rejected, accepted) => { return (rejected, accepted) }}
+									>
+										<div className="b mb2">
+											<BodyText>{verse.humanReference}</BodyText>
+										</div>
+										<BodyText>{verse.text}</BodyText>
+									</ImageDrop>
+								</Card>
+							</div>)
+					})}
+				</div>
 			</div>
 		)
 	}
 }
 
-export default UserVerseAssignment
+export default injectIntl(UserVerseAssignment)

@@ -3,12 +3,10 @@ import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { Redirect } from 'react-router-dom'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
+import withPartner from '../../context/withPartner'
 import YVLogo from '../../assets/youversion.png'
 import YVBible from '../../assets/YV_bible.png'
-import FacebookLogo from '../../assets/facebook-app-logo.svg'
-import GoogleLogo from '../../assets/google-icon.svg'
 import Button from '../../components/button'
-import IconButton from '../../components/icon-button'
 import TextInput from '../../components/text-input'
 import PrimaryHeading from '../../components/typography/primary-heading'
 import SecondaryHeading from '../../components/typography/secondary-heading'
@@ -42,13 +40,16 @@ class SplashPage extends Component {
 	render() {
 		const {
 			intl,
-			isSignedIn
+			isSignedIn,
+			isPartner
 		} = this.props
 
 		const email = intl.formatMessage({ id: 'email' }).toUpperCase()
 		const password = intl.formatMessage({ id: 'password' }).toUpperCase()
 
-		if (isSignedIn) return (<Redirect to="/user-verse-assignment" />)
+		if (isSignedIn === true && isPartner === false) return (<Redirect to="/user-registration" />)
+
+		if (isSignedIn === true && isPartner === true) return (<Redirect to="/user-verse-assignment" />)
 
 		return (
 			<div className="h-100">
@@ -88,17 +89,10 @@ class SplashPage extends Component {
 				<div id="sign-in" className="flex flex-column w-100 items-center pa4 bg-light-gray">
 					<img src={YVBible} alt="" className="w3" />
 
-					<div className="tc">
+					<div className="tc mv4">
 						<SecondaryHeading>
 							<FormattedMessage id="toGetStarted" />
 						</SecondaryHeading>
-					</div>
-
-					<div className="w-100 mw6 mb2">
-						<IconButton to="/" icon={FacebookLogo} alt="Facebook"><FormattedMessage id="continueFacebook" /></IconButton>
-					</div>
-					<div className="w-100 mw6 mb2">
-						<IconButton to="/" icon={GoogleLogo} alt="Google"><FormattedMessage id="continueGoogle" /></IconButton>
 					</div>
 
 					<div className="w5 bg-light-silver self-center mv4" style={{ height: 1 }} />
@@ -117,7 +111,7 @@ class SplashPage extends Component {
 						</div>
 					</form>
 
-					<div className="mt2 tc">
+					<div className="mt4 tc">
 						<BodyText>
 							<FormattedMessage id="dontHaveAccount" />
 						</BodyText>
@@ -142,4 +136,4 @@ SplashPage.defaultProps = {
 	isSignedIn: false
 }
 
-export default withYVAuth(injectIntl(SplashPage))
+export default withYVAuth(withPartner(injectIntl(SplashPage)))
