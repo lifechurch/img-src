@@ -11,6 +11,7 @@ function PartnerProtectedRoute(props) {
 			render={(renderProps) => {
 				if (isSignedIn === true && isPartner === true) return (<RouteComponent {...renderProps} />)
 				else if (isSignedIn === true && isPartner === false) return (<Redirect to={redirectTo} />)
+				else if (isSignedIn === false) return (<Redirect to="/" />)
 				return null
 			}}
 		/>
