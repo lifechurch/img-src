@@ -31,5 +31,6 @@
 	"createOneHere": "Create one here.",
 	"continueFacebook": "Continue with Facebook",
 	"continueGoogle": "Continue with Google",
-  "signOut": "Sign Out"
+  "signOut": "Sign Out",
+  "registrationError": "There was a problem registering you as a partner." 
 }

@@ -16,7 +16,7 @@ class UserVerseAssignment extends Component {
 		super(props)
 		this.state = {
 			modalIsOpen: false,
-			verse: null
+			verse: null,
 		}
 		this.notify = notifier.notify()
 		this.loadData = this.loadData.bind(this)
