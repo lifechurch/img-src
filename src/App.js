@@ -11,6 +11,7 @@ import UserVerseAssignment from './containers/user-verse-assignment'
 import UserProfile from './containers/user-profile'
 import SidebarNav from './layouts/sidebar-nav'
 import ToastHandler from './components/toast-handler'
+import AdminPending from './containers/pending'
 
 function App() {
 	return (
@@ -44,11 +45,20 @@ function App() {
 						)
 					}}
 				/>
-				<Route
+				{/* <Route
 					path="/admin" component={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
 								<PartnerProtectedRoute redirectTo="/" path="/admin" component={Admin} />
+							</SidebarNav>
+						)
+					}}
+				/> */}
+				<Route
+					exact path="/admin/pending" render={() => {
+						return (
+							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
+								<YVAuthProtectedRoute redirectTo="/" path="/admin/pending" component={AdminPending} />
 							</SidebarNav>
 						)
 					}}
