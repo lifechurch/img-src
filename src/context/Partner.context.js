@@ -26,12 +26,17 @@ class PartnerProvider extends Component {
 	}
 
 	async partnerCheck() {
-		let isPartner = false
-		try {
-			const me = await Partner.me()
-			isPartner = !Number.isNaN(me.id)
-		} catch (error) { console.error(error) }
-		this.setState({ isPartner })
+		const { isSignedIn } = this.props
+		if (isSignedIn) {
+			let isPartner = false
+			try {
+				const me = await Partner.me()
+				isPartner = !Number.isNaN(me.id)
+			} catch (error) { console.error(error) }
+			this.setState({ isPartner })
+		} else {
+			this.setState({ isPartner: undefined })
+		}
 	}
 
 	render() {
