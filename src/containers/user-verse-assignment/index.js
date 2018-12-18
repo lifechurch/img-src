@@ -1,7 +1,7 @@
+/* eslint-disable linebreak-style */
 import React from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import shortid from 'shortid'
-import { notifier } from '../../components/toast-handler'
 import PrimaryHeading from './../../components/typography/primary-heading'
 import Verses from '../../tupos/models/verses'
 import Language from '../../tupos/models/language'
@@ -13,11 +13,11 @@ import BodyText from './../../components/typography/body-text'
 import ImageDrop from './../../components/image-drop'
 import ComboBox from './../../components/combo-box'
 import Card from './../../components/card'
+import { notifier } from './../../components/toast-handler'
 
 class UserVerseAssignment extends React.Component {
 	constructor(props) {
 		super(props)
-
 		this.state = {}
 		this.notify = notifier.notify()
 		this.onResize = this.onResize.bind(this)
