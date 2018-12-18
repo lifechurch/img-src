@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 function BodyText({ children, ...props }) {
 
 	return (
-		<p className="f6 f4-ns gray" {...props}>
+		<p className="f6 f4-ns gray ma0" {...props}>
 			{children}
 		</p>
 	)

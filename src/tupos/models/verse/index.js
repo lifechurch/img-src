@@ -26,11 +26,7 @@ class Verse extends TuposModel {
 		}
 	}
 
-	/**
-   * Fetch verse from API
-   * @param {string} usfm - the USFM of the Bible Verse to Fetch
-   * @param {number} versionId - the ID of the Bible Version to use when fetching Bible Verse
-   */
+	/** Fetch verse from API */
 	static async getOne(usfm, versionId) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',

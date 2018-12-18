@@ -22,7 +22,11 @@
   "userProfile": "User Profile: {user}",
   "userRegistration": "User Registration",
   "userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
-  "userVerseAssignment": "User Verse Assignment",
+  "versesNeedImages": "Verses that need images",
+	"verses": "Verses",
+	"chooseAVerse": "Choose a verse, design an image and upload",
+	"pendingImages": "Pending Images",
+	"verseGuidelines": "All Verse Images must contain the verse reference and fit within the size guidelines to be approved for the Bible App",
   "welcomeHeader": "Welcome to Image Source",
 	"designVerseImages": "Design Verse Images. Inspire the world.",
 	"joinTheCommunity": "Join the YouVersion Community of volunteer designers and help create Verse Images for the Bible App.",
@@ -31,5 +35,8 @@
 	"createOneHere": "Create one here.",
 	"continueFacebook": "Continue with Facebook",
 	"continueGoogle": "Continue with Google",
-  "signOut": "Sign Out"
+  "signOut": "Sign Out",
+  "registrationError": "There was a problem registering you as a partner.",
+  "language": "Language",
+  "version": "Version"
 }

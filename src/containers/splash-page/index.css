@@ -57,13 +57,13 @@
 
 .splashHeading {
 	width: 250px;
-	margin-top: 40px;
+	margin-top: 65px;
 	margin-left: 450px;
 }
 
 .splashSubText {
 	width: 450px;
-	margin-top: 800px;
+	margin-top: 820px;
 }
 
 @media only screen and (max-width: 740px) {
@@ -102,13 +102,13 @@
 
 	.splashHeading {
 		width: 350px;
-		margin-top: 0px;
+		margin-top: 25px;
 		margin-left: 20px;
 	}
 
 	.splashSubText {
 		width: 90%;
-		margin-top: 450px;
+		margin-top: 470px;
 		margin-left: 20px;
 	}
 }
