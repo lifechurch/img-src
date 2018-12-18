@@ -1,6 +1,4 @@
 import { TuposModel } from '@youversion/tupos-base'
-import setDate from '@youversion/tupos-base/dist/setters/date'
-import setNumber from '@youversion/tupos-base/dist/setters/number'
 import setString from '@youversion/tupos-base/dist/setters/string'
 import api4 from '@youversion/tupos-base/dist/fetchers/api4'
 
@@ -13,29 +11,15 @@ class Image extends TuposModel {
 	constructor(json) {
 		super(json)
 		if (!json || typeof json !== 'object') return
-		this.versionId = json.version_id
-		this.usfm = json.usfm
-		this.createdDt = json.created_dt
-		this.userId = json.user_id
-		this.status = json.status
-		this.languageTag = json.language_tag
-		this.weight = json.weight
-		this.id = json.id
-		this.category = json.category
+		this.error = json.error
+		this.errorDescription = json.error_description
 	}
 
 	/** Convert Image to simple object */
 	toObject() {
 		return {
-			version_id: this.versionId,
-			usfm: this.usfm,
-			created_dt: this.createdDt,
-			user_id: this.userId,
-			status: this.status,
-			language_tag: this.languageTag,
-			weight: this.weight,
-			id: this.id,
-			category: this.category
+			error: this.error,
+			error_description: this.errorDescription
 		}
 	}
 
@@ -78,85 +62,22 @@ class Image extends TuposModel {
 	}
 
 
-	/** @type {number} */
-	get versionId() {
-		return this._versionId
+	/** @type {string} */
+	get error() {
+		return this._error
 	}
 
-	set versionId(versionId) {
-		this._versionId = setNumber(versionId, 'versionId')
+	set error(error) {
+		this._error = setString(error, 'error')
 	}
 
 	/** @type {string} */
-	get usfm() {
-		return this._usfm
+	get errorDescription() {
+		return this._errorDescription
 	}
 
-	set usfm(usfm) {
-		this._usfm = setString(usfm, 'usfm')
-	}
-
-	/** @type {Date} */
-	get createdDt() {
-		return this._createdDt
-	}
-
-	set createdDt(createdDt) {
-		this._createdDt = setDate(createdDt, 'createdDt')
-	}
-
-	/** @type {number} */
-	get userId() {
-		return this._userId
-	}
-
-	set userId(userId) {
-		this._userId = setNumber(userId, 'userId')
-	}
-
-	/** @type {number} */
-	get status() {
-		return this._status
-	}
-
-	set status(status) {
-		this._status = setNumber(status, 'status')
-	}
-
-	/** @type {string} */
-	get languageTag() {
-		return this._languageTag
-	}
-
-	set languageTag(languageTag) {
-		this._languageTag = setString(languageTag, 'languageTag')
-	}
-
-	/** @type {string} */
-	get weight() {
-		return this._weight
-	}
-
-	set weight(weight) {
-		this._weight = setString(weight, 'weight')
-	}
-
-	/** @type {number} */
-	get id() {
-		return this._id
-	}
-
-	set id(id) {
-		this._id = setNumber(id, 'id')
-	}
-
-	/** @type {string} */
-	get category() {
-		return this._category
-	}
-
-	set category(category) {
-		this._category = setString(category, 'category')
+	set errorDescription(errorDescription) {
+		this._errorDescription = setString(errorDescription, 'errorDescription')
 	}
 
 }
