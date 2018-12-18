@@ -42,38 +42,47 @@ class UserVerseAssignment extends React.Component {
 		})
 	}
 
-  async handleDrop(accepted, rejected) {
+  async handleDrop(verse, accepted, rejected) {
     if (!Array.isArray(accepted) || accepted.length === 0) return
 
-    /* NOTE: Only accepts single file uploads for now */
+    /* NOTE: Only accepts single-file JPEG uploads for now */
 
     const { intl } = this.props
     const imageConfig = await ImageConfig.get()
+    const {
+      awsResponse,
+      presignedUploadConfirmId,
+      presignedUploadId
+    } = imageConfig
+
     const formData = new FormData()
     const reader = new FileReader()
     const fileToUpload = accepted[0]
 
-    formData.append('AWSAccessKeyId', imageConfig.awsResponse.fields.AWSAccessKeyId)
-    formData.append('key', imageConfig.awsResponse.fields.key)
-    formData.append('policy', imageConfig.awsResponse.fields.policy)
-    formData.append('acl', imageConfig.awsResponse.fields.acl)
-    // formData.append('x-amz-storage-class', response_init.params['x-amz-storage-class'])
-    formData.append('signature', imageConfig.awsResponse.fields.signature)
+    formData.append('AWSAccessKeyId', awsResponse.fields.AWSAccessKeyId)
+    formData.append('key', awsResponse.fields.key)
+    formData.append('policy', awsResponse.fields.policy)
+    formData.append('acl', awsResponse.fields.acl)
+    formData.append('Content-Type',  'image/jpeg')
+    formData.append('signature', awsResponse.fields.signature)
     formData.append('file', fileToUpload)
 
     reader.onload = (loadEvent) => {
       const image = new Image()
       const handleLoad = () => {
         const xhr = new XMLHttpRequest()
-        xhr.open('POST', imageConfig.awsResponse.url)
+        xhr.open('POST', awsResponse.url)
         xhr.send(formData)
 
         xhr.onload = () => {
           if (xhr.readyState === 4) {
             if (xhr.status >= 200 && xhr.status < 300) {
               this.notify(intl.formatMessage({ id: 'imageUploadComplete' }))
-              // TO-DO: notify API that image upload is Complete
-              // SEE: https://in.thewardro.be/snippets/58#images-info-and-uploads
+              const postBody = {
+                language_tag: 'en',
+                usfm: verse.usfms
+              }
+              const confirmResponse = Image.confirmUpload(presignedUploadConfirmId, presignedUploadId, postBody)
             } else {
               this.notify(intl.formatMessage({ id: 'imageUploadError' }), 0, false)
             }
@@ -95,17 +104,27 @@ class UserVerseAssignment extends React.Component {
   }
 
 	async loadData() {
-		const [
-			verses,
-			images,
-			langs,
-			vers,
-		] = await Promise.all([
-			Verses.getMany(),
-			Image.getMany('pending'),
-			Language.getMany(),
-			Version.getMany()
-		])
+    let verses = []
+    let images = []
+    let langs = []
+    let vers = []
+
+    try {
+      verses = await Verses.getMany()
+    } catch(e) {}
+
+    try {
+      images = await Image.getMany('pending')
+    } catch(e) {}
+
+    try {
+      langs = await Language.getMany()
+    } catch(e) {}
+
+    try {
+      vers = await Version.getMany()
+    } catch(e) {}
+
 
 		const languages = langs.map((l) => {
 			return { name: l.name, value: l.languageTag }
@@ -188,7 +207,7 @@ class UserVerseAssignment extends React.Component {
 									maxWidth={1920}
 									minHeight={1080}
 									maxHeight={1920}
-									onDrop={this.handleDrop}
+									onDrop={this.handleDrop.bind(this, verse)}
 								>
 									<div className="b mb2">
 										<BodyText>{verse.humanReference}</BodyText>
