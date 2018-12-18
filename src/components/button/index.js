@@ -18,13 +18,19 @@ function Button(props) {
 
 	const classes = `pointer link br-pill ph4 pv2 f4 dib ${disabledClasses} ${buttontypeClasses}`
 
+	const handleKeyPress = event => {
+		if (event.key === 'Enter') {
+			this.refs.but.click()
+		}
+	}
+
 	if (disabled) {
 		return (
-			<a {...remainingProps} className={classes}>{children}</a>
+			<a { ...remainingProps } className={ classes }>{ children }</a>
 		)
 	} else if (isSubmit) {
 		return (
-			<button {...remainingProps} onClick={onClick} type="submit" className={classes}>{children}</button>
+			<button { ...remainingProps} onClick={ onClick } onKeyPress={ (e) => { return handleKeyPress(e) } } type="submit" className={classes}>{children}</button>
 		)
 	}
 
