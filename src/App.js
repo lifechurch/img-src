@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import YVAuthProtectedRoute from '@youversion/tupos-auth/dist/YVAuthProtectedRoute'
 import PartnerProtectedRoute from './context/PartnerProtectedRoute'
 import SidebarNavMenu from './components/sidebar-nav-menu'
-import admin from './containers/admin'
+import AdminReview from './containers/admin/review'
 import SplashPage from './containers/splash-page'
 import UserRegistration from './containers/user-registration'
 import UserVerseAssignment from './containers/user-verse-assignment'
@@ -45,10 +45,28 @@ function App() {
 					}}
 				/>
 				<Route
-					path="/admin" component={() => {
+					path="/admin/review" exact component={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
-								<PartnerProtectedRoute redirectTo="/" path="/admin" component={Admin} />
+								<PartnerProtectedRoute redirectTo="/" path="/admin/review" component={AdminReview} />
+							</SidebarNav>
+						)
+					}}
+				/>
+				<Route
+					path="/admin/review/approved" exact component={() => {
+						return (
+							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
+								<PartnerProtectedRoute redirectTo="/" path="/admin/review/approved" component={() => <AdminReview show="approved" /> } />
+							</SidebarNav>
+						)
+					}}
+				/>
+				<Route
+					path="/admin/review/declined" exact component={() => {
+						return (
+							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
+								<PartnerProtectedRoute redirectTo="/" path="/admin/review/declined" show="declined" component={() => <AdminReview show="declined" /> } />
 							</SidebarNav>
 						)
 					}}
