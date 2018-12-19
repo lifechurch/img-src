@@ -29,7 +29,6 @@ class ToggleBar extends React.Component {
 
 		this.onResize = this.onResize.bind(this)
 		this.handleDropdown = this.handleDropdown.bind(this)
-		this.props.changeStatus(this.state.current)
 	}
 
 	componentDidMount() {
@@ -49,7 +48,6 @@ class ToggleBar extends React.Component {
 
 	handleChange(text) {
 		this.setState({	current: text, isOpen: false })
-		this.props.changeStatus(text)
 	}
 
 	handleDropdown() {
@@ -123,7 +121,6 @@ class ToggleBar extends React.Component {
 
 ToggleBar.propTypes = {
 	links: PropTypes.array.isRequired,
-	changeStatus: PropTypes.func.isRequired
 }
 
 export default ToggleBar

@@ -13,7 +13,6 @@ class UserProfile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-      imageStatus: undefined,
       images: [],
       counts: {
         approved: 0,
@@ -23,7 +22,6 @@ class UserProfile extends React.Component {
       }
 		}
 		this.loadData = this.loadData.bind(this)
-		this.handleChange = this.handleChange.bind(this)
 	}
 
 	componentDidMount() {
@@ -51,10 +49,6 @@ class UserProfile extends React.Component {
       this.loadData()
     }
   }
-
-	handleChange(status) {
-		this.setState({ imgStatus: status })
-	}
 
 	async loadData() {
     const {
@@ -93,21 +87,26 @@ class UserProfile extends React.Component {
     if (!userId) return (<Redirect to={`/user-profile/${user.id}/pending`} />)
     if (!imageStatus) return (<Redirect to={`/user-profile/${userId}/pending`} />)
 
-    const imageList = images.map((image) => (
-      <div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
-        <img src={image.url} className="pv2" />
-      </div>
-    ))
+    const imageList = images.map((image) => {
+      if (!image.url || !image.url.length) return null
+      return (
+        <div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
+          <img src={image.url} className="pv2" />
+        </div>
+      )
+    })
 
 		return (
 			<div className="pt4">
 
 				<div className="pb2 flex flex-column-ns items-center-ns justify-center-ns">
-					<div className="ma3">
-						<div>
-							<img src={images[3]} alt="" className="w4-ns w3 br-100" />
-						</div>
-					</div>
+          {user.avatarImageId ? (
+  					<div className="ma3">
+  						<div>
+  							<img src={user.avatarUrl} alt={user.firstName} className="w4-ns w3 br-100" />
+  						</div>
+  					</div>
+          ) : null}
 					<div className="flex flex-column items-center-ns justify-center-ns mt3">
 						<h2 className="ma0 pa0">
               {user.firstName} {user.lastName}
@@ -135,27 +134,25 @@ class UserProfile extends React.Component {
 								links={[
 									{
 										text: <FormattedMessage id="submissionsLabel" />,
-										address: `/user-profile/${this.props.match.params.userId}/submissions`,
+										address: `/user-profile/${userId}/submissions`,
 										total: counts.moderated
 									},
 									{
 										text: <FormattedMessage id="approvedLabel" />,
-										address: `/user-profile/${this.props.match.params.userId}/approved`,
+										address: `/user-profile/${userId}/approved`,
 										total: counts.approved
 									},
 									{
 										text: <FormattedMessage id="declinedLabel" />,
-										address: `/user-profile/${this.props.match.params.userId}/declined`,
+										address: `/user-profile/${userId}/declined`,
 										total: counts.denied
 									},
 									{
 										text: <FormattedMessage id="pendingLabel" />,
-										address: `/user-profile/${this.props.match.params.userId}/pending`,
+										address: `/user-profile/${userId}/pending`,
 										total: counts.pending
 									}
 								]}
-
-								changeStatus={this.handleChange}
 							/>
 						</div>
 					</h1>
