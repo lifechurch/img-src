@@ -15,7 +15,6 @@ class PartnerProvider extends Component {
 	constructor(props) {
 		super(props)
 		this.state = DEFAULT_STATE
-
 		this.partnerCheck = this.partnerCheck.bind(this)
 	}
 
@@ -29,21 +28,27 @@ class PartnerProvider extends Component {
 		const { isSignedIn } = this.props
 		if (isSignedIn) {
 			let isPartner = false
+      let partner = null
 			try {
-				const me = await Partner.me()
-				isPartner = !Number.isNaN(me.id)
+				partner = await Partner.me()
+				isPartner = !Number.isNaN(partner.id)
 			} catch (error) { console.error(error) }
-			this.setState({ isPartner })
+			this.setState({ isPartner, partner })
 		} else {
-			this.setState({ isPartner: undefined })
+			this.setState({ isPartner: undefined, partner: undefined })
 		}
 	}
 
 	render() {
 		const { children, isSignedIn } = this.props
-		const { isPartner } = this.state
+		const { isPartner, partner } = this.state
 		return (
-			<PartnerContext.Provider value={{ isPartner, isSignedIn, partnerCheck: this.partnerCheck }}>
+			<PartnerContext.Provider value={{
+        isPartner,
+        isSignedIn,
+        partnerCheck: this.partnerCheck,
+        partner
+      }}>
 				{ children }
 			</PartnerContext.Provider>
 		)
