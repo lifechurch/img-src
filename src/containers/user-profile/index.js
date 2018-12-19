@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
+import { Redirect } from 'react-router-dom'
+import moment from 'moment'
+import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import ToggleBar from '../../components/toggle-bar'
 import tempIcon from '../../assets/me.svg'
 import images from '../splash-page/assets/images'
@@ -10,82 +13,91 @@ class UserProfile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+      imageStatus: undefined,
+      images: [],
+      counts: {
+        approved: 0,
+        denied: 0,
+        moderated: 0,
+        pending: 0
+      }
 		}
 		this.loadData = this.loadData.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 	}
 
-
 	componentDidMount() {
 		this.loadData()
 	}
+
+  componentDidUpdate(prevProps) {
+    const {
+      match: {
+        params: {
+          imageStatus
+        },
+      },
+    } = this.props
+
+    const {
+      match: {
+        params: {
+          imageStatus: prevImageStatus,
+        },
+      },
+    } = prevProps
+
+    if (imageStatus !== prevImageStatus) {
+      this.loadData()
+    }
+  }
 
 	handleChange(status) {
 		this.setState({ imgStatus: status })
 	}
 
-
 	async loadData() {
-		// TODO: Add reference to url (item.url) when null is not being returned back
-		const approvedImg = await Image.getMany('approved').then((img) => {
-			return img.map((item, index) => {
-				return (
-					<div className="fl w-50 w-third-ns pa2-ns pa1" key={item.id}>
-						<img src={images[0]} alt="" className="pv2" />
-					</div>
-				)
-			})
-		})
+    const {
+      match: {
+        params: {
+          imageStatus
+        },
+      },
+    } = this.props
 
-
-		const pendingImg = await Image.getMany('pending').then((img) => {
-			return img.map((item, index) => {
-				return (
-					<div className="fl w-50 w-third-ns pa2-ns pa1" key={item.id}>
-						<img src={images[3]} alt="" className="pv2" />
-					</div>
-				)
-			})
-		})
-
-		const declinedImg = await Image.getMany('denied').then((img) => {
-			return img.map((item, index) => {
-				return (
-					<div className="fl w-50 w-third-ns pa2-ns pa1" key={item.id}>
-						<img src={images[1]} alt="" className="pv2" />
-					</div>
-				)
-			})
-		})
-
-		const submissionsImg = await Image.getMany('moderated').then((img) => {
-			return img.map((item, index) => {
-				return (
-					<div className="fl w-50 w-third-ns pa2-ns pa1" key={item.id}>
-						<img src={images[2]} alt="" className="pv2" />
-					</div>
-				)
-			})
-
-		})
-
-		this.setState({
-			submissionsImg,
-			approvedImg,
-			declinedImg,
-			pendingImg
-		})
-
+    if (imageStatus) {
+      let images = []
+      try {
+        images = await Image.getMany(imageStatus)
+      } catch(e) {}
+      this.setState({ images })
+    }
 	}
 
 	render() {
 		const {
-			submissionsImg,
-			approvedImg,
-			declinedImg,
-			pendingImg,
-			imgStatus
+      images,
+      counts
 		} = this.state
+
+    const {
+      user,
+      match: {
+        params: {
+          userId,
+          imageStatus
+        },
+      }
+    } = this.props
+
+    if (!userId) return (<Redirect to={`/user-profile/${user.id}/pending`} />)
+    if (!imageStatus) return (<Redirect to={`/user-profile/${userId}/pending`} />)
+
+    const imageList = images.map((image) => (
+      <div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
+        <img src={image.url} className="pv2" />
+      </div>
+    ))
 
 		return (
 			<div className="pt4">
@@ -98,18 +110,18 @@ class UserProfile extends React.Component {
 					</div>
 					<div className="flex flex-column items-center-ns justify-center-ns mt3">
 						<h2 className="ma0 pa0">
-							<FormattedMessage id="userProfile" values={{ user: this.props.match.params.userId }} />
+              {user.firstName} {user.lastName}
 						</h2>
 						<p className="ma0 pa0 light-silver">
 							<FormattedMessage id="userBio" />
 						</p>
 						<p className="ma0 pa0 light-silver">
-							<FormattedMessage id="designerSince" />
+							<FormattedMessage id="designerSince" values={{ date: moment().format('LL') }} />
 						</p>
 						<div className="flex">
 							<img src={tempIcon} alt="" className="mr2" />
 							<p className="gray">
-								<FormattedMessage id="userLocation" />
+                {user.location}
 							</p>
 						</div>
 					</div>
@@ -122,24 +134,24 @@ class UserProfile extends React.Component {
 							<ToggleBar
 								links={[
 									{
-										text: 'Submissions',
+										text: <FormattedMessage id="submissionsLabel" />,
 										address: `/user-profile/${this.props.match.params.userId}/submissions`,
-										total: submissionsImg ? submissionsImg.length : 0
+										total: counts.moderated
 									},
 									{
-										text: 'Approved',
+										text: <FormattedMessage id="approvedLabel" />,
 										address: `/user-profile/${this.props.match.params.userId}/approved`,
-										total: approvedImg ? approvedImg.length : 0
+										total: counts.approved
 									},
 									{
-										text: 'Declined',
+										text: <FormattedMessage id="declinedLabel" />,
 										address: `/user-profile/${this.props.match.params.userId}/declined`,
-										total: declinedImg ? declinedImg.length : 0
+										total: counts.denied
 									},
 									{
-										text: 'Pending',
+										text: <FormattedMessage id="pendingLabel" />,
 										address: `/user-profile/${this.props.match.params.userId}/pending`,
-										total: pendingImg ? pendingImg.length : 0
+										total: counts.pending
 									}
 								]}
 
@@ -150,14 +162,7 @@ class UserProfile extends React.Component {
 
 					<div className="mw9 center ph3-ns">
 						<div className="cf ph2-ns">
-							{ imgStatus === 'Submissions' && submissionsImg }
-							{ imgStatus === 'Approved' && approvedImg }
-							{ imgStatus === 'Declined' && declinedImg }
-							{ imgStatus === 'Pending' && pendingImg }
-							{ imgStatus === 'Select' && submissionsImg }
-							{ imgStatus === 'Select' && approvedImg }
-							{ imgStatus === 'Select' && declinedImg }
-							{ imgStatus === 'Select' && pendingImg }
+              {imageList}
 						</div>
 					</div>
 				</div>
@@ -177,4 +182,4 @@ UserProfile.propTypes = {
 UserProfile.defaultProps = {
 	match: null
 }
-export default UserProfile
+export default withYVAuth(UserProfile)

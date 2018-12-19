@@ -41,7 +41,10 @@
   "registrationError": "There was a problem registering you as a partner.",
   "language": "Language",
   "version": "Version",
-	"userBio": "YouVersion Volunteer.",
-	"userLocation": "Little Rock, AR",
-    "designerSince": "Designer since May 2018"
+	"userBio": "YouVersion Volunteer",
+  "designerSince": "Designer since {date}",
+  "submissionsLabel": "Submissions",
+  "approvedLabel": "Approved",
+  "declinedLabel": "Declined",
+  "pendingLabel": "Pending"
 }

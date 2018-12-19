@@ -36,10 +36,10 @@ function App() {
 					}}
 				/>
 				<Route
-					path="/user-profile/:userId" render={() => {
+					path="/user-profile/:userId?/:imageStatus?" render={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu />}>
-								<PartnerProtectedRoute redirectTo="/" path="/user-profile/:userId" component={UserProfile} />
+								<PartnerProtectedRoute redirectTo="/" path="/user-profile/:userId?/:imageStatus?" component={UserProfile} />
 							</SidebarNav>
 						)
 					}}
