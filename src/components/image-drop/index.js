@@ -29,7 +29,7 @@ class ImageDrop extends Component {
 	}
 
 
-	onDrop(accept, reject) {
+	async onDrop(accept, reject) {
 
 		this.setState({
 			rejectedSmall: [],
@@ -60,38 +60,41 @@ class ImageDrop extends Component {
 			return (rejectedType)
 		})
 
-		accept.map((file) => {
-			const reader = new FileReader()
-			reader.onload = (loadEvent) => {
-				const image = new Image()
-				const handleLoad = () => {
+		await Promise.all(accept.map((file) => {
+      return new Promise((resolve, reject) => {
+  			const reader = new FileReader()
+  			reader.onload = (loadEvent) => {
+  				const image = new Image()
+  				const handleLoad = () => {
 
-					if (image.width < minWidth || image.height < minHeight) {
-						rejectedSmall.push(file)
-						rejectList.push(file)
-					} else if ((image.width > maxWidth) || (image.width > maxHeight)) {
-						rejectedLarge.push(file)
-						rejectList.push(file)
-					} else {
-						accepted.push(file)
-					}
+  					if (image.width < minWidth || image.height < minHeight) {
+  						rejectedSmall.push(file)
+  						rejectList.push(file)
+  					} else if ((image.width > maxWidth) || (image.height > maxHeight)) {
+  						rejectedLarge.push(file)
+  						rejectList.push(file)
+  					} else {
+  						accepted.push(file)
+  					}
 
-					this.setState({ rejectedSmall, rejectedLarge, accepted })
-				}
+  					this.setState({ rejectedSmall, rejectedLarge, accepted }, () => {
+              resolve()
+            })
+  				}
 
-				image.src = loadEvent.target.result
-				if (image.width === 0) {
-					image.onload = handleLoad
-				} else {
-					handleLoad()
-				}
-			}
+  				image.src = loadEvent.target.result
+  				if (image.width === 0) {
+  					image.onload = handleLoad
+  				} else {
+  					handleLoad()
+  				}
+  			}
+        reader.readAsDataURL(file)
+  			// return (rejectedSmall, rejectedLarge, accepted)
+      })
+  	}))
 
-			reader.readAsDataURL(file)
-			return (rejectedSmall, rejectedLarge, accepted)
-		})
-
-		onDrop(rejectList, accepted)
+		onDrop(accepted, rejectList)
 
 		this.setState({
 			dropzoneActive: false
@@ -196,10 +199,10 @@ ImageDrop.propTypes = {
 
 ImageDrop.defaultProps = {
 	children: null,
-	minWidth: 960,
-	maxWidth: 4000,
-	minHeight: 960,
-	maxHeight: 400,
+	minWidth: 1080,
+	maxWidth: 1920,
+	minHeight: 1080,
+	maxHeight: 1920,
 	type: 'image/jpg, image/jpeg',
 	onDrop: null
 }

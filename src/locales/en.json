@@ -18,6 +18,8 @@
   "rejectedLargeFile": "{file} exceeds the maximum image size of {maxWidth}px by {maxHeight}px",
   "rejectedSmallFile": "{file} does not meet the minimum image size of {minWidth}px by {minHeight}px",
   "rejectedType": "{file} is not an accepted file type of: {type}",
+  "imageUploadComplete": "Image Upload Complete",
+  "imageUploadError": "There was a problem uploading your image.",
   "termsConditions": "Terms and Conditions go here",
   "userProfile": "User Profile: {user}",
   "userRegistration": "User Registration",
