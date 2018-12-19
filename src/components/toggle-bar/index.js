@@ -29,6 +29,7 @@ class ToggleBar extends React.Component {
 
 		this.onResize = this.onResize.bind(this)
 		this.handleDropdown = this.handleDropdown.bind(this)
+		this.props.changeStatus(this.state.current)
 	}
 
 	componentDidMount() {
@@ -48,6 +49,7 @@ class ToggleBar extends React.Component {
 
 	handleChange(text) {
 		this.setState({	current: text, isOpen: false })
+		this.props.changeStatus(text)
 	}
 
 	handleDropdown() {
@@ -63,7 +65,7 @@ class ToggleBar extends React.Component {
 			return (
 				<div className="togglebar">
 					{links.map((link) => {
-						const { text, address } = link
+						const { text, address, total } = link
 
 						return (
 							<NavLink
@@ -73,7 +75,7 @@ class ToggleBar extends React.Component {
 								className="mid-gray no-underline ph4 pv2 b--mid-gray ba f4"
 								activeClassName="bg-mid-gray white"
 							>
-								{text}
+								{text} <span className="f7 fw1">({ total })</span>
 							</NavLink>
 						)
 					})}
@@ -97,7 +99,7 @@ class ToggleBar extends React.Component {
 					{isOpen &&
 						<div className="absolute center left-0 right-0 w-90 f4 flex flex-column bg-white">
 							{links.map((link) => {
-								const { text, address } = link
+								const { text, address, total } = link
 
 								return (
 									<NavLink
@@ -107,7 +109,7 @@ class ToggleBar extends React.Component {
 										className="w-100 ph3 pv1 mid-gray no-underline bb"
 										activeClassName="bg-mid-gray white bb"
 									>
-										{text}
+										{text} <span className="f7 fw1">({ total })</span>
 									</NavLink>
 								)
 							})}
@@ -120,7 +122,8 @@ class ToggleBar extends React.Component {
 }
 
 ToggleBar.propTypes = {
-	links: PropTypes.array.isRequired
+	links: PropTypes.array.isRequired,
+	changeStatus: PropTypes.func.isRequired
 }
 
 export default ToggleBar
