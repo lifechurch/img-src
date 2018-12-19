@@ -21,7 +21,7 @@
   "imageUploadComplete": "Image Upload Complete",
   "imageUploadError": "There was a problem uploading your image.",
   "termsConditions": "Terms and Conditions go here",
-  "userProfile": "User Profile: {user}",
+  "userProfile": "{user}",
   "userRegistration": "User Registration",
   "userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
   "versesNeedImages": "Verses that need images",
@@ -40,5 +40,8 @@
   "signOut": "Sign Out",
   "registrationError": "There was a problem registering you as a partner.",
   "language": "Language",
-  "version": "Version"
+  "version": "Version",
+	"userBio": "YouVersion Volunteer.",
+	"userLocation": "Little Rock, AR",
+    "designerSince": "Designer since May 2018"
 }
