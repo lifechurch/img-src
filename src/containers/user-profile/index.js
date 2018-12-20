@@ -3,17 +3,18 @@ import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
+import PulseLoader from 'react-spinners/PulseLoader'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import ToggleBar from '../../components/toggle-bar'
 import tempIcon from '../../assets/me.svg'
-import images from '../splash-page/assets/images'
 import Image from '../../tupos/models/image'
 
 class UserProfile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			images: [],
+			imageData: [],
+			loadingData: false,
 			counts: {
 				approved: 0,
 				denied: 0,
@@ -21,6 +22,7 @@ class UserProfile extends React.Component {
 				pending: 0
 			}
 		}
+
 		this.loadData = this.loadData.bind(this)
 	}
 
@@ -60,17 +62,22 @@ class UserProfile extends React.Component {
 		} = this.props
 
 		if (imageStatus) {
-			let images = []
-			try {
-				images = await Image.getMany(imageStatus)
-			} catch (e) {}
-			this.setState({ images })
+			let imageData = []
+
+			this.setState({ loadingData: true })
+			imageData = Image.getMany(imageStatus)
+				.then((data) => {
+					imageData = data
+					this.setState({ imageData, loadingData: false })
+				})
+				.catch(() => {})
 		}
 	}
 
 	render() {
 		const {
-			images,
+			imageData,
+			loadingData,
 			counts
 		} = this.state
 
@@ -87,17 +94,17 @@ class UserProfile extends React.Component {
 		if (!userId) return (<Redirect to={`/user-profile/${user.id}/pending`} />)
 		if (!imageStatus) return (<Redirect to={`/user-profile/${userId}/pending`} />)
 
-		const imageList = images.map((image) => {
+		const imageList = imageData.map((image) => {
 			if (!image.url || !image.url.length) return null
 			return (
 				<div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
-					<img src={image.url} className="pv2" />
+					<img src={image.url} className="pv2" alt="" />
 				</div>
 			)
 		})
 
 		return (
-			<div className="pt4">
+			<div className="flex flex-column w-100 min-h-100 pt4">
 
 				<div className="pb2 flex flex-column-ns items-center-ns justify-center-ns">
 					{user.avatarImageId ? (
@@ -109,9 +116,7 @@ class UserProfile extends React.Component {
 					) : null}
 					<div className="flex flex-column items-center-ns justify-center-ns mt3">
 						<h2 className="ma0 pa0">
-							{user.firstName}
-							{' '}
-							{user.lastName}
+							{ `${user.firstName} ${user.lastName}` }
 						</h2>
 						<p className="ma0 pa0 light-silver">
 							<FormattedMessage id="userBio" />
@@ -128,7 +133,7 @@ class UserProfile extends React.Component {
 					</div>
 				</div>
 
-				<div className="pt2 bg-light-gray pa4">
+				<div className="flex-auto pa4 bg-light-gray">
 					<h1 className="ma0 pa0">
 
 						<div className="w-100 flex justify-center ma3">
@@ -162,6 +167,12 @@ class UserProfile extends React.Component {
 					<div className="mw9 center ph3-ns">
 						<div className="cf ph2-ns">
 							{imageList}
+							{ loadingData &&
+								<PulseLoader
+									className="flex justify-center mt5"
+									color="#555"
+								/>
+							}
 						</div>
 					</div>
 				</div>
