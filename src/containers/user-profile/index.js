@@ -6,7 +6,6 @@ import moment from 'moment'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import ToggleBar from '../../components/toggle-bar'
 import tempIcon from '../../assets/me.svg'
-import images from '../splash-page/assets/images'
 import Image from '../../tupos/models/image'
 
 class UserProfile extends React.Component {
@@ -100,29 +99,31 @@ class UserProfile extends React.Component {
 			<div className="pt4">
 
 				<div className="pb2 flex flex-column-ns items-center-ns justify-center-ns">
-          {user.avatarImageId ? (
-  					<div className="ma3">
-  						<div>
-  							<img src={user.avatarUrl} alt={user.firstName} className="w4-ns w3 br-100" />
-  						</div>
-  					</div>
-          ) : null}
+					<div className="ma3">
+						<div>
+							{user.avatarImageId ? (
+								<img src={user.avatarUrl} alt={user.firstName} className="w4-ns w3 br-100" />
+							) : <img src={tempIcon} alt={user.firstName} className="w3-ns w3 br-100" /> }
+						</div>
+					</div>
 					<div className="flex flex-column items-center-ns justify-center-ns mt3">
 						<h2 className="ma0 pa0">
-              {user.firstName} {user.lastName}
+							{user.firstName} {user.lastName}
 						</h2>
 						<p className="ma0 pa0 light-silver">
 							<FormattedMessage id="userBio" />
 						</p>
-						<p className="ma0 pa0 light-silver">
+						<p className={`ma0 pa0 light-silver ${!user.location ? 'mb4' : ''}`}>
 							<FormattedMessage id="designerSince" values={{ date: moment().format('LL') }} />
 						</p>
+
+						{ user.location &&
 						<div className="flex">
 							<img src={tempIcon} alt="" className="mr2" />
 							<p className="gray">
-                {user.location}
+								{user.location}
 							</p>
-						</div>
+						</div> }
 					</div>
 				</div>
 
