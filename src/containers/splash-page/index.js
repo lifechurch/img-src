@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { Redirect } from 'react-router-dom'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
-import withPartner from '../../context/withPartner'
 import YVLogo from '../../assets/youversion.png'
 import YVBible from '../../assets/YV_bible.png'
 import Button from '../../components/button'
@@ -40,16 +39,13 @@ class SplashPage extends Component {
 	render() {
 		const {
 			intl,
-			isSignedIn,
-			isPartner
+			isSignedIn
 		} = this.props
 
 		const email = intl.formatMessage({ id: 'email' }).toUpperCase()
 		const password = intl.formatMessage({ id: 'password' }).toUpperCase()
 
-		if (isSignedIn === true && isPartner === false) return (<Redirect to="/user-registration" />)
-
-		if (isSignedIn === true && isPartner === true) return (<Redirect to="/user-verse-assignment" />)
+		if (isSignedIn) return (<Redirect to="/user-verse-assignment" />)
 
 		return (
 			<div className="h-100">
@@ -136,4 +132,4 @@ SplashPage.defaultProps = {
 	isSignedIn: false
 }
 
-export default withYVAuth(withPartner(injectIntl(SplashPage)))
+export default withYVAuth(injectIntl(SplashPage))

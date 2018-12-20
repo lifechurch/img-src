@@ -1,8 +1,5 @@
 import React from 'react'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
-import { Redirect } from 'react-router-dom'
-import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
-import withPartner from '../../context/withPartner'
 import Card from '../../components/card'
 import TextInput from '../../components/text-input'
 import TextArea from '../../components/textarea'
@@ -10,68 +7,32 @@ import Button from '../../components/button'
 import Checkbox from '../../components/checkbox'
 import PrimaryHeading from '../../components/typography/primary-heading'
 import BodyText from '../../components/typography/body-text'
-import Partner from '../../tupos/models/partner'
-import { notifier } from './../../components/toast-handler'
 
 class UserRegistration extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			firstName: '',
-			lastName: '',
-			signUpEssay: '',
 			submitted: false,
-			tcAccepted: false,
+			tcAccepted: false
 		}
-		this.notify = notifier.notify()
 
 		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
-		this.handleContinue = this.handleContinue.bind(this)
-	}
-
-	handleChange(event) {
-		this.setState({ [event.target.name]: event.target.value })
 	}
 
 	handleSubmit(e) {
 		this.setState({ submitted: true })
-		e.preventDefault()
-	}
 
-	async handleContinue() {
-		const {
-			firstName, lastName, signUpEssay, tcAccepted
-		} = this.state
-		const {
-			partnerCheck, intl
-		} = this.props
-		try {
-			const partner = await Partner.signUp({
-				first_name: firstName,
-				last_name: lastName,
-				signup_essay: signUpEssay,
-				agrees_to_terms: tcAccepted
-			})
-			if (Number.isNaN(partner.id)) {
-				this.notify(intl.formatMessage({ id: 'registrationError' }), 0, false)
-			}
-		} catch (error) { this.notify(intl.formatMessage({ id: 'registrationError' }), 0, false) }
-		partnerCheck()
+		e.preventDefault()
 	}
 
 	render() {
 		const {
-			intl,
-			isSignedIn,
-			isPartner
+			intl
 		} = this.props
 
 		const termsConditions = intl.formatMessage({ id: 'termsConditions' })
 		const firstName = intl.formatMessage({ id: 'firstName' }).toUpperCase()
 		const lastName = intl.formatMessage({ id: 'lastName' }).toUpperCase()
-
-		if (isSignedIn === true && isPartner === true) return (<Redirect to="/user-verse-assignment" />)
 
 		return (
 			<div>
@@ -87,10 +48,10 @@ class UserRegistration extends React.Component {
 							<form onSubmit={this.handleSubmit} className="f5">
 								<div className="flex flex-column flex-row-ns mb4">
 									<div className="flex-auto mb2 mb0-ns mr3-ns">
-										<TextInput required border disabled={this.state.submitted} name="firstName" type="text" placeholder={firstName} value={this.state.firstName} onChange={this.handleChange} />
+										<TextInput required border disabled={this.state.submitted} name="firstname" type="text" placeholder={firstName} />
 									</div>
 									<div className='flex-auto ml3-ns'>
-										<TextInput required border disabled={this.state.submitted} name="lastName" type="text" placeholder={lastName} value={this.state.lastName} onChange={this.handleChange} />
+										<TextInput required border disabled={this.state.submitted} name="lastname" type="text" placeholder={lastName} />
 									</div>
 								</div>
 
@@ -101,7 +62,7 @@ class UserRegistration extends React.Component {
 								</div>
 
 								<div className="h4 black">
-									<TextArea required disabled={this.state.submitted} className="h4" name="signUpEssay" value={this.state.signUpEssay} onChange={this.handleChange} />
+									<TextArea required disabled={this.state.submitted} className="h4" />
 								</div>
 
 								{
@@ -133,7 +94,7 @@ class UserRegistration extends React.Component {
 							</div>
 
 							<div className="flex justify-center justify-end-ns mt3 f5">
-								<Button isSubmit={true} disabled={!this.state.tcAccepted} onClick={this.handleContinue}>
+								<Button isSubmit={true} disabled={!this.state.tcAccepted}>
 									<FormattedMessage id="continue" />
 								</Button>
 							</div>
@@ -149,4 +110,4 @@ UserRegistration.propTypes = {
 	intl: intlShape.isRequired
 }
 
-export default withYVAuth(withPartner(injectIntl(UserRegistration)))
+export default injectIntl(UserRegistration)

@@ -21,33 +21,13 @@
       "auth": true,
       "parseJson": true,
       "jsonRootNode": "data"
-    },
-    "me": {
-      "description": "Fetch current user partner status from API",
-      "endpoint": "viewmaster",
-      "method": "partners/me",
-      "version": "api",
-      "auth": true,
-      "parseJson": true
-    },
-    "signUp": {
-      "description": "Create partner",
-      "endpoint": "viewmaster",
-      "method": "signup",
-      "version": "api",
-      "auth": true,
-      "parseJson": true,
-      "fetchArgs": {
-        "method": "POST"
-      },
-      "hasBody": true
     }
-  },     
+  },
   "sample": {
     "jsonRootNode": false,
     "sampleMethod": "getOne",
     "sampleUrlParams": {
-      "partnerId": 18
+      "partnerId": 1
     }
   },
   "template": "youversion"

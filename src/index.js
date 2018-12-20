@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import { YVAuthProvider } from '@youversion/tupos-auth/dist/YVAuth.context'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import localeData from 'react-intl/locale-data/en'
-import PartnerProvider from './context/Partner.context'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import localeMessages from './locales/en.json'
@@ -20,11 +19,9 @@ addLocaleData(localeData)
 ReactDOM.render(
 	(
 		<YVAuthProvider>
-			<PartnerProvider>
-				<IntlProvider locale="en" messages={localeMessages}>
-					<App />
-				</IntlProvider>
-			</PartnerProvider>
+			<IntlProvider locale="en" messages={localeMessages}>
+				<App />
+			</IntlProvider>
 		</YVAuthProvider>
 	), document.getElementById('root')
 )

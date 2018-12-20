@@ -18,10 +18,8 @@
   "rejectedLargeFile": "{file} exceeds the maximum image size of {maxWidth}px by {maxHeight}px",
   "rejectedSmallFile": "{file} does not meet the minimum image size of {minWidth}px by {minHeight}px",
   "rejectedType": "{file} is not an accepted file type of: {type}",
-  "imageUploadComplete": "Image Upload Complete",
-  "imageUploadError": "There was a problem uploading your image.",
   "termsConditions": "Terms and Conditions go here",
-  "userProfile": "{user}",
+  "userProfile": "User Profile: {user}",
   "userRegistration": "User Registration",
   "userRegistrationWhyJoin": "Why do you want to be on the volunteer design team for YouVersion?",
   "versesNeedImages": "Verses that need images",
@@ -38,13 +36,6 @@
 	"continueFacebook": "Continue with Facebook",
 	"continueGoogle": "Continue with Google",
   "signOut": "Sign Out",
-  "registrationError": "There was a problem registering you as a partner.",
   "language": "Language",
-  "version": "Version",
-	"userBio": "YouVersion Volunteer",
-  "designerSince": "Designer since {date}",
-  "submissionsLabel": "Submissions",
-  "approvedLabel": "Approved",
-  "declinedLabel": "Declined",
-  "pendingLabel": "Pending"
+  "version": "Version"
 }

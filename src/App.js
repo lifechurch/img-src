@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import YVAuthProtectedRoute from '@youversion/tupos-auth/dist/YVAuthProtectedRoute'
-import PartnerProtectedRoute from './context/PartnerProtectedRoute'
 import SidebarNavMenu from './components/sidebar-nav-menu'
 import Admin from './containers/admin'
 import SplashPage from './containers/splash-page'
@@ -25,21 +24,21 @@ function App() {
 				<ToastHandler />
 
 				<Route exact path="/" component={SplashPage} />
-				  <YVAuthProtectedRoute redirectTo="/" path="/user-registration" component={UserRegistration} />
+				<YVAuthProtectedRoute redirectTo="/" path="/user-registration" component={UserRegistration} />
 				<Route
 					path="/user-verse-assignment" render={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu />}>
-								<PartnerProtectedRoute redirectTo="/" path="/user-verse-assignment" component={UserVerseAssignment} />
+								<YVAuthProtectedRoute redirectTo="/" path="/user-verse-assignment" component={UserVerseAssignment} />
 							</SidebarNav>
 						)
 					}}
 				/>
 				<Route
-					path="/user-profile/:userId?/:imageStatus?" render={() => {
+					path="/user-profile/:userId" render={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu />}>
-								<PartnerProtectedRoute redirectTo="/" path="/user-profile/:userId?/:imageStatus?" component={UserProfile} />
+								<YVAuthProtectedRoute redirectTo="/" path="/user-profile/:userId" component={UserProfile} />
 							</SidebarNav>
 						)
 					}}
@@ -48,7 +47,7 @@ function App() {
 					path="/admin" component={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
-								<PartnerProtectedRoute redirectTo="/" path="/admin" component={Admin} />
+								<YVAuthProtectedRoute redirectTo="/" path="/admin" component={Admin} />
 							</SidebarNav>
 						)
 					}}
