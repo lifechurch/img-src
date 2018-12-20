@@ -78,7 +78,7 @@ class SplashPage extends Component {
 							</PrimaryHeading>
 						</div>
 
-						<div className="splashSubText absolute z-1">
+						<div className="splashSubtitle absolute z-1">
 							<MinorHeading>
 								<FormattedMessage id="joinTheCommunity" />
 							</MinorHeading>
@@ -95,7 +95,7 @@ class SplashPage extends Component {
 						</SecondaryHeading>
 					</div>
 
-					<div className="w5 bg-light-silver self-center mv4" style={{ height: 1 }} />
+					<div className="w5 bg-light-silver self-center mb4" style={{ height: 1 }} />
 
 					<form className="w-100">
 						<div className="w-100 flex items-center flex-column">
