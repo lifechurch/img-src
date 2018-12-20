@@ -24,13 +24,30 @@
       "query": {
         "image_status": "string"
       }
+    },
+    "confirmUpload": {
+      "description": "Confirm that image upload is complete and image is ready to view.",
+      "endpoint": "viewmaster",
+      "method": "images/confirm_post_and_submit/:presignedUploadId/:presignedUploadConfirmId",
+      "version": "api",
+      "auth": true,
+      "parseJson": true,
+      "jsonRootNode": "data",
+      "hasBody": true,
+      "urlParams": {
+        "presignedUploadId": "string",
+        "presignedUploadConfirmId": "string"
+      },
+      "fetchArgs": {
+        "method": "POST"
+      }
     }
   },
   "sample": {
     "jsonRootNode": false,
     "sampleMethod": "getOne",
     "sampleUrlParams": {
-      "imageId": 1
+      "imageId": 25
     }
   },
   "template": "youversion"

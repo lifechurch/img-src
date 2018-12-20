@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>image-config/params.js - Documentation</title>
+    <title>image-config/aws_response.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">image-config/params.js</h1>
+    <h1 class="page-title">image-config/aws_response.js</h1>
     
 
     
@@ -40,83 +40,50 @@
             <pre class="prettyprint source linenums"><code>
 import setString from '@youversion/tupos-base/dist/setters/string'
 
-
+import Fields from './aws_response/fields'
 
 /** *
  * ImageConfig model
  */
-class Params {
+class AwsResponse {
 	constructor(json) {
 
 		if (!json || typeof json !== 'object') return
-		this.acl = json.acl
-		this.key = json.key
-		this.AWSAccessKeyId = json.AWSAccessKeyId
-		this.policy = json.policy
-		this.signature = json.signature
+		this.url = json.url
+		this.fields = json.fields
 	}
 
-	/** Convert Params to simple object */
+	/** Convert AwsResponse to simple object */
 	toObject() {
 		return {
-			acl: this.acl,
-			key: this.key,
-			AWSAccessKeyId: this.AWSAccessKeyId,
-			policy: this.policy,
-			signature: this.signature
+			url: this.url,
+			fields: this.fields.toObject()
 		}
 	}
 
 
 
 	/** @type {string} */
-	get acl() {
-		return this._acl
+	get url() {
+		return this._url
 	}
 
-	set acl(acl) {
-		this._acl = setString(acl, 'acl')
+	set url(url) {
+		this._url = setString(url, 'url')
 	}
 
-	/** @type {string} */
-	get key() {
-		return this._key
+	/** @type {Fields} */
+	get fields() {
+		return this._fields
 	}
 
-	set key(key) {
-		this._key = setString(key, 'key')
-	}
-
-	/** @type {string} */
-	get AWSAccessKeyId() {
-		return this._AWSAccessKeyId
-	}
-
-	set AWSAccessKeyId(AWSAccessKeyId) {
-		this._AWSAccessKeyId = setString(AWSAccessKeyId, 'AWSAccessKeyId')
-	}
-
-	/** @type {string} */
-	get policy() {
-		return this._policy
-	}
-
-	set policy(policy) {
-		this._policy = setString(policy, 'policy')
-	}
-
-	/** @type {string} */
-	get signature() {
-		return this._signature
-	}
-
-	set signature(signature) {
-		this._signature = setString(signature, 'signature')
+	set fields(fields) {
+		this._fields = new Fields(fields, 'fields')
 	}
 
 }
 
-export default Params
+export default AwsResponse
 </code></pre>
         </article>
     </section>
