@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import ToggleBar from '../../components/toggle-bar'
+import pin from '../../assets/pin.png'
 import tempIcon from '../../assets/me.svg'
 import Image from '../../tupos/models/image'
 
@@ -12,13 +13,13 @@ class UserProfile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-      images: [],
-      counts: {
-        approved: 0,
-        denied: 0,
-        moderated: 0,
-        pending: 0
-      }
+			images: [],
+			counts: {
+				approved: 0,
+				denied: 0,
+				moderated: 0,
+				pending: 0
+			}
 		}
 		this.loadData = this.loadData.bind(this)
 	}
@@ -27,73 +28,73 @@ class UserProfile extends React.Component {
 		this.loadData()
 	}
 
-  componentDidUpdate(prevProps) {
-    const {
-      match: {
-        params: {
-          imageStatus
-        },
-      },
-    } = this.props
+	componentDidUpdate(prevProps) {
+		const {
+			match: {
+				params: {
+					imageStatus
+				},
+			},
+		} = this.props
 
-    const {
-      match: {
-        params: {
-          imageStatus: prevImageStatus,
-        },
-      },
-    } = prevProps
+		const {
+			match: {
+				params: {
+					imageStatus: prevImageStatus,
+				},
+			},
+		} = prevProps
 
-    if (imageStatus !== prevImageStatus) {
-      this.loadData()
-    }
-  }
+		if (imageStatus !== prevImageStatus) {
+			this.loadData()
+		}
+	}
 
 	async loadData() {
-    const {
-      match: {
-        params: {
-          imageStatus
-        },
-      },
-    } = this.props
+		const {
+			match: {
+				params: {
+					imageStatus
+				},
+			},
+		} = this.props
 
-    if (imageStatus) {
-      let images = []
-      try {
-        images = await Image.getMany(imageStatus)
-      } catch(e) {}
-      this.setState({ images })
-    }
+		if (imageStatus) {
+			let images = []
+			try {
+				images = await Image.getMany(imageStatus)
+			} catch (e) {}
+			this.setState({ images })
+		}
 	}
 
 	render() {
 		const {
-      images,
-      counts
+			images,
+			counts
 		} = this.state
 
-    const {
-      user,
-      match: {
-        params: {
-          userId,
-          imageStatus
-        },
-      }
-    } = this.props
+		const {
+			user,
+			match: {
+				params: {
+					userId,
+					imageStatus
+				},
+			}
+		} = this.props
 
-    if (!userId) return (<Redirect to={`/user-profile/${user.id}/pending`} />)
-    if (!imageStatus) return (<Redirect to={`/user-profile/${userId}/pending`} />)
+		if (!userId) return (<Redirect to={`/user-profile/${user.id}/pending`} />)
+		if (!imageStatus) return (<Redirect to={`/user-profile/${userId}/pending`} />)
 
-    const imageList = images.map((image) => {
-      if (!image.url || !image.url.length) return null
-      return (
-        <div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
-          <img src={image.url} className="pv2" />
-        </div>
-      )
-    })
+		const imageList = images.map((image) => {
+			if (!image.url || !image.url.length) return null
+			return (
+				<div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
+					<img src={image.url} className="pv2" />
+				</div>
+			)
+		})
 
 		return (
 			<div className="pt4">
@@ -119,8 +120,8 @@ class UserProfile extends React.Component {
 
 						{ user.location &&
 						<div className="flex">
-							<img src={tempIcon} alt="" className="mr2" />
-							<p className="gray">
+							<img src={pin} alt="" className="mr2 w1 h1 mt2" />
+							<p className="gray mt2">
 								{user.location}
 							</p>
 						</div> }
@@ -160,7 +161,7 @@ class UserProfile extends React.Component {
 
 					<div className="mw9 center ph3-ns">
 						<div className="cf ph2-ns">
-              {imageList}
+							{imageList}
 						</div>
 					</div>
 				</div>
