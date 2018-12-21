@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
 				},
 			},
 		} = prevProps
-		
+
 		if (imageStatus !== prevImageStatus) {
 			this.setState({ images: [] })
 			this.loadData()
@@ -64,7 +64,6 @@ class UserProfile extends React.Component {
 		} = this.props
 
 		if (imageStatus) {
-			let images = []
 			const stat = imageStatus !== 'submissions' ? imageStatus : ''
 
 			this.setState({ loadingData: true })
@@ -130,12 +129,12 @@ class UserProfile extends React.Component {
 						</p>
 
 						{ user.location &&
-    						<div className="flex">
-    							<img src={pin} alt="" className="mr2 w1 h1 mt2" />
-    							<p className="gray mt2">
-    								{user.location}
-    							</p>
-    						</div> 
+							<div className="flex">
+								<img src={pin} alt="" className="mr2 w1 h1 mt2" />
+								<p className="gray mt2">
+									{user.location}
+								</p>
+							</div>
 						}
 					</div>
 				</div>
