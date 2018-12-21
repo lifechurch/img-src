@@ -146,9 +146,9 @@ class UserProfile extends React.Component {
 							<ToggleBar
 								links={[
 									{
-										text: <FormattedMessage id="submissionsLabel" />,
-										address: `/user-profile/${userId}/submissions`,
-										total: counts.moderated
+										text: <FormattedMessage id="pendingLabel" />,
+										address: `/user-profile/${userId}/pending`,
+										total: counts.pending
 									},
 									{
 										text: <FormattedMessage id="approvedLabel" />,
@@ -161,9 +161,9 @@ class UserProfile extends React.Component {
 										total: counts.denied
 									},
 									{
-										text: <FormattedMessage id="pendingLabel" />,
-										address: `/user-profile/${userId}/pending`,
-										total: counts.pending
+										text: <FormattedMessage id="allLabel" />,
+										address: `/user-profile/${userId}/submissions`,
+										total: counts.moderated
 									}
 								]}
 							/>
