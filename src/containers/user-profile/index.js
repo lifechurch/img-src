@@ -48,6 +48,7 @@ class UserProfile extends React.Component {
 		} = prevProps
 
 		if (imageStatus !== prevImageStatus) {
+			this.setState({ imageData: [] })
 			this.loadData()
 		}
 	}
@@ -63,14 +64,17 @@ class UserProfile extends React.Component {
 
 		if (imageStatus) {
 			let imageData = []
+			const stat = imageStatus !== 'submissions' ? imageStatus : ''
 
 			this.setState({ loadingData: true })
-			imageData = Image.getMany(imageStatus)
+			imageData = Image.getMany(stat)
 				.then((data) => {
 					imageData = data
 					this.setState({ imageData, loadingData: false })
 				})
-				.catch(() => {})
+				.catch(() => {
+					this.setState({ loadingData: false })
+				})
 		}
 	}
 
@@ -136,7 +140,7 @@ class UserProfile extends React.Component {
 				<div className="flex-auto pa4 bg-light-gray">
 					<h1 className="ma0 pa0">
 
-						<div className="w-100 flex justify-center ma3">
+						<div className="w-100 flex justify-center mb3">
 							<ToggleBar
 								links={[
 									{
@@ -164,14 +168,18 @@ class UserProfile extends React.Component {
 						</div>
 					</h1>
 
-					<div className="mw9 center ph3-ns">
+					<div className="flex justify-center mw9 center ph3-ns">
 						<div className="cf ph2-ns">
-							{imageList}
-							{ loadingData &&
+							{ loadingData ?
 								<PulseLoader
 									className="flex justify-center mt5"
 									color="#555"
-								/>
+								/> :
+								[
+									imageList.length ?
+										imageList :
+										<p className="b f3-ns f5 mid-gray tc">{`No ${imageStatus} images found.`}</p>
+								]
 							}
 						</div>
 					</div>
@@ -182,6 +190,7 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.propTypes = {
+	user: PropTypes.object,
 	match: PropTypes.shape({
 		params: PropTypes.shape({
 			inventoryId: PropTypes.string,
@@ -190,6 +199,7 @@ UserProfile.propTypes = {
 }
 
 UserProfile.defaultProps = {
+	user: {},
 	match: null
 }
 export default withYVAuth(UserProfile)
