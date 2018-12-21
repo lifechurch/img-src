@@ -6,6 +6,7 @@ import moment from 'moment'
 import PulseLoader from 'react-spinners/PulseLoader'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import ToggleBar from '../../components/toggle-bar'
+import pin from '../../assets/pin.png'
 import tempIcon from '../../assets/me.svg'
 import Image from '../../tupos/models/image'
 
@@ -13,7 +14,7 @@ class UserProfile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			imageData: [],
+			images: [],
 			loadingData: false,
 			counts: {
 				approved: 0,
@@ -46,9 +47,9 @@ class UserProfile extends React.Component {
 				},
 			},
 		} = prevProps
-
+		
 		if (imageStatus !== prevImageStatus) {
-			this.setState({ imageData: [] })
+			this.setState({ images: [] })
 			this.loadData()
 		}
 	}
@@ -63,14 +64,13 @@ class UserProfile extends React.Component {
 		} = this.props
 
 		if (imageStatus) {
-			let imageData = []
+			let images = []
 			const stat = imageStatus !== 'submissions' ? imageStatus : ''
 
 			this.setState({ loadingData: true })
-			imageData = Image.getMany(stat)
-				.then((data) => {
-					imageData = data
-					this.setState({ imageData, loadingData: false })
+			Image.getMany(stat)
+				.then((images) => {
+					this.setState({ images, loadingData: false })
 				})
 				.catch(() => {
 					this.setState({ loadingData: false })
@@ -80,7 +80,7 @@ class UserProfile extends React.Component {
 
 	render() {
 		const {
-			imageData,
+			images,
 			loadingData,
 			counts
 		} = this.state
@@ -98,7 +98,7 @@ class UserProfile extends React.Component {
 		if (!userId) return (<Redirect to={`/user-profile/${user.id}/pending`} />)
 		if (!imageStatus) return (<Redirect to={`/user-profile/${userId}/pending`} />)
 
-		const imageList = imageData.map((image) => {
+		const imageList = images.map((image) => {
 			if (!image.url || !image.url.length) return null
 			return (
 				<div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
@@ -111,29 +111,32 @@ class UserProfile extends React.Component {
 			<div className="flex flex-column w-100 min-h-100 pt4">
 
 				<div className="pb2 flex flex-column-ns items-center-ns justify-center-ns">
-					{user.avatarImageId ? (
-						<div className="ma3">
-							<div>
+					<div className="ma3">
+						<div>
+							{user.avatarImageId ? (
 								<img src={user.avatarUrl} alt={user.firstName} className="w4-ns w3 br-100" />
-							</div>
+							) : <img src={tempIcon} alt={user.firstName} className="w3-ns w3 br-100" /> }
 						</div>
-					) : null}
+					</div>
 					<div className="flex flex-column items-center-ns justify-center-ns mt3">
 						<h2 className="ma0 pa0">
-							{ `${user.firstName} ${user.lastName}` }
+							{user.firstName} {user.lastName}
 						</h2>
 						<p className="ma0 pa0 light-silver">
 							<FormattedMessage id="userBio" />
 						</p>
-						<p className="ma0 pa0 light-silver">
+						<p className={`ma0 pa0 light-silver ${!user.location ? 'mb4' : ''}`}>
 							<FormattedMessage id="designerSince" values={{ date: moment().format('LL') }} />
 						</p>
-						<div className="flex">
-							<img src={tempIcon} alt="" className="mr2" />
-							<p className="gray">
-								{user.location}
-							</p>
-						</div>
+
+						{ user.location &&
+    						<div className="flex">
+    							<img src={pin} alt="" className="mr2 w1 h1 mt2" />
+    							<p className="gray mt2">
+    								{user.location}
+    							</p>
+    						</div> 
+						}
 					</div>
 				</div>
 
