@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
+import PulseLoader from 'react-spinners/PulseLoader'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import ToggleBar from '../../components/toggle-bar'
 import pin from '../../assets/pin.png'
@@ -14,6 +15,7 @@ class UserProfile extends React.Component {
 		super(props)
 		this.state = {
 			images: [],
+			loadingData: false,
 			counts: {
 				approved: 0,
 				denied: 0,
@@ -21,6 +23,7 @@ class UserProfile extends React.Component {
 				pending: 0
 			}
 		}
+
 		this.loadData = this.loadData.bind(this)
 	}
 
@@ -46,6 +49,7 @@ class UserProfile extends React.Component {
 		} = prevProps
 
 		if (imageStatus !== prevImageStatus) {
+			this.setState({ images: [] })
 			this.loadData()
 		}
 	}
@@ -60,17 +64,23 @@ class UserProfile extends React.Component {
 		} = this.props
 
 		if (imageStatus) {
-			let images = []
-			try {
-				images = await Image.getMany(imageStatus)
-			} catch (e) {}
-			this.setState({ images })
+			const stat = imageStatus !== 'submissions' ? imageStatus : ''
+
+			this.setState({ loadingData: true })
+			Image.getMany(stat)
+				.then((images) => {
+					this.setState({ images, loadingData: false })
+				})
+				.catch(() => {
+					this.setState({ loadingData: false })
+				})
 		}
 	}
 
 	render() {
 		const {
 			images,
+			loadingData,
 			counts
 		} = this.state
 
@@ -91,13 +101,13 @@ class UserProfile extends React.Component {
 			if (!image.url || !image.url.length) return null
 			return (
 				<div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
-					<img src={image.url} className="pv2" />
+					<img src={image.url} className="pv2" alt="" />
 				</div>
 			)
 		})
 
 		return (
-			<div className="pt4">
+			<div className="flex flex-column w-100 min-h-100 pt4">
 
 				<div className="pb2 flex flex-column-ns items-center-ns justify-center-ns">
 					<div className="ma3">
@@ -119,19 +129,20 @@ class UserProfile extends React.Component {
 						</p>
 
 						{ user.location &&
-						<div className="flex">
-							<img src={pin} alt="" className="mr2 w1 h1 mt2" />
-							<p className="gray mt2">
-								{user.location}
-							</p>
-						</div> }
+							<div className="flex">
+								<img src={pin} alt="" className="mr2 w1 h1 mt2" />
+								<p className="gray mt2">
+									{user.location}
+								</p>
+							</div>
+						}
 					</div>
 				</div>
 
-				<div className="pt2 bg-light-gray pa4" >
+				<div className="flex-auto pa4 bg-light-gray">
 					<h1 className="ma0 pa0">
 
-						<div className="w-100 flex justify-center ma3">
+						<div className="w-100 flex justify-center mb3">
 							<ToggleBar
 								links={[
 									{
@@ -159,9 +170,19 @@ class UserProfile extends React.Component {
 						</div>
 					</h1>
 
-					<div className="mw9 center ph3-ns">
+					<div className="flex justify-center mw9 center ph3-ns">
 						<div className="cf ph2-ns">
-							{imageList}
+							{ loadingData ?
+								<PulseLoader
+									className="flex justify-center mt5"
+									color="#555"
+								/> :
+								[
+									imageList.length ?
+										imageList :
+										<p className="b f3-ns f5 mid-gray tc">{`No ${imageStatus} images found.`}</p>
+								]
+							}
 						</div>
 					</div>
 				</div>
@@ -171,6 +192,7 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.propTypes = {
+	user: PropTypes.object,
 	match: PropTypes.shape({
 		params: PropTypes.shape({
 			inventoryId: PropTypes.string,
@@ -179,6 +201,7 @@ UserProfile.propTypes = {
 }
 
 UserProfile.defaultProps = {
+	user: {},
 	match: null
 }
 export default withYVAuth(UserProfile)

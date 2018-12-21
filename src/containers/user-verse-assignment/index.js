@@ -1,24 +1,27 @@
 /* eslint-disable linebreak-style */
 import React from 'react'
-import { FormattedMessage, injectIntl } from 'react-intl'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import shortid from 'shortid'
-import PrimaryHeading from './../../components/typography/primary-heading'
+import PulseLoader from 'react-spinners/PulseLoader'
+import PrimaryHeading from '../../components/typography/primary-heading'
 import Verses from '../../tupos/models/verses'
 import Language from '../../tupos/models/language'
 import Version from '../../tupos/models/version'
 import Image from '../../tupos/models/image'
 import ImageConfig from '../../tupos/models/image-config'
-import MinorHeading from './../../components/typography/minor-heading'
-import BodyText from './../../components/typography/body-text'
-import ImageDrop from './../../components/image-drop'
-import ComboBox from './../../components/combo-box'
-import Card from './../../components/card'
-import { notifier } from './../../components/toast-handler'
+import MinorHeading from '../../components/typography/minor-heading'
+import BodyText from '../../components/typography/body-text'
+import ImageDrop from '../../components/image-drop'
+import ComboBox from '../../components/combo-box'
+import Card from '../../components/card'
+import { notifier } from '../../components/toast-handler'
 
 class UserVerseAssignment extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			loadingData: false
+		}
 		this.notify = notifier.notify()
 		this.onResize = this.onResize.bind(this)
 		this.loadData = this.loadData.bind(this)
@@ -42,99 +45,93 @@ class UserVerseAssignment extends React.Component {
 		})
 	}
 
-  async handleDrop(verse, accepted, rejected) {
-    if (!Array.isArray(accepted) || accepted.length === 0) return
+	async handleDrop(verse, accepted, rejected) {
+		if (!Array.isArray(accepted) || accepted.length === 0) return
 
-    /* NOTE: Only accepts single-file JPEG uploads for now */
+		/* NOTE: Only accepts single-file JPEG uploads for now */
 
-    const { intl } = this.props
-    const imageConfig = await ImageConfig.get()
-    const {
-      awsResponse,
-      presignedUploadConfirmId,
-      presignedUploadId
-    } = imageConfig
+		const { intl } = this.props
+		const imageConfig = await ImageConfig.get()
+		const {
+			awsResponse,
+			presignedUploadConfirmId,
+			presignedUploadId
+		} = imageConfig
 
-    const formData = new FormData()
-    const reader = new FileReader()
-    const fileToUpload = accepted[0]
+		const formData = new FormData()
+		const reader = new FileReader()
+		const fileToUpload = accepted[0]
 
-    formData.append('AWSAccessKeyId', awsResponse.fields.AWSAccessKeyId)
-    formData.append('key', awsResponse.fields.key)
-    formData.append('policy', awsResponse.fields.policy)
-    formData.append('acl', awsResponse.fields.acl)
-    formData.append('Content-Type',  'image/jpeg')
-    formData.append('signature', awsResponse.fields.signature)
-    formData.append('file', fileToUpload)
+		formData.append('AWSAccessKeyId', awsResponse.fields.AWSAccessKeyId)
+		formData.append('key', awsResponse.fields.key)
+		formData.append('policy', awsResponse.fields.policy)
+		formData.append('acl', awsResponse.fields.acl)
+		formData.append('Content-Type', 'image/jpeg')
+		formData.append('signature', awsResponse.fields.signature)
+		formData.append('file', fileToUpload)
 
-    reader.onload = (loadEvent) => {
-      const image = new Image()
-      const handleLoad = () => {
-        const xhr = new XMLHttpRequest()
-        xhr.open('POST', awsResponse.url)
-        xhr.send(formData)
+		reader.onload = (loadEvent) => {
+			const image = new Image()
+			const handleLoad = () => {
+				const xhr = new XMLHttpRequest()
+				xhr.open('POST', awsResponse.url)
+				xhr.send(formData)
 
-        xhr.onload = () => {
-          if (xhr.readyState === 4) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-              this.notify(intl.formatMessage({ id: 'imageUploadComplete' }))
-              const postBody = {
-                language_tag: 'en',
-                usfm: verse.usfms
-              }
-              const confirmResponse = Image.confirmUpload(presignedUploadConfirmId, presignedUploadId, postBody)
-            } else {
-              this.notify(intl.formatMessage({ id: 'imageUploadError' }), 0, false)
-            }
-          }
-        }
-        xhr.onerror = (e) => {
-          this.notify(intl.formatMessage({ id: 'imageUploadError' }), 0, false)
-        }
-      }
+				xhr.onload = () => {
+					if (xhr.readyState === 4) {
+						if (xhr.status >= 200 && xhr.status < 300) {
+							this.notify(intl.formatMessage({ id: 'imageUploadComplete' }))
+							const postBody = {
+								language_tag: 'en',
+								usfm: verse.usfms
+							}
+							const confirmResponse = Image.confirmUpload(presignedUploadConfirmId, presignedUploadId, postBody)
+						} else {
+							this.notify(intl.formatMessage({ id: 'imageUploadError' }), 0, false)
+						}
+					}
+				}
+				xhr.onerror = () => {
+					this.notify(intl.formatMessage({ id: 'imageUploadError' }), 0, false)
+				}
+			}
 
-      image.src = loadEvent.target.result
-      if (image.width === 0) {
-        image.onload = handleLoad
-      } else {
-        handleLoad()
-      }
-    }
-    reader.readAsDataURL(fileToUpload)
-  }
+			image.src = loadEvent.target.result
+			if (image.width === 0) {
+				image.onload = handleLoad
+			} else {
+				handleLoad()
+			}
+		}
+		reader.readAsDataURL(fileToUpload)
+	}
 
 	async loadData() {
-    let verses = []
-    let images = []
-    let langs = []
-    let vers = []
+		let verses = []
+		let images = []
+		let langs = []
+		let vers = []
 
-    try {
-      verses = await Verses.getMany()
-    } catch(e) {}
+		this.setState({ loadingData: true })
+		verses = Verses.getMany().catch(() => {})
+		langs = Language.getMany().catch(() => {})
+		vers = Version.getMany().catch(() => {})
+		images = Image.getMany('pending').catch(() => {})
 
-    try {
-      images = await Image.getMany('pending')
-    } catch(e) {}
+		Promise.all([verses, langs, vers, images]).then((data) => {
+			const languages = data[1].map((l) => {
+				return { name: l.name, value: l.languageTag }
+			})
 
-    try {
-      langs = await Language.getMany()
-    } catch(e) {}
+			const versions = data[2].map((v) => {
+				return { name: v.name, value: v.abbreviation }
+			})
 
-    try {
-      vers = await Version.getMany()
-    } catch(e) {}
-
-
-		const languages = langs.map((l) => {
-			return { name: l.name, value: l.languageTag }
+			this.setState({
+				verses: data[0], images: data[3], languages, versions, loadingData: false
+			})
 		})
-
-		const versions = vers.map((v) => {
-			return { name: v.name, value: v.abbreviation }
-		})
-
-		this.setState({ verses, languages, versions, images })
+		// this.setState({ verses, languages, versions, images })
 	}
 
 	render() {
@@ -143,7 +140,8 @@ class UserVerseAssignment extends React.Component {
 			verses,
 			languages,
 			versions,
-			images
+			images,
+			loadingData
 		} = this.state
 
 		const {
@@ -159,37 +157,37 @@ class UserVerseAssignment extends React.Component {
 					<PrimaryHeading>
 						<FormattedMessage id={width > 700 ? 'versesNeedImages' : 'verses'} />
 					</PrimaryHeading>
-					{width > 700 &&
+					{width > 700 && (
 						<div className="mt2">
 							<MinorHeading>
 								<FormattedMessage id="chooseAVerse" />
 							</MinorHeading>
 						</div>
-					}
+					)}
 
 					<div className="w-100 flex items-center justify-between flex-wrap">
 						<div className={`flex ${width > 700 ? 'mv4' : 'mv3'}`}>
-							{languages &&
+							{languages && (
 								<ComboBox
 									name={languageString}
 									options={languages}
 									onSelect={(val) => { return (val) }}
 								/>
-							}
-							{versions &&
+							)}
+							{versions && (
 								<ComboBox
 									name={versionString}
 									options={versions}
 									onSelect={(val) => { return (val) }}
 								/>
-							}
+							)}
 						</div>
 
-						{ images &&
+						{ images && (
 							<span className="fr green b">
 								<FormattedMessage id="pendingImages" />: {images.length}
 							</span>
-						}
+						)}
 					</div>
 				</div>
 
@@ -200,27 +198,39 @@ class UserVerseAssignment extends React.Component {
 						</BodyText>
 					</div>
 					{ verses && verses.map((verse) => {
-						return <div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
-							<Card>
-								<ImageDrop
-									minWidth={1080}
-									maxWidth={1920}
-									minHeight={1080}
-									maxHeight={1920}
-									onDrop={this.handleDrop.bind(this, verse)}
-								>
-									<div className="b mb2">
-										<BodyText>{verse.humanReference}</BodyText>
-									</div>
-									<BodyText>{verse.text}</BodyText>
-								</ImageDrop>
-							</Card>
-						</div>
+						return (
+							<div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
+								<Card>
+									<ImageDrop
+										minWidth={1080}
+										maxWidth={1920}
+										minHeight={1080}
+										maxHeight={1920}
+										onDrop={this.handleDrop.bind(this, verse)}
+									>
+										<div className="b mb2">
+											<BodyText>{verse.humanReference}</BodyText>
+										</div>
+										<BodyText>{verse.text}</BodyText>
+									</ImageDrop>
+								</Card>
+							</div>
+						)
 					})}
+					{ loadingData &&
+						<PulseLoader
+							className="flex justify-center mt5"
+							color="#555"
+						/>
+					}
 				</div>
 			</div>
 		)
 	}
+}
+
+UserVerseAssignment.propTypes = {
+	intl: intlShape.isRequired,
 }
 
 export default injectIntl(UserVerseAssignment)
