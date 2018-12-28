@@ -49,6 +49,7 @@ module.exports = {
 		indent: [2, 'tab', {
 			SwitchCase: 1
 		}],
+		"linebreak-style": 0,
 		'no-unused-vars': 1,
 		'no-underscore-dangle': 0,
 		'one-var': 0,
