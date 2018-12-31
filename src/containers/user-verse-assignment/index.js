@@ -199,7 +199,7 @@ class UserVerseAssignment extends React.Component {
 					</div>
 					{ verses && verses.map((verse) => {
 						return (
-							<div className={width > 700 ? 'mv4' : 'mv2'} key={shortid.generate()}>
+							<div className={width > 700 ? 'mv4 mw7 center' : 'mv2'} key={shortid.generate()}>
 								<Card>
 									<ImageDrop
 										minWidth={1080}
