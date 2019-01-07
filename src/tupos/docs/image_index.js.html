@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AwsResponse.html">AwsResponse</a><ul class='methods'><li data-type='method'><a href="AwsResponse.html#toObject">toObject</a></li></ul></li><li><a href="Copyright.html">Copyright</a><ul class='methods'><li data-type='method'><a href="Copyright.html#toObject">toObject</a></li></ul></li><li><a href="Fields.html">Fields</a><ul class='methods'><li data-type='method'><a href="Fields.html#toObject">toObject</a></li></ul></li><li><a href="Image.html">Image</a><ul class='methods'><li data-type='method'><a href="Image.html#.confirmUpload">confirmUpload</a></li><li data-type='method'><a href="Image.html#.getMany">getMany</a></li><li data-type='method'><a href="Image.html#.getOne">getOne</a></li><li data-type='method'><a href="Image.html#toObject">toObject</a></li></ul></li><li><a href="ImageConfig.html">ImageConfig</a><ul class='methods'><li data-type='method'><a href="ImageConfig.html#.get">get</a></li><li data-type='method'><a href="ImageConfig.html#toObject">toObject</a></li></ul></li><li><a href="Language.html">Language</a><ul class='methods'><li data-type='method'><a href="Language.html#.getMany">getMany</a></li><li data-type='method'><a href="Language.html#toObject">toObject</a></li></ul></li><li><a href="Reference.html">Reference</a><ul class='methods'><li data-type='method'><a href="Reference.html#toObject">toObject</a></li></ul></li><li><a href="Verse.html">Verse</a><ul class='methods'><li data-type='method'><a href="Verse.html#.getOne">getOne</a></li><li data-type='method'><a href="Verse.html#toObject">toObject</a></li></ul></li><li><a href="Verses.html">Verses</a><ul class='methods'><li data-type='method'><a href="Verses.html#.getMany">getMany</a></li><li data-type='method'><a href="Verses.html#toObject">toObject</a></li></ul></li><li><a href="Version.html">Version</a><ul class='methods'><li data-type='method'><a href="Version.html#.getMany">getMany</a></li><li data-type='method'><a href="Version.html#toObject">toObject</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AwsResponse.html">AwsResponse</a><ul class='methods'><li data-type='method'><a href="AwsResponse.html#toObject">toObject</a></li></ul></li><li><a href="Copyright.html">Copyright</a><ul class='methods'><li data-type='method'><a href="Copyright.html#toObject">toObject</a></li></ul></li><li><a href="Fields.html">Fields</a><ul class='methods'><li data-type='method'><a href="Fields.html#toObject">toObject</a></li></ul></li><li><a href="Image.html">Image</a><ul class='methods'><li data-type='method'><a href="Image.html#.confirmUpload">confirmUpload</a></li><li data-type='method'><a href="Image.html#.getMany">getMany</a></li><li data-type='method'><a href="Image.html#.getOne">getOne</a></li><li data-type='method'><a href="Image.html#toObject">toObject</a></li></ul></li><li><a href="ImageConfig.html">ImageConfig</a><ul class='methods'><li data-type='method'><a href="ImageConfig.html#.get">get</a></li><li data-type='method'><a href="ImageConfig.html#toObject">toObject</a></li></ul></li><li><a href="ImageCounts.html">ImageCounts</a><ul class='methods'><li data-type='method'><a href="ImageCounts.html#.get">get</a></li><li data-type='method'><a href="ImageCounts.html#toObject">toObject</a></li></ul></li><li><a href="Language.html">Language</a><ul class='methods'><li data-type='method'><a href="Language.html#.getMany">getMany</a></li><li data-type='method'><a href="Language.html#toObject">toObject</a></li></ul></li><li><a href="Reference.html">Reference</a><ul class='methods'><li data-type='method'><a href="Reference.html#toObject">toObject</a></li></ul></li><li><a href="Verse.html">Verse</a><ul class='methods'><li data-type='method'><a href="Verse.html#.getOne">getOne</a></li><li data-type='method'><a href="Verse.html#toObject">toObject</a></li></ul></li><li><a href="Verses.html">Verses</a><ul class='methods'><li data-type='method'><a href="Verses.html#.getMany">getMany</a></li><li data-type='method'><a href="Verses.html#toObject">toObject</a></li></ul></li><li><a href="Version.html">Version</a><ul class='methods'><li data-type='method'><a href="Version.html#.getMany">getMany</a></li><li data-type='method'><a href="Version.html#toObject">toObject</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -38,8 +38,6 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { TuposModel } from '@youversion/tupos-base'
-import setDate from '@youversion/tupos-base/dist/setters/date'
-import setNumber from '@youversion/tupos-base/dist/setters/number'
 import setString from '@youversion/tupos-base/dist/setters/string'
 import api4 from '@youversion/tupos-base/dist/fetchers/api4'
 
@@ -52,31 +50,13 @@ class Image extends TuposModel {
 	constructor(json) {
 		super(json)
 		if (!json || typeof json !== 'object') return
-		this.versionId = json.version_id
-		this.usfm = json.usfm
-		this.createdDt = json.created_dt
-		this.url = json.url
-		this.userId = json.user_id
-		this.status = json.status
-		this.languageTag = json.language_tag
-		this.weight = json.weight
-		this.id = json.id
-		this.category = json.category
+		this.errors = json.errors
 	}
 
 	/** Convert Image to simple object */
 	toObject() {
 		return {
-			version_id: this.versionId,
-			usfm: this.usfm,
-			created_dt: this.createdDt,
-			url: this.url,
-			user_id: this.userId,
-			status: this.status,
-			language_tag: this.languageTag,
-			weight: this.weight,
-			id: this.id,
-			category: this.category
+			errors: this.errors
 		}
 	}
 
@@ -140,94 +120,13 @@ class Image extends TuposModel {
 	}
 
 
-	/** @type {number} */
-	get versionId() {
-		return this._versionId
-	}
-
-	set versionId(versionId) {
-		this._versionId = setNumber(versionId, 'versionId')
-	}
-
 	/** @type {string} */
-	get usfm() {
-		return this._usfm
+	get errors() {
+		return this._errors
 	}
 
-	set usfm(usfm) {
-		this._usfm = setString(usfm, 'usfm')
-	}
-
-	/** @type {Date} */
-	get createdDt() {
-		return this._createdDt
-	}
-
-	set createdDt(createdDt) {
-		this._createdDt = setDate(createdDt, 'createdDt')
-	}
-
-	/** @type {string} */
-	get url() {
-		return this._url
-	}
-
-	set url(url) {
-		this._url = setString(url, 'url')
-	}
-
-	/** @type {number} */
-	get userId() {
-		return this._userId
-	}
-
-	set userId(userId) {
-		this._userId = setNumber(userId, 'userId')
-	}
-
-	/** @type {string} */
-	get status() {
-		return this._status
-	}
-
-	set status(status) {
-		this._status = setString(status, 'status')
-	}
-
-	/** @type {string} */
-	get languageTag() {
-		return this._languageTag
-	}
-
-	set languageTag(languageTag) {
-		this._languageTag = setString(languageTag, 'languageTag')
-	}
-
-	/** @type {string} */
-	get weight() {
-		return this._weight
-	}
-
-	set weight(weight) {
-		this._weight = setString(weight, 'weight')
-	}
-
-	/** @type {number} */
-	get id() {
-		return this._id
-	}
-
-	set id(id) {
-		this._id = setNumber(id, 'id')
-	}
-
-	/** @type {string} */
-	get category() {
-		return this._category
-	}
-
-	set category(category) {
-		this._category = setString(category, 'category')
+	set errors(errors) {
+		this._errors = setString(errors, 'errors')
 	}
 
 }
@@ -245,7 +144,7 @@ export default Image
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 20 2018 16:34:49 GMT-0600 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jan 07 2019 12:19:55 GMT-0600 (Central Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

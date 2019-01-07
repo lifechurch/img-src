@@ -1,0 +1,18 @@
+{
+  "description": "ImageCounts model",
+  "methods": {
+    "get": {
+      "description": "Get image status counts",
+      "endpoint": "viewmaster",
+      "method": "images/counts",
+      "version": "api",
+      "auth": true,
+      "parseJson": true
+    }
+  },
+  "sample": {
+    "jsonRootNode": false,
+    "sampleMethod": "get"
+  },
+  "template": "youversion"
+}
