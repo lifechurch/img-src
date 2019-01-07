@@ -47,7 +47,7 @@
     "jsonRootNode": false,
     "sampleMethod": "getOne",
     "sampleUrlParams": {
-      "partnerId": 18
+      "partnerId": 23
     }
   },
   "template": "youversion"
