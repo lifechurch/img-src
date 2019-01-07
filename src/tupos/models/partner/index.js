@@ -94,7 +94,7 @@ class Partner extends TuposModel {
 			auth: true,
 			bodyParams,
 			parseJson: true,
-    fetchArgs: { 'method': 'POST' }
+			fetchArgs: { method: 'POST' }
 		}))
 
 		if (typeof json !== 'object') throw new Error()
