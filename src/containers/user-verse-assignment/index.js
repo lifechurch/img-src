@@ -202,10 +202,10 @@ class UserVerseAssignment extends React.Component {
 							<div className={width > 700 ? 'mv4 mw7 center' : 'mv2'} key={shortid.generate()}>
 								<Card>
 									<ImageDrop
-										minWidth={1080}
-										maxWidth={1920}
-										minHeight={1080}
-										maxHeight={1920}
+										minWidth={1280}
+										maxWidth={1280}
+										minHeight={1280}
+										maxHeight={1280}
 										onDrop={this.handleDrop.bind(this, verse)}
 									>
 										<div className="b mb2">

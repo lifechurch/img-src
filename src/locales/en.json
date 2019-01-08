@@ -28,7 +28,7 @@
 	"verses": "Verses",
 	"chooseAVerse": "Choose a verse, design an image and upload",
 	"pendingImages": "Pending Images",
-	"verseGuidelines": "All Verse Images must contain the verse reference and fit within the size guidelines to be approved for the Bible App",
+	"verseGuidelines": "All Verse Images must contain the verse reference and be exactly 1280px x 1280px to be approved for the Bible App",
   "welcomeHeader": "Welcome to Image Source",
 	"designVerseImages": "Design Verse Images. Inspire the world.",
 	"joinTheCommunity": "Join the YouVersion Community of volunteer designers and help create Verse Images for the Bible App.",

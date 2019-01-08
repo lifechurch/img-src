@@ -61,7 +61,7 @@ class ImageDrop extends Component {
 		})
 
 		await Promise.all(accept.map((file) => {
-      return new Promise((resolve, reject) => {
+			return new Promise((resolve, reject) => {
   			const reader = new FileReader()
   			reader.onload = (loadEvent) => {
   				const image = new Image()
@@ -73,13 +73,15 @@ class ImageDrop extends Component {
   					} else if ((image.width > maxWidth) || (image.height > maxHeight)) {
   						rejectedLarge.push(file)
   						rejectList.push(file)
-  					} else {
+						} else if (image.width !== image.height) {
+							rejectList.push(file)
+						} else {
   						accepted.push(file)
   					}
 
   					this.setState({ rejectedSmall, rejectedLarge, accepted }, () => {
-              resolve()
-            })
+							resolve()
+						})
   				}
 
   				image.src = loadEvent.target.result
@@ -89,9 +91,9 @@ class ImageDrop extends Component {
   					handleLoad()
   				}
   			}
-        reader.readAsDataURL(file)
+				reader.readAsDataURL(file)
   			// return (rejectedSmall, rejectedLarge, accepted)
-      })
+			})
   	}))
 
 		onDrop(accepted, rejectList)
@@ -199,10 +201,10 @@ ImageDrop.propTypes = {
 
 ImageDrop.defaultProps = {
 	children: null,
-	minWidth: 1080,
-	maxWidth: 1920,
-	minHeight: 1080,
-	maxHeight: 1920,
+	minWidth: 1280,
+	maxWidth: 1280,
+	minHeight: 1280,
+	maxHeight: 1280,
 	type: 'image/jpg, image/jpeg',
 	onDrop: null
 }
