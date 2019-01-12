@@ -45,28 +45,10 @@ function App() {
 					}}
 				/>
 				<Route
-					path="/admin/review" exact component={() => {
+					path="/admin/review/:imageStatus?" exact component={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
-								<PartnerProtectedRoute redirectTo="/" path="/admin/review" component={AdminReview} />
-							</SidebarNav>
-						)
-					}}
-				/>
-				<Route
-					path="/admin/review/approved" exact component={() => {
-						return (
-							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
-								<PartnerProtectedRoute redirectTo="/" path="/admin/review/approved" component={() => <AdminReview show="approved" /> } />
-							</SidebarNav>
-						)
-					}}
-				/>
-				<Route
-					path="/admin/review/declined" exact component={() => {
-						return (
-							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
-								<PartnerProtectedRoute redirectTo="/" path="/admin/review/declined" show="declined" component={() => <AdminReview show="declined" /> } />
+								<PartnerProtectedRoute redirectTo="/" path="/admin/review/:imageStatus?" component={AdminReview} />
 							</SidebarNav>
 						)
 					}}

@@ -1,95 +1,148 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
+import PulseLoader from 'react-spinners/PulseLoader'
+import PropTypes from 'prop-types'
 import ToggleBar from '../../../components/toggle-bar'
-import main from './../../../try-models'
 import Image from './../../../tupos/models/image/index'
 
 class AdminReview extends Component {
 	constructor(props) {
 		super(props)
-		this.declinedImages = [
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/472/720x480.jpg'
-			},
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/2005/720x480.jpg'
-			},
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/186/360x240.jpg'
-			}
-		]
 
-		this.approvedImages = [
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/266/360x240.jpg'
-			},
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/1102/720x480.jpg'
-			},
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/1/720x480.jpg'
-			},
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/472/720x480.jpg'
-			},
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/2005/720x480.jpg'
-			},
-			{
-				url: '//d33q4ye4b26s92.cloudfront.net/videos/thumbnails/186/360x240.jpg'
-			}
-		]
+		this.state = {
+			images: [],
+			loadingData: false
+		}
 	}
 
+	componentDidMount() {
+		this.loadData()
+	}
+
+	componentDidUpdate(prevProps) {
+		const {
+			match: {
+				params: {
+					imageStatus
+				},
+			},
+		} = this.props
+
+		const {
+			match: {
+				params: {
+					imageStatus: prevImageStatus,
+				},
+			},
+		} = prevProps
+
+		if (imageStatus !== prevImageStatus) {
+			this.setState({ images: [] })
+			this.loadData()
+		}
+	}
+
+	async loadData() {
+		const {
+			match: {
+				params: {
+					imageStatus
+				},
+			},
+		} = this.props
+
+		if (imageStatus) {
+			const stat = imageStatus !== 'submissions' ? imageStatus : ''
+
+			this.setState({ loadingData: true })
+			Image.getMany(stat)
+				.then((images) => {
+					this.setState({ images, loadingData: false })
+				})
+				.catch(() => {
+					this.setState({ loadingData: false })
+				})
+		}
+	}
 
 	render() {
 
-		const renderImage = (img, i) => {
-			return (
-				<div className="h5 w5 ma3" key={ i }>
-					<div className="w-100 h-100 pv4 cover bg-center" style={{ backgroundImage: `url(${ img.url })`}}  />
-				</div>
-			)
-		}
-
-		const renderByType = (type) => {
-			if (type === 'approved') {
-				return this.approvedImages.map(renderImage)
-			} else if (type === 'declined') {
-				return this.declinedImages.map(renderImage)
-			} else {
-				return this.approvedImages.map(renderImage)
-			}
-		}
+		const {
+			images,
+			loadingData
+		} = this.state
 
 		const {
-			show
+			match: {
+				params: {
+					imageStatus
+				},
+			}
 		} = this.props
 
+
+		const imageList = images.map((image) => {
+			if (!image.url || !image.url.length) return null
+			return (
+				<div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
+					<img src={image.url} className="pv2" alt="" />
+				</div>
+			)
+		})
+
 		return (
-			<div className="pa4">
-				<h1 className="ma0 pa0">
-					<div className="w-100 flex justify-center ma3">
-						<ToggleBar
-							links={[
-								{
-									text: 'Approved',
-									address: '/admin/review/approved'
-								},
-								{
-									text: 'Declined',
-									address: '/admin/review/declined'
-								}
-							]}
-						/>
+			<div className="flex flex-column w-100 min-h-100 pt4">
+				<div className="pa4">
+					<h1 className="ma0 pa0">
+						<div className="w-100 flex justify-center ma3">
+							<ToggleBar
+								links={[
+									{
+										text: <FormattedMessage id="approvedLabel" />,
+										address: '/admin/review/approved'
+									},
+									{
+										text: <FormattedMessage id="declinedLabel" />,
+										address: '/admin/review/approved'
+									}
+								]}
+							/>
+						</div>
+					</h1>
+				</div>
+				<div className="fl flex-auto pa4 bg-light-gray">
+					<div className="flex justify-center mw9 center ph3-ns">
+						<div className="cf ph2-ns">
+							{ loadingData ?
+								<PulseLoader
+									className="flex justify-center mt5"
+									color="#555"
+								/> :
+								[
+									imageList.length ?
+										imageList :
+										<p className="b f3-ns f5 mid-gray tc">{`No ${imageStatus} images found.`}</p>
+								]
+							}
+						</div>
 					</div>
-					<div className="cf w-100 flex items-center justify-center flex-wrap mw8 mr-auto ml-auto">
-						{ renderByType(show) }
-					</div>
-				</h1>
+				</div>
 			</div>
+
 		)
 	}
+}
+
+AdminReview.propTypes = {
+	match: PropTypes.shape({
+		params: PropTypes.shape({
+			imageStatus: PropTypes.string,
+		}),
+	})
+}
+
+AdminReview.defaultProps = {
+	match: null
 }
 
 export default AdminReview
