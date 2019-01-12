@@ -43,7 +43,7 @@
   "version": "Version",
 	"userBio": "YouVersion Volunteer",
   "designerSince": "Designer since {date}",
-  "submissionsLabel": "Submissions",
+  "allLabel": "All",
   "approvedLabel": "Approved",
   "declinedLabel": "Declined",
   "pendingLabel": "Pending"

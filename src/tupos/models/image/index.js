@@ -146,13 +146,13 @@ class Image extends TuposModel {
 		this._userId = setNumber(userId, 'userId')
 	}
 
-	/** @type {number} */
+	/** @type {string} */
 	get status() {
 		return this._status
 	}
 
 	set status(status) {
-		this._status = setNumber(status, 'status')
+		this._status = setString(status, 'status')
 	}
 
 	/** @type {string} */
