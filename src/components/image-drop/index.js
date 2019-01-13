@@ -63,39 +63,39 @@ class ImageDrop extends Component {
 
 		await Promise.all(accept.map((file) => {
 			return new Promise((resolve, reject) => {
-  			const reader = new FileReader()
-  			reader.onload = (loadEvent) => {
-  				const image = new Image()
-  				const handleLoad = () => {
+				const reader = new FileReader()
+				reader.onload = (loadEvent) => {
+					const image = new Image()
+					const handleLoad = () => {
 
-  					if (image.width < minWidth || image.height < minHeight) {
-  						rejectedSmall.push(file)
-  						rejectList.push(file)
-  					} else if ((image.width > maxWidth) || (image.height > maxHeight)) {
-  						rejectedLarge.push(file)
-  						rejectList.push(file)
+						if (image.width < minWidth || image.height < minHeight) {
+							rejectedSmall.push(file)
+							rejectList.push(file)
+						} else if ((image.width > maxWidth) || (image.height > maxHeight)) {
+							rejectedLarge.push(file)
+							rejectList.push(file)
 						} else if (image.width !== image.height) {
 							rejectList.push(file)
 						} else {
-  						accepted.push(file)
-  					}
+							accepted.push(file)
+						}
 
-  					this.setState({ rejectedSmall, rejectedLarge, accepted }, () => {
+						this.setState({ rejectedSmall, rejectedLarge, accepted }, () => {
 							resolve()
 						})
-  				}
+					}
 
-  				image.src = loadEvent.target.result
-  				if (image.width === 0) {
-  					image.onload = handleLoad
-  				} else {
-  					handleLoad()
-  				}
-  			}
+					image.src = loadEvent.target.result
+					if (image.width === 0) {
+						image.onload = handleLoad
+					} else {
+						handleLoad()
+					}
+				}
 				reader.readAsDataURL(file)
-  			// return (rejectedSmall, rejectedLarge, accepted)
+				// return (rejectedSmall, rejectedLarge, accepted)
 			})
-  	}))
+		}))
 
 		onDrop(accepted, rejectList)
 
