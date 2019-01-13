@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
+import PulseLoader from 'react-spinners/PulseLoader'
 import { FormattedMessage } from 'react-intl'
 import './index.css'
 
@@ -148,6 +149,7 @@ class ImageDrop extends Component {
 							return (
 								<div key={f.name} className="ma2 w-100 mw3 dib">
 									<img className="w-100" src={f.preview} alt={f.name} />
+									<PulseLoader className="flex justify-center mt1" color="#555" />
 								</div>
 							)
 						})
