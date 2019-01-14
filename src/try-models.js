@@ -28,11 +28,11 @@ async function main() {
         console.log('RESPONSE: ARRAY')
         data.forEach((model) => {
           console.log(model.toObject())
-        })
+				})
       } else {
         console.log('RESPONSE: OBJECT')
         console.log(data.toObject())
-      }
+			}
     } catch (e) {
       console.error('ERROR', e)
     }
