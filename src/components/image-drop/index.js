@@ -13,7 +13,8 @@ class ImageDrop extends Component {
 			rejectedLarge: [],
 			rejectedType: [],
 			accepted: [],
-			dropzoneActive: false
+			dropzoneActive: false,
+			loadingImage: false
 		}
 	}
 
@@ -36,7 +37,8 @@ class ImageDrop extends Component {
 			rejectedSmall: [],
 			rejectedLarge: [],
 			rejectedType: [],
-			accepted: []
+			accepted: [],
+			loadingImage: true
 		})
 
 		const {
@@ -97,10 +99,11 @@ class ImageDrop extends Component {
 			})
 		}))
 
-		onDrop(accepted, rejectList)
+		await onDrop(accepted, rejectList)
 
 		this.setState({
-			dropzoneActive: false
+			dropzoneActive: false,
+			loadingImage: false
 		})
 	}
 
@@ -117,7 +120,8 @@ class ImageDrop extends Component {
 			rejectedLarge,
 			rejectedType,
 			accepted,
-			dropzoneActive
+			dropzoneActive,
+			loadingImage
 		} = this.state
 
 		const {
@@ -149,7 +153,7 @@ class ImageDrop extends Component {
 							return (
 								<div key={f.name} className="ma2 w-100 mw3 dib">
 									<img className="w-100" src={f.preview} alt={f.name} />
-									<PulseLoader className="flex justify-center mt1" color="#555" />
+									{loadingImage && <PulseLoader className="flex justify-center mt1" color="#555" />}
 								</div>
 							)
 						})
