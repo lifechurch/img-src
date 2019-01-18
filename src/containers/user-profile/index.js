@@ -9,7 +9,7 @@ import ToggleBar from '../../components/toggle-bar'
 import pin from '../../assets/pin.png'
 import tempIcon from '../../assets/me.svg'
 import Image from '../../tupos/models/image'
-import ImageCounts from '../../tupos/models/image-counts';
+import ImageCounts from '../../tupos/models/image-counts'
 
 class UserProfile extends React.Component {
 	constructor(props) {
