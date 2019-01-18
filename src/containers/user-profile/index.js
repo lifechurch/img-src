@@ -9,6 +9,7 @@ import ToggleBar from '../../components/toggle-bar'
 import pin from '../../assets/pin.png'
 import tempIcon from '../../assets/me.svg'
 import Image from '../../tupos/models/image'
+import ImageCounts from '../../tupos/models/image-counts';
 
 class UserProfile extends React.Component {
 	constructor(props) {
@@ -74,6 +75,16 @@ class UserProfile extends React.Component {
 				.catch(() => {
 					this.setState({ loadingData: false })
 				})
+
+			const imageCounts = await ImageCounts.get()
+			this.setState({
+				counts: {
+					pending: imageCounts.Pending,
+					approved: imageCounts.Approved,
+					denied: imageCounts.Denied,
+					moderated: imageCounts.Moderated
+				}
+			})
 		}
 	}
 
