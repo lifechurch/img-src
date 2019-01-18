@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
+import PulseLoader from 'react-spinners/PulseLoader'
 import { FormattedMessage } from 'react-intl'
 import './index.css'
 
@@ -12,7 +13,8 @@ class ImageDrop extends Component {
 			rejectedLarge: [],
 			rejectedType: [],
 			accepted: [],
-			dropzoneActive: false
+			dropzoneActive: false,
+			loadingImage: false
 		}
 	}
 
@@ -35,7 +37,8 @@ class ImageDrop extends Component {
 			rejectedSmall: [],
 			rejectedLarge: [],
 			rejectedType: [],
-			accepted: []
+			accepted: [],
+			loadingImage: true
 		})
 
 		const {
@@ -62,44 +65,45 @@ class ImageDrop extends Component {
 
 		await Promise.all(accept.map((file) => {
 			return new Promise((resolve, reject) => {
-  			const reader = new FileReader()
-  			reader.onload = (loadEvent) => {
-  				const image = new Image()
-  				const handleLoad = () => {
+				const reader = new FileReader()
+				reader.onload = (loadEvent) => {
+					const image = new Image()
+					const handleLoad = () => {
 
-  					if (image.width < minWidth || image.height < minHeight) {
-  						rejectedSmall.push(file)
-  						rejectList.push(file)
-  					} else if ((image.width > maxWidth) || (image.height > maxHeight)) {
-  						rejectedLarge.push(file)
-  						rejectList.push(file)
+						if (image.width < minWidth || image.height < minHeight) {
+							rejectedSmall.push(file)
+							rejectList.push(file)
+						} else if ((image.width > maxWidth) || (image.height > maxHeight)) {
+							rejectedLarge.push(file)
+							rejectList.push(file)
 						} else if (image.width !== image.height) {
 							rejectList.push(file)
 						} else {
-  						accepted.push(file)
-  					}
+							accepted.push(file)
+						}
 
-  					this.setState({ rejectedSmall, rejectedLarge, accepted }, () => {
+						this.setState({ rejectedSmall, rejectedLarge, accepted }, () => {
 							resolve()
 						})
-  				}
+					}
 
-  				image.src = loadEvent.target.result
-  				if (image.width === 0) {
-  					image.onload = handleLoad
-  				} else {
-  					handleLoad()
-  				}
-  			}
+					image.src = loadEvent.target.result
+					if (image.width === 0) {
+						image.onload = handleLoad
+					} else {
+						handleLoad()
+					}
+				}
 				reader.readAsDataURL(file)
-  			// return (rejectedSmall, rejectedLarge, accepted)
+				// return (rejectedSmall, rejectedLarge, accepted)
 			})
-  	}))
+		}))
 
-		onDrop(accepted, rejectList)
+		await onDrop(accepted, rejectList)
 
 		this.setState({
-			dropzoneActive: false
+			dropzoneActive: false,
+			loadingImage: false
 		})
 	}
 
@@ -116,7 +120,8 @@ class ImageDrop extends Component {
 			rejectedLarge,
 			rejectedType,
 			accepted,
-			dropzoneActive
+			dropzoneActive,
+			loadingImage
 		} = this.state
 
 		const {
@@ -148,6 +153,7 @@ class ImageDrop extends Component {
 							return (
 								<div key={f.name} className="ma2 w-100 mw3 dib">
 									<img className="w-100" src={f.preview} alt={f.name} />
+									{loadingImage && <PulseLoader className="flex justify-center mt1" color="#555" />}
 								</div>
 							)
 						})

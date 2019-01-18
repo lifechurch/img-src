@@ -85,7 +85,7 @@ class UserVerseAssignment extends React.Component {
 								language_tag: 'en',
 								usfm: verse.usfms
 							}
-							const confirmResponse = Image.confirmUpload(presignedUploadConfirmId, presignedUploadId, postBody)
+							Image.confirmUpload(presignedUploadConfirmId, presignedUploadId, postBody)
 						} else {
 							this.notify(intl.formatMessage({ id: 'imageUploadError' }), 0, false)
 						}
