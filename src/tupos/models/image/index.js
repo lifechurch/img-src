@@ -16,6 +16,7 @@ class Image extends TuposModel {
 		this.versionId = json.version_id
 		this.usfm = json.usfm
 		this.createdDt = json.created_dt
+		this.url = json.url
 		this.userId = json.user_id
 		this.status = json.status
 		this.languageTag = json.language_tag
@@ -30,6 +31,7 @@ class Image extends TuposModel {
 			version_id: this.versionId,
 			usfm: this.usfm,
 			created_dt: this.createdDt,
+			url: this.url,
 			user_id: this.userId,
 			status: this.status,
 			language_tag: this.languageTag,
@@ -77,6 +79,27 @@ class Image extends TuposModel {
 		})
 	}
 
+	/** Confirm that image upload is complete and image is ready to view. */
+	static async confirmUpload(presignedUploadConfirmId, presignedUploadId, bodyParams) {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'images/confirm_post_and_submit/:presignedUploadId/:presignedUploadConfirmId',
+			version: 'api',
+			auth: true,
+			bodyParams,
+			parseJson: true,
+			urlParams: {
+				presignedUploadId,
+				presignedUploadConfirmId
+			},
+			fetchArgs: { method: 'POST' }
+		}))
+
+		if (typeof json !== 'object') throw new Error()
+
+		return new Image(json)
+	}
+
 
 	/** @type {number} */
 	get versionId() {
@@ -105,6 +128,15 @@ class Image extends TuposModel {
 		this._createdDt = setDate(createdDt, 'createdDt')
 	}
 
+	/** @type {string} */
+	get url() {
+		return this._url
+	}
+
+	set url(url) {
+		this._url = setString(url, 'url')
+	}
+
 	/** @type {number} */
 	get userId() {
 		return this._userId
@@ -114,13 +146,13 @@ class Image extends TuposModel {
 		this._userId = setNumber(userId, 'userId')
 	}
 
-	/** @type {number} */
+	/** @type {string} */
 	get status() {
 		return this._status
 	}
 
 	set status(status) {
-		this._status = setNumber(status, 'status')
+		this._status = setString(status, 'status')
 	}
 
 	/** @type {string} */

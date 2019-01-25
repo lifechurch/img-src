@@ -6,7 +6,7 @@ import setString from '@youversion/tupos-base/dist/setters/string'
 /** *
  * ImageConfig model
  */
-class Params {
+class Fields {
 	constructor(json) {
 
 		if (!json || typeof json !== 'object') return
@@ -17,7 +17,7 @@ class Params {
 		this.signature = json.signature
 	}
 
-	/** Convert Params to simple object */
+	/** Convert Fields to simple object */
 	toObject() {
 		return {
 			acl: this.acl,
@@ -77,4 +77,4 @@ class Params {
 
 }
 
-export default Params
+export default Fields

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
+import { FormattedMessage, injectIntl } from 'react-intl'
 import { Redirect } from 'react-router-dom'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import withPartner from '../../context/withPartner'
 import YVLogo from '../../assets/youversion.png'
 import YVBible from '../../assets/YV_bible.png'
 import Button from '../../components/button'
-import TextInput from '../../components/text-input'
+import LoginForm from '../../components/login-form'
 import PrimaryHeading from '../../components/typography/primary-heading'
 import SecondaryHeading from '../../components/typography/secondary-heading'
 import MinorHeading from '../../components/typography/minor-heading'
@@ -18,37 +18,16 @@ import './index.css'
 class SplashPage extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			username: '',
-			password: ''
-		}
-	}
-
-	handleChange = (e) => {
-		const { name, value } = e.target
-		this.setState({
-			[name]: value
-		})
-	}
-
-	handleSubmit = () => {
-		const { login } = this.props
-		const { username, password } = this.state
-		login({ username, password })
+		this.state = {}
 	}
 
 	render() {
 		const {
-			intl,
 			isSignedIn,
 			isPartner
 		} = this.props
 
-		const email = intl.formatMessage({ id: 'email' }).toUpperCase()
-		const password = intl.formatMessage({ id: 'password' }).toUpperCase()
-
 		if (isSignedIn === true && isPartner === false) return (<Redirect to="/user-registration" />)
-
 		if (isSignedIn === true && isPartner === true) return (<Redirect to="/user-verse-assignment" />)
 
 		return (
@@ -78,7 +57,7 @@ class SplashPage extends Component {
 							</PrimaryHeading>
 						</div>
 
-						<div className="splashSubText absolute z-1">
+						<div className="splashSubtitle absolute z-1">
 							<MinorHeading>
 								<FormattedMessage id="joinTheCommunity" />
 							</MinorHeading>
@@ -95,21 +74,9 @@ class SplashPage extends Component {
 						</SecondaryHeading>
 					</div>
 
-					<div className="w5 bg-light-silver self-center mv4" style={{ height: 1 }} />
+					<div className="w5 bg-light-silver self-center mb4" style={{ height: 1 }} />
 
-					<form className="w-100">
-						<div className="w-100 flex items-center flex-column">
-							<div className="w-100 mw6 mb3">
-								<TextInput required name="username" placeholder={email} type="text" onChange={this.handleChange} />
-							</div>
-							<div className="w-100 mw6 mb3">
-								<TextInput required name="password" placeholder={password} type="password" onChange={this.handleChange} />
-							</div>
-							<Button buttontype="outline-only" onClick={this.handleSubmit}>
-								<FormattedMessage id="signIn" />
-							</Button>
-						</div>
-					</form>
+					<LoginForm />
 
 					<div className="mt4 tc">
 						<BodyText>
@@ -126,14 +93,13 @@ class SplashPage extends Component {
 }
 
 SplashPage.propTypes = {
-	intl: intlShape.isRequired,
-	login: PropTypes.func,
-	isSignedIn: PropTypes.bool
+	isSignedIn: PropTypes.bool,
+	isPartner: PropTypes.bool
 }
 
 SplashPage.defaultProps = {
-	login: null,
-	isSignedIn: false
+	isSignedIn: false,
+	isPartner: false
 }
 
 export default withYVAuth(withPartner(injectIntl(SplashPage)))

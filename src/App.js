@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import YVAuthProtectedRoute from '@youversion/tupos-auth/dist/YVAuthProtectedRoute'
 import PartnerProtectedRoute from './context/PartnerProtectedRoute'
 import SidebarNavMenu from './components/sidebar-nav-menu'
-import Admin from './containers/admin'
+import AdminReview from './containers/admin/review'
 import SplashPage from './containers/splash-page'
 import UserRegistration from './containers/user-registration'
 import UserVerseAssignment from './containers/user-verse-assignment'
@@ -37,23 +37,23 @@ function App() {
 					}}
 				/>
 				<Route
-					path="/user-profile/:userId" render={() => {
+					path="/user-profile/:userId?/:imageStatus?" render={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu />}>
-								<PartnerProtectedRoute redirectTo="/" path="/user-profile/:userId" component={UserProfile} />
+								<PartnerProtectedRoute redirectTo="/" path="/user-profile/:userId?/:imageStatus?" component={UserProfile} />
 							</SidebarNav>
 						)
 					}}
 				/>
-				{/* <Route
-					path="/admin" component={() => {
+				<Route
+					path="/admin/review/:imageStatus?" exact component={() => {
 						return (
 							<SidebarNav menu={<SidebarNavMenu isAdmin={true} />}>
-								<PartnerProtectedRoute redirectTo="/" path="/admin" component={Admin} />
+								<PartnerProtectedRoute redirectTo="/" path="/admin/review/:imageStatus?" component={AdminReview} />
 							</SidebarNav>
 						)
 					}}
-				/> */}
+				/>
 				<Route
 					exact path="/admin/pending" render={() => {
 						return (

@@ -61,7 +61,7 @@
 	margin-left: 450px;
 }
 
-.splashSubText {
+.splashSubtitle {
 	width: 450px;
 	margin-top: 820px;
 }
@@ -72,7 +72,7 @@
 	}
 
 	.splashDisplayUnit {
-		height: 620px;
+		height: 560px;
 		width: 100%;
 		display: block;
 		margin: auto;
@@ -106,7 +106,7 @@
 		margin-left: 20px;
 	}
 
-	.splashSubText {
+	.splashSubtitle {
 		width: 90%;
 		margin-top: 470px;
 		margin-left: 20px;

@@ -5,6 +5,7 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import withYVAuth from '@youversion/tupos-auth/dist/withYVAuth'
 import YVLogo from '../../assets/LC_YouVersion_Logo_with_icon_Light.png'
 import AdminIcon from '../../assets/admin.svg'
+import Button from '../../components/button'
 import ToDoIcon from '../../assets/todo.svg'
 import MyImagesIcon from '../../assets/me.svg'
 import './index.css'
@@ -49,7 +50,7 @@ function SidebarNavMenu(props) {
 			</div>
 
 			<div className="pl3 mb4">
-				<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/myimages">
+				<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/user-profile">
 					<img src={MyImagesIcon} alt="" className="mr3" />
 					<FormattedMessage id="myImages" />
 				</NavLink>
@@ -57,10 +58,9 @@ function SidebarNavMenu(props) {
 
 			{ isSignedIn && (
 				<div className="pl3 mb4">
-					<button className="no-underline light-silver link dim flex items-center pointer" onClick={logout} tabIndex={0}>
-						<img src={MyImagesIcon} alt="" className="mr3" />
+					<Button buttontype="outline-only" onClick={logout} tabIndex={0}>
 						<FormattedMessage id="signOut" />
-					</button>
+					</Button>
 				</div>
 			)}
 		</div>

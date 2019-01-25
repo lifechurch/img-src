@@ -1,4 +1,5 @@
 import { TuposModel } from '@youversion/tupos-base'
+import setDate from '@youversion/tupos-base/dist/setters/date'
 import setNumber from '@youversion/tupos-base/dist/setters/number'
 import setString from '@youversion/tupos-base/dist/setters/string'
 import api4 from '@youversion/tupos-base/dist/fetchers/api4'
@@ -18,6 +19,7 @@ class Partner extends TuposModel {
 		this.permission = json.permission
 		this.status = json.status
 		this.versionId = json.version_id
+		this.memberSince = json.member_since
 	}
 
 	/** Convert Partner to simple object */
@@ -28,7 +30,8 @@ class Partner extends TuposModel {
 			attribution: this.attribution,
 			permission: this.permission,
 			status: this.status,
-			version_id: this.versionId
+			version_id: this.versionId,
+			member_since: this.memberSince
 		}
 	}
 
@@ -152,6 +155,15 @@ class Partner extends TuposModel {
 
 	set versionId(versionId) {
 		this._versionId = setNumber(versionId, 'versionId')
+	}
+
+	/** @type {Date} */
+	get memberSince() {
+		return this._memberSince
+	}
+
+	set memberSince(memberSince) {
+		this._memberSince = setDate(memberSince, 'memberSince')
 	}
 
 }

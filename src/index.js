@@ -6,7 +6,6 @@ import { IntlProvider, addLocaleData } from 'react-intl'
 import localeData from 'react-intl/locale-data/en'
 import PartnerProvider from './context/Partner.context'
 import App from './App'
-import registerServiceWorker from './registerServiceWorker'
 import localeMessages from './locales/en.json'
 // import tryModels from './try-models'
 
@@ -30,5 +29,3 @@ ReactDOM.render(
 )
 
 // tryModels()
-
-registerServiceWorker()
