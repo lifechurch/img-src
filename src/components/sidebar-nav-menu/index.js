@@ -13,7 +13,7 @@ import './index.css'
 function SidebarNavMenu(props) {
 	const { isSignedIn, logout } = props
 	return (
-		<div className="pa3 f3">
+		<div className="pa3 f4">
 			<img src={YVLogo} alt="YouVersion" style={{ width: 200 }} className="mb4" />
 
 			{props.isAdmin &&
@@ -57,8 +57,8 @@ function SidebarNavMenu(props) {
 			</div>
 
 			{ isSignedIn && (
-				<div className="pl3 mb4">
-					<Button buttontype="outline-only" onClick={logout} tabIndex={0}>
+				<div className="mb4">
+					<Button buttontype="outline-only" onClick={logout} tabIndex={0} block>
 						<FormattedMessage id="signOut" />
 					</Button>
 				</div>

@@ -153,7 +153,7 @@ class UserVerseAssignment extends React.Component {
 
 		return (
 			<div className="flex flex-column w-100 min-h-100">
-				<div className={width > 700 ? 'pt4 ph4' : 'pa4'}>
+				<div className={`${width > 700 ? 'pt4' : 'pa4'} measure center tc`}>
 					<PrimaryHeading>
 						<FormattedMessage id={width > 700 ? 'versesNeedImages' : 'verses'} />
 					</PrimaryHeading>
@@ -184,45 +184,47 @@ class UserVerseAssignment extends React.Component {
 						</div>
 
 						{ images && (
-							<span className="fr green b">
-								<FormattedMessage id="pendingImages" />: {images.length}
-							</span>
+							<p className="tc green w-100">
+								<FormattedMessage id="pendingImages" />: <strong>{images.length}</strong>
+							</p>
 						)}
 					</div>
 				</div>
 
 				<div className="flex-auto pa4 bg-light-gray">
-					<div className="b">
-						<BodyText>
-							<FormattedMessage id="verseGuidelines" />
-						</BodyText>
-					</div>
-					{ verses && verses.map((verse) => {
-						return (
-							<div className={width > 700 ? 'mv4 mw7 center' : 'mv2'} key={shortid.generate()}>
-								<Card>
-									<ImageDrop
-										minWidth={1280}
-										maxWidth={1280}
-										minHeight={1280}
-										maxHeight={1280}
-										onDrop={this.handleDrop.bind(this, verse)}
-									>
-										<div className="b mb2">
-											<BodyText>{verse.humanReference}</BodyText>
-										</div>
-										<BodyText>{verse.text}</BodyText>
-									</ImageDrop>
-								</Card>
-							</div>
-						)
-					})}
-					{ loadingData &&
+					<div className="measure center">
+						<div className="b tc">
+							<BodyText>
+								<FormattedMessage id="verseGuidelines" />
+							</BodyText>
+						</div>
+						{ verses && verses.map((verse) => {
+							return (
+								<div className={width > 700 ? 'mv4 mw7 center' : 'mv2'} key={shortid.generate()}>
+									<Card>
+										<ImageDrop
+											minWidth={1280}
+											maxWidth={1280}
+											minHeight={1280}
+											maxHeight={1280}
+											onDrop={this.handleDrop.bind(this, verse)}
+										>
+											<div className="b mb2">
+												<BodyText>{verse.humanReference}</BodyText>
+											</div>
+											<BodyText>{verse.text}</BodyText>
+										</ImageDrop>
+									</Card>
+								</div>
+							)
+						})}
+						{ loadingData &&
 						<PulseLoader
 							className="flex justify-center mt5"
 							color="#555"
 						/>
-					}
+						}
+					</div>
 				</div>
 			</div>
 		)

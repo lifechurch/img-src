@@ -37,7 +37,7 @@ class LoginForm extends Component {
 			errors.username = this.messages.enterEmail
 		}
 		if (typeof username !== 'undefined') {
-			const pattern = new RegExp(/^(([\w-\s]+)|([\w-]+(?:\.[\w-]+)*)|([\w-\s]+)([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i)
+			const pattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i)
 			if (!pattern.test(username)) {
 				formIsValid = false
 				errors.username = this.messages.fixEmail
@@ -66,17 +66,11 @@ class LoginForm extends Component {
 		})
 	}
 
-	handleSubmit = () => {
+	handleSubmit = async () => {
 		if (this.validateForm()) {
 			const { login } = this.props
 			const { username, password } = this.state
-			if (login({ username, password })) {
-				const { errors } = this.state
-				errors.username = this.messages.clearMsg
-				errors.password = this.messages.clearMsg
-				errors.login = this.messages.fixLogin
-				this.setState({ errors })
-			}
+			login({ username, password })
 		}
 	}
 

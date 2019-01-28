@@ -10,13 +10,14 @@ function Button(props) {
 		isSubmit,
 		disabled,
 		buttontype,
+		block,
 		...remainingProps
 	} = props
 
 	const disabledClasses = disabled ? 'o-50' : 'dim'
 	const buttontypeClasses = buttontype === 'solid' ? 'bg-mid-gray white bn' : 'ba bw1 b--mid-gray mid-gray bg-transparent'
 
-	const classes = `pointer link br-pill ph4 pv2 f4 dib ${disabledClasses} ${buttontypeClasses}`
+	const classes = `pointer link br-pill ph4 pv2 f4 dib ${disabledClasses} ${buttontypeClasses} tc ${block && 'w-100'}`
 
 	const handleKeyPress = event => {
 		if (event.key === 'Enter') {
@@ -63,7 +64,8 @@ Button.propTypes = {
 	disabled: PropTypes.bool,
 	buttontype: PropTypes.oneOf(['solid', 'outline-only']),
 	onClick: PropTypes.func,
-	isSubmit: PropTypes.bool
+	isSubmit: PropTypes.bool,
+	block: PropTypes.bool
 }
 
 Button.defaultProps = {
@@ -72,7 +74,8 @@ Button.defaultProps = {
 	disabled: false,
 	buttontype: 'solid',
 	onClick: null,
-	isSubmit: false
+	isSubmit: false,
+	block: false
 }
 
 export default Button

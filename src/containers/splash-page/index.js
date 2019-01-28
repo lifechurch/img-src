@@ -32,7 +32,7 @@ class SplashPage extends Component {
 
 		return (
 			<div className="h-100">
-				<div className="w-100 ph3 mt2 mb2 flex items-center justify-between">
+				<div className="w-100 pa4 mb3 flex items-center justify-between">
 					<img src={YVLogo} alt="YouVersion" width={150} />
 					<div className="fr">
 						<Button href="#sign-in" buttontype="outline-only">
@@ -68,7 +68,7 @@ class SplashPage extends Component {
 				<div id="sign-in" className="flex flex-column w-100 items-center pa4 bg-light-gray">
 					<img src={YVBible} alt="" className="w3" />
 
-					<div className="tc mv4">
+					<div className="tc mv4 mw6">
 						<SecondaryHeading>
 							<FormattedMessage id="toGetStarted" />
 						</SecondaryHeading>

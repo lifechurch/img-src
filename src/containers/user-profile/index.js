@@ -10,6 +10,10 @@ import pin from '../../assets/pin.png'
 import tempIcon from '../../assets/me.svg'
 import Image from '../../tupos/models/image'
 import ImageCounts from '../../tupos/models/image-counts'
+import BodyText from '../../components/typography/body-text'
+import PrimaryHeading from '../../components/typography/primary-heading'
+import MinorHeading from '../../components/typography/minor-heading'
+
 
 class UserProfile extends React.Component {
 	constructor(props) {
@@ -111,8 +115,8 @@ class UserProfile extends React.Component {
 		const imageList = images.map((image) => {
 			if (!image.url || !image.url.length) return null
 			return (
-				<div className="fl w-50 w-third-ns pa2-ns pa1" key={image.id}>
-					<img src={image.url} className="pv2" alt="" />
+				<div className="w-50 w-third-m w-25-l pa2-ns pa1" key={image.id}>
+					<img src={image.url} className="" alt="" />
 				</div>
 			)
 		})
@@ -129,22 +133,27 @@ class UserProfile extends React.Component {
 						</div>
 					</div>
 					<div className="flex flex-column items-center-ns justify-center-ns mt3">
-						<h2 className="ma0 pa0">
+						<PrimaryHeading>
 							{user.firstName} {user.lastName}
-						</h2>
-						<p className="ma0 pa0 light-silver">
-							<FormattedMessage id="userBio" />
-						</p>
-						<p className={`ma0 pa0 light-silver ${!user.location ? 'mb4' : ''}`}>
-							<FormattedMessage id="designerSince" values={{ date: moment().format('LL') }} />
-						</p>
+						</PrimaryHeading>
+						<div className="mt1">
+							<MinorHeading>
+								<FormattedMessage id="userBio" />
+							</MinorHeading>
+						</div>
+
+						<div className={`light-silver ${!user.location ? 'mb4' : ''}`}>
+							<BodyText>
+								<FormattedMessage id="designerSince" values={{ date: moment().format('LL') }} />
+							</BodyText>
+						</div>
 
 						{ user.location &&
 							<div className="flex">
 								<img src={pin} alt="" className="mr2 w1 h1 mt2" />
-								<p className="gray mt2">
-									{user.location}
-								</p>
+								<BodyText>
+									<span className="gray mt1">{user.location}</span>
+								</BodyText>
 							</div>
 						}
 					</div>
@@ -181,20 +190,18 @@ class UserProfile extends React.Component {
 						</div>
 					</h1>
 
-					<div className="flex justify-center mw9 center ph3-ns">
-						<div className="cf ph2-ns">
-							{ loadingData ?
-								<PulseLoader
-									className="flex justify-center mt5"
-									color="#555"
-								/> :
-								[
-									imageList.length ?
-										imageList :
-										<p className="b f3-ns f5 mid-gray tc">{`No ${imageStatus} images found.`}</p>
-								]
-							}
-						</div>
+					<div className="flex flex-wrap mw9 center ph3-ns">
+						{ loadingData ?
+							<PulseLoader
+								className="flex center mt5 tc"
+								color="#555"
+							/> :
+							[
+								imageList.length ?
+									imageList :
+									<p className="b f3-ns f5 mid-gray tc">{`No ${imageStatus} images found.`}</p>
+							]
+						}
 					</div>
 				</div>
 			</div>
