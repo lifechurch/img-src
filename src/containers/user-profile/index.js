@@ -25,7 +25,8 @@ class UserProfile extends React.Component {
 				approved: 0,
 				denied: 0,
 				moderated: 0,
-				pending: 0
+				pending: 0,
+				all: 0
 			}
 		}
 
@@ -86,7 +87,13 @@ class UserProfile extends React.Component {
 					pending: imageCounts.Pending,
 					approved: imageCounts.Approved,
 					denied: imageCounts.Denied,
-					moderated: imageCounts.Moderated
+					moderated: imageCounts.Moderated,
+					all: (
+						imageCounts.Pending +
+						imageCounts.Approved +
+						imageCounts.Denied +
+						imageCounts.Moderated
+					)
 				}
 			})
 		}
@@ -177,13 +184,13 @@ class UserProfile extends React.Component {
 									},
 									{
 										text: <FormattedMessage id="declinedLabel" />,
-										address: `/user-profile/${userId}/declined`,
+										address: `/user-profile/${userId}/denied`,
 										total: counts.denied
 									},
 									{
 										text: <FormattedMessage id="allLabel" />,
 										address: `/user-profile/${userId}/submissions`,
-										total: counts.moderated
+										total: counts.all
 									}
 								]}
 							/>
