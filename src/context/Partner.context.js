@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import Partner from '../tupos/models/partner'
 
 const DEFAULT_STATE = {
-	isPartner: undefined
+	isPartner: undefined,
+	isEditor: undefined
 }
 
 export const PartnerContext = React.createContext(DEFAULT_STATE)
@@ -28,27 +29,31 @@ class PartnerProvider extends Component {
 		const { isSignedIn } = this.props
 		if (isSignedIn) {
 			let isPartner = false
-      let partner = null
+			let isEditor = false
+			let partner = null
 			try {
 				partner = await Partner.me()
 				isPartner = !Number.isNaN(partner.id)
+				isEditor = !Number.isNaN(partner.permission) && partner.permission === 2
 			} catch (error) { console.error(error) }
-			this.setState({ isPartner, partner })
+			this.setState({ isPartner, isEditor, partner })
 		} else {
-			this.setState({ isPartner: undefined, partner: undefined })
+			this.setState({ isPartner: undefined, isEditor: undefined, partner: undefined })
 		}
 	}
 
 	render() {
 		const { children, isSignedIn } = this.props
-		const { isPartner, partner } = this.state
+		const { isPartner, isEditor, partner } = this.state
 		return (
 			<PartnerContext.Provider value={{
-        isPartner,
-        isSignedIn,
-        partnerCheck: this.partnerCheck,
-        partner
-      }}>
+				isPartner,
+				isEditor,
+				isSignedIn,
+				partnerCheck: this.partnerCheck,
+				partner
+			}}
+			>
 				{ children }
 			</PartnerContext.Provider>
 		)
