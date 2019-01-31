@@ -101,12 +101,13 @@ class Image extends TuposModel {
 	}
 
 	/** Update image status */
-	static async setStatus(imageId) {
+	static async setStatus(imageId, bodyParams) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
 			method: 'images/:imageId',
 			version: 'api',
 			auth: true,
+			bodyParams,
 			parseJson: true,
 			urlParams: {
 				imageId

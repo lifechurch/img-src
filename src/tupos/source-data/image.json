@@ -50,6 +50,7 @@
       "auth": true,
       "parseJson": true,
       "jsonRootNode": "data",
+      "hasBody": true,
       "urlParams": {
         "imageId": "number"
       },
