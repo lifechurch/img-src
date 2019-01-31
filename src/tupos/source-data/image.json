@@ -41,6 +41,21 @@
       "fetchArgs": {
         "method": "POST"
       }
+    },
+    "setStatus": {
+      "description": "Update image status",
+      "endpoint": "viewmaster",
+      "method": "images/:imageId",
+      "version": "api",
+      "auth": true,
+      "parseJson": true,
+      "jsonRootNode": "data",
+      "urlParams": {
+        "imageId": "number"
+      },
+      "fetchArgs": {
+        "method": "PUT"
+      }
     }
   },
   "sample": {

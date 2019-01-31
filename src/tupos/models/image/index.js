@@ -100,6 +100,25 @@ class Image extends TuposModel {
 		return new Image(json)
 	}
 
+	/** Update image status */
+	static async setStatus(imageId) {
+		const json = await TuposModel.get(api4({
+			endpoint: 'viewmaster',
+			method: 'images/:imageId',
+			version: 'api',
+			auth: true,
+			parseJson: true,
+			urlParams: {
+				imageId
+			},
+			fetchArgs: { method: 'PUT' }
+		}))
+
+		if (typeof json !== 'object') throw new Error()
+
+		return new Image(json)
+	}
+
 
 	/** @type {number} */
 	get versionId() {
