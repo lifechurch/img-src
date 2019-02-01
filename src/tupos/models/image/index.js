@@ -60,7 +60,7 @@ class Image extends TuposModel {
 	}
 
 	/** Fetch list of images from API. Must be in editor role. */
-	static async getMany(imageStatus) {
+	static async getMany(imageStatus, partnerId) {
 		const json = await TuposModel.get(api4({
 			endpoint: 'viewmaster',
 			method: 'images',
@@ -68,7 +68,8 @@ class Image extends TuposModel {
 			auth: true,
 			parseJson: true,
 			params: {
-				image_status: imageStatus
+				image_status: imageStatus,
+				partner_id: partnerId
 			}
 		}))
 
