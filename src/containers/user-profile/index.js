@@ -62,6 +62,7 @@ class UserProfile extends React.Component {
 
 	async loadData() {
 		const {
+			user,
 			match: {
 				params: {
 					imageStatus
@@ -73,7 +74,8 @@ class UserProfile extends React.Component {
 			const stat = imageStatus !== 'submissions' ? imageStatus : ''
 
 			this.setState({ loadingData: true })
-			Image.getMany(stat)
+
+			Image.getMany(stat, user.id)
 				.then((images) => {
 					this.setState({ images, loadingData: false })
 				})
@@ -82,6 +84,7 @@ class UserProfile extends React.Component {
 				})
 
 			const imageCounts = await ImageCounts.get()
+
 			this.setState({
 				counts: {
 					pending: imageCounts.Pending,

@@ -22,7 +22,8 @@
       "parseJson": true,
       "jsonRootNode": "data",
       "query": {
-        "image_status": "string"
+        "image_status": "string",
+        "partner_id": "number"
       }
     },
     "confirmUpload": {

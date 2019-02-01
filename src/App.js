@@ -26,7 +26,7 @@ function App() {
 				<ToastHandler />
 
 				<Route exact path="/" component={SplashPage} />
-				  <YVAuthProtectedRoute redirectTo="/" path="/user-registration" component={UserRegistration} />
+				<YVAuthProtectedRoute redirectTo="/" path="/user-registration" component={UserRegistration} />
 				<Route
 					path="/user-verse-assignment" render={() => {
 						return (
