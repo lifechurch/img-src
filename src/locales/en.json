@@ -46,5 +46,7 @@
   "allLabel": "All",
   "approvedLabel": "Approved",
   "declinedLabel": "Declined",
-  "pendingLabel": "Pending"
+  "pendingLabel": "Pending",
+  "approveButton": "Approve",
+  "declineButton": "Decline"
 }

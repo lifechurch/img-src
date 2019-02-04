@@ -11,7 +11,7 @@ import UserVerseAssignment from './containers/user-verse-assignment'
 import UserProfile from './containers/user-profile'
 import SidebarNav from './layouts/sidebar-nav'
 import ToastHandler from './components/toast-handler'
-import AdminPending from './containers/pending'
+import AdminPending from './containers/admin/pending'
 
 function App() {
 	return (

@@ -1,7 +1,6 @@
 /* eslint-disable linebreak-style */
 import React from 'react'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
-import shortid from 'shortid'
 import PulseLoader from 'react-spinners/PulseLoader'
 import PrimaryHeading from '../../components/typography/primary-heading'
 import Verses from '../../tupos/models/verses'
@@ -200,7 +199,7 @@ class UserVerseAssignment extends React.Component {
 						</div>
 						{ verses && verses.map((verse) => {
 							return (
-								<div className={width > 700 ? 'mv4 mw7 center' : 'mv2'} key={shortid.generate()}>
+								<div className={width > 700 ? 'mv4 mw7 center' : 'mv2'} key={verse.usfms}>
 									<Card>
 										<ImageDrop
 											minWidth={1280}

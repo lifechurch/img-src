@@ -11,15 +11,16 @@ import ToDoIcon from '../../assets/todo.svg'
 import MyImagesIcon from '../../assets/me.svg'
 import './index.css'
 
-function SidebarNavMenu(props) {
-	const {
-		isSignedIn, logout, isPartner, isEditor
-	} = props
+function SidebarNavMenu({
+	isSignedIn,
+	logout,
+	isEditor
+}) {
 	return (
 		<div className="pa3 f4">
 			<img src={YVLogo} alt="YouVersion" style={{ width: 200 }} className="mb4" />
 
-			{props.isEditor &&
+			{isEditor &&
 				<div className="mb4 flex flex-column">
 					<div className="pl3 mb3">
 						<div className="no-underline light-silver flex items-center" activeClassName="active">
@@ -35,7 +36,7 @@ function SidebarNavMenu(props) {
 						</NavLink>
 					</div>
 					<div className="pl3 mb4" style={{ marginLeft: 35 }}>
-						<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/admin/review">
+						<NavLink className="no-underline light-silver link dim flex items-center" activeClassName="active" to="/admin/review/approved">
 							<div className="bg-mid-gray br-100 mr2 bullet" style={{ width: 7, height: 7 }} />
 							<FormattedMessage id="images" />
 						</NavLink>

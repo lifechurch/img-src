@@ -1,10 +1,5 @@
-.upload-image {
-    background: none;
-    color: #6ab750;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    outline: inherit;
+.yv-green {
+  color: #6ab750;
 }
 
 .dropzone-overlay {

@@ -189,7 +189,7 @@ class ImageDrop extends Component {
 						})
 					}
 				</div>
-				<button className="upload-image fr f5-ns f6" onClick={() => { dropzoneRef.open() }}><FormattedMessage id="imageDropButton" /></button>
+				<button className="yv-green w-100 tr bn bg-transparent pointer f5-ns f6 link dim" onClick={() => { dropzoneRef.open() }}><FormattedMessage id="imageDropButton" /></button>
 			</Dropzone>
 		)
 	}

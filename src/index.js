@@ -27,5 +27,3 @@ ReactDOM.render(
 		</YVAuthProvider>
 	), document.getElementById('root')
 )
-
-// tryModels()
