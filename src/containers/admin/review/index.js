@@ -102,7 +102,7 @@ class AdminReview extends Component {
 										address: '/admin/review/approved'
 									},
 									{
-										text: <FormattedMessage id="declinedLabel" />,
+										text: <FormattedMessage id="deniedLabel" />,
 										address: '/admin/review/denied'
 									}
 								]}

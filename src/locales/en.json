@@ -45,7 +45,7 @@
   "designerSince": "Designer since {date}",
   "allLabel": "All",
   "approvedLabel": "Approved",
-  "declinedLabel": "Declined",
+  "deniedLabel": "Denied",
   "pendingLabel": "Pending",
   "approveButton": "Approve",
   "declineButton": "Decline"

@@ -186,7 +186,7 @@ class UserProfile extends React.Component {
 										total: counts.approved
 									},
 									{
-										text: <FormattedMessage id="declinedLabel" />,
+										text: <FormattedMessage id="deniedLabel" />,
 										address: `/user-profile/${userId}/denied`,
 										total: counts.denied
 									},
