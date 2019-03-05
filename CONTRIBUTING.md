@@ -28,14 +28,14 @@ Right up front, let me say, *"THANKS!"* We appreciate that you're willing to use
 
 ## Getting Started
 
-- Make sure you have a [Github account](https://github.com/signup/free).
+- Make sure you have a [GitHub account](https://github.com/signup/free).
 - Make sure you have a [YouVersion account](https://www.bible.com/sign-up).
 - Join our Open Digerati Slack Channel:
   - Go to [OpenDigerati.com](https://opendigerati.com/)
   - Click the *Slack* link at the top of the page
   - Enter and then verify your email
   - Once you're in the Open Digerati workspace, look for the `#yv-image-source` channel
-  - Once you're in the `#yv-image-source` channel, mention me (`@Michael Martin`) so I can add you to our `YouVersion Volunteers` team in Github.
+  - Once you're in the `#yv-image-source` channel, mention me (`@Michael Martin`) so I can add you to our `YouVersion Volunteers` team in GitHub.
 - Check out the full UI designs for this project in the `/ui-design` folder of this repo.
 
 ## Package Manager
@@ -44,11 +44,11 @@ For this project, we're using `yarn` as our package manager. You can get instruc
 
 ## Pick Your First Issue
 
-We're using Github Projects and Issues to manage this project. Everything that needs to be done is organized into bite-sized issues that can usually be completed in a few hours. No contribution is too small, so even if you only have a couple of hours available there's something for you.
+We're using GitHub Projects and Issues to manage this project. Everything that needs to be done is organized into bite-sized issues that can usually be completed in a few hours. No contribution is too small, so even if you only have a couple of hours available there's something for you.
 
 - Open the [Image Source Project Board](https://github.com/lifechurch/img-src/projects/1)
 - Find an Issue card in the `To do` column that isn't assigned to anyone. The highest priority items are at the top of the list.
-- Open the issue and assign it to yourself. If you don't see your name in the list of assignees, make sure you were added to the `YouVersion Volunteers` team in Github.
+- Open the issue and assign it to yourself. If you don't see your name in the list of assignees, make sure you were added to the `YouVersion Volunteers` team in GitHub.
 - Go back to the [Image Source Project Board](https://github.com/lifechurch/img-src/projects/1) and drag your Issue into the `In progress` column.
 - There will be many volunteers contributing to this project, so please don't assign as issue to yourself until you're ready to start working. And, if you've assigned an issue to yourself that you cannot work on, un-assign the issue and drag the card back to the `To do` column for someone else to pick up.
 

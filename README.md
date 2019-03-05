@@ -14,8 +14,8 @@ Once you are in, there are plenty of [issues](https://github.com/lifechurch/img-
 ### Where can I create an account?
 To create an account, you need to register to the YouVersion staging system. You can register at [staging.bible.com](https://staging.bible.com). You can ask for the username + password in the `#yv-img-source` channel on Slack!
 
-### How do I get access to the Github group to assign tasks?
-Simply ask in the `#yv-img-source` channel on Slack with your Github username and you will be given access as soon as possible.
+### How do I get access to the GitHub group to assign tasks?
+Simply ask in the `#yv-img-source` channel on Slack with your GitHub username and you will be given access as soon as possible.
 
 ### What is `${NPM_TOKEN}`?
 This is your token used to authenticate with the NPM registry. To access private resources (such as `@youversion/tupos`) you will need a token from the YouVersion team, which can be requested in the `#yv-img-source` channel on Slack.
